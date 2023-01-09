@@ -1,0 +1,147 @@
+﻿<UserControl x:Class="RCP_Sys.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RCP_Sys.Views" 
+             xmlns:vm="clr-namespace:RCP_Sys.ViewModels"
+             mc:Ignorable="d"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
+
+    <UserControl.DataContext>
+        <vm:HomeViewModel />
+    </UserControl.DataContext>
+    
+    <Grid Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <StackPanel
+            Margin="0,20,0,0" HorizontalAlignment="Left" Width="300">
+            <TextBlock
+                Text="Home"
+                Foreground="#BDBBFF"
+                HorizontalAlignment="Center"
+                FontSize="35"
+                Margin="0 30 0 0"
+                FontWeight="Bold"
+                VerticalAlignment="Top">
+            </TextBlock>
+        </StackPanel>
+        <fa:IconImage 
+                Icon="UserClock" 
+                Width="200" 
+                Style="{StaticResource ClockIconHome}"  
+                />
+        <Border Grid.Column="1"
+                Background="#351c75"
+                CornerRadius="30"
+                Margin="25"
+                Opacity="0.8">
+                
+            <StackPanel Grid.Column="1"
+                    Margin="50"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+              
+            <StackPanel>
+                <TextBlock Text="Information About User:"
+                               Foreground="#BDBBFF"
+                               FontSize="25"
+                               FontWeight="Bold"
+                               FontFamily="Montserrat"                             
+                               HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Username:"
+                               Foreground="#BDBBFF"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               FontFamily="Montserrat"                             
+                               HorizontalAlignment="Left"
+                               Margin="20,20 0 0"/>
+                <TextBlock Text="{Binding UserInformation.Username}"
+                               Foreground="#BDBBFF"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               FontFamily="Montserrat"                             
+                               HorizontalAlignment="Left"
+                               Margin="20,20 0 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Name:"
+                               Foreground="#BDBBFF"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               FontFamily="Montserrat"                             
+                               HorizontalAlignment="Left"
+                               Margin="20,20 0 0"/>
+                <TextBlock Text="{Binding UserInformation.Name}"
+                               Foreground="#BDBBFF"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               FontFamily="Montserrat"                             
+                               HorizontalAlignment="Left"
+                               Margin="20,20 0 0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Surname:"
+                               Foreground="#BDBBFF"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               FontFamily="Montserrat"                             
+                               HorizontalAlignment="Left"
+                               Margin="20,20 0 0"/>
+                <TextBlock Text="{Binding UserInformation.Surname}"
+                               Foreground="#BDBBFF"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               FontFamily="Montserrat"                             
+                               HorizontalAlignment="Left"
+                               Margin="20,20 0 0"/>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Email:"
+                               Foreground="#BDBBFF"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               FontFamily="Montserrat"                             
+                               HorizontalAlignment="Left"
+                               Margin="20,20 0 0"/>
+                <TextBlock Text="{Binding UserInformation.Email}"
+                               Foreground="#BDBBFF"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               FontFamily="Montserrat"                             
+                               HorizontalAlignment="Left"
+                               Margin="20,20 0 0"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Join Date:"
+                               Foreground="#BDBBFF"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               FontFamily="Montserrat"                             
+                               HorizontalAlignment="Left"
+                               Margin="20,20 0 0"/>
+                <TextBlock Text="{Binding UserInformation.DateJoin}"
+                               Foreground="#BDBBFF"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               FontFamily="Montserrat"                             
+                               HorizontalAlignment="Left"
+                               Margin="20,20 0 0"/>
+
+            </StackPanel>
+        </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

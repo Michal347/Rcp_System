@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="RCP_Sys.Views.TimeSheetView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RCP_Sys.Views"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d" 
+             Height="600" Width="1000">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Background="White" Margin="10" Orientation="Horizontal">
+            <fa:IconImage Icon="Calendar" Style="{StaticResource MenuIcon}" Height="36" Width="52"/>
+            <Label FontSize="30"
+                       FontWeight="ExtraBlack"
+                       Foreground="Black"
+                       VerticalContentAlignment="Center"
+                       Margin="20 0 0 0"> All Time History</Label>
+            <TextBlock Text=" Filtr:"
+                       FontSize="24"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       Margin="200 0 0 0">
+                
+            </TextBlock>
+            <TextBox 
+                        x:Name="WhatWorkTextbox"
+                        Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource TimesheetBox}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontSize="16"
+                        Margin="20 0 0 0"
+                        Width="300"
+                        Height="50">
+            </TextBox>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Grid  x:Name="GridTimesheet" Grid.Row="1">
+
+                <DataGrid Height="400" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="4" x:Name="TimerDataGrid" ItemsSource="{Binding TimeCollection}">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding TimerId}" Header="#" Width="60" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding EndDateTime}" Header="End Date" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding EndTimerValue}" Header="Time" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Username}" Header="Username" Width="*" CanUserResize="False" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding Project}" Header="Project Name" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>
