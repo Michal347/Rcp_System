@@ -23,7 +23,6 @@ namespace RCP_Sys.ViewModels
             DataListView();
             TimeCollectionUser = CollectionViewSource.GetDefaultView(TimeViewCollectionUser);
             TimeCollectionUser.Filter = TimeFilter;
-            TimeCollectionUser.Filter = UsernameFilter;
         }
 
         private bool TimeFilter(object obj)
@@ -31,10 +30,9 @@ namespace RCP_Sys.ViewModels
             if (obj is TimerModel timermodel)
             {
                 return timermodel.EndDateTime.Contains(Filter) ||
-                    timermodel.Project.Contains(Filter);
-                    //timermodel.Username.Contains(Filter);
+                    timermodel.Project.Contains(Filter) ||
+                timermodel.Username.Contains(Filter);
             }
-
             return false;
 
         }
