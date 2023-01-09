@@ -23,6 +23,7 @@ namespace RCP_Sys.ViewModels
         public ICommand ShowProjectView { get; }
         public ICommand ShowTimesheetView { get; }
         public ICommand ShowUserView { get; }
+        public ICommand ShowUserHistory { get; }
 
 
         #endregion
@@ -37,6 +38,7 @@ namespace RCP_Sys.ViewModels
         public ProjectViewModel _projectViewModel;
         public TimeSheetViewModel _timeSheetViewModel;
         public UserViewModel _userViewModel;
+        public UserHistoryViewModel _userHistoryViewModel;
 
         #endregion
         public MainViewModel()
@@ -55,12 +57,25 @@ namespace RCP_Sys.ViewModels
                 }
             }
 
+            if (user != null)
+            {
+                if (user.IsUserAdmin == false)
+                {
+                    _btnAdminVisi = false;
+                }
+                else
+                {
+                    _btnAdminVisi = true;
+                }
+            }
+
 
             _timerViewModel = new TimerViewModel();
             _homeViewModel = new HomeViewModel();
             _projectViewModel = new ProjectViewModel();
             _timeSheetViewModel = new TimeSheetViewModel();
             _userViewModel = new UserViewModel();
+            _userHistoryViewModel = new UserHistoryViewModel();
             GetUsername = new UserService();
             UserAccount = new UserAccountModel();
             CurrentUserData();
@@ -71,6 +86,7 @@ namespace RCP_Sys.ViewModels
             ShowProjectView = new RelayCommand(Project);
             ShowTimesheetView = new RelayCommand(Timesheet);
             ShowUserView = new RelayCommand(UserV);
+            ShowUserHistory= new RelayCommand(UserHistory);
 
 
 
@@ -102,6 +118,12 @@ namespace RCP_Sys.ViewModels
         private void Home(object obj)
         {
             CurrentChildView = _homeViewModel;
+
+        }
+
+        private void UserHistory(object obj)
+        {
+            CurrentChildView = _userHistoryViewModel;
 
         }
 
@@ -139,6 +161,16 @@ namespace RCP_Sys.ViewModels
         {
             get { return _btnUpdateVisibility; }
             set { _btnUpdateVisibility = value; OnPropertyChanged(nameof(btnUpdateVisibility)); }
+
+
+        }
+
+        private bool _btnAdminVisi;
+
+        public bool btnAdminVisi
+        {
+            get { return _btnAdminVisi; }
+            set { _btnAdminVisi = value; OnPropertyChanged(nameof(btnAdminVisi)); }
 
 
         }

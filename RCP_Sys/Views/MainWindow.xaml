@@ -78,10 +78,19 @@
                 </StackPanel>
             </Button>
             <Button Style="{StaticResource MenuButton}"
-                    Command="{Binding ShowTimesheetView}">
+                    Command="{Binding ShowTimesheetView}"
+                    Visibility="{Binding btnAdminVisi, Converter={StaticResource InvertedBooleanToVisibilityConverter},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="Calendar" Style="{StaticResource MenuIcon}"/>
                     <TextBlock Style="{StaticResource MenuText}" Text="Timesheet History" ></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Style="{StaticResource MenuButton}"
+                    Command="{Binding ShowUserHistory}"
+                    Visibility="{Binding btnUpdateVisibility, Converter={StaticResource InvertedBooleanToVisibilityConverter},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Cursor="Hand">
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="Calendar" Style="{StaticResource MenuIcon}"/>
+                    <TextBlock Style="{StaticResource MenuText}" Text="Users History" ></TextBlock>
                 </StackPanel>
             </Button>
             <Button Style="{StaticResource MenuButton}"

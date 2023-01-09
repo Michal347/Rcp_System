@@ -28,4 +28,7 @@
     <DataTemplate DataType="{x:Type vm:UserViewModel}">
         <vw:UserView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:UserHistoryViewModel}">
+        <vw:UserHistory/>
+    </DataTemplate>
 </ResourceDictionary>
