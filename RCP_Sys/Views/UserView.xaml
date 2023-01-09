@@ -34,8 +34,8 @@
                               Height="50"
                               ItemsSource="{Binding UserCollection}"
                               VerticalAlignment="Center"
-                              SelectedValuePath="{Binding Path=Id}"
-                              SelectedValue="{Binding Path=SelectedComboItem}"
+                              SelectedValuePath="Id"
+                              SelectedValue="{Binding SelectedComboItem}"
                               DisplayMemberPath="Username">
                 </ComboBox>
                 <TextBlock 
