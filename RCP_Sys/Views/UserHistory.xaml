@@ -20,7 +20,7 @@
                        Foreground="Black"
                        VerticalContentAlignment="Center"
                        Margin="20 0 0 0">User History</Label>
-            <!--<StackPanel Margin="150 0 0 0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Margin="150 0 0 0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Text="Username:"
                        FontSize="20"
                        VerticalAlignment="Center"
@@ -39,8 +39,8 @@
                         Width="200"
                         Height="40">
                 </TextBox>
-            </StackPanel>-->
-            <StackPanel Margin="200 0 0 0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            </StackPanel>
+            <StackPanel Margin="30 0 0 0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Text="Filtr By:"
                        FontSize="20"
                        VerticalAlignment="Center"
@@ -64,20 +64,25 @@
         <StackPanel Grid.Row="1">
 
         </StackPanel>
-        <StackPanel Grid.Row="1" Height="400">
+        <StackPanel Grid.Row="1">
             <Grid  x:Name="GridTimesheet" Grid.Row="1">
-                <DataGrid Height="400" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="TimerDataGrid" ItemsSource="{Binding TimeCollectionUser}" Grid.ColumnSpan="2" Width="994">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="159*"/>
+                    <ColumnDefinition Width="91*"/>
+                </Grid.ColumnDefinitions>
 
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding TimerId}" Header="#" Width="60" CanUserResize="False" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding EndDateTime}" Header="End Date" Width="*" CanUserResize="False" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding EndTimerValue}" Header="Time" Width="*" CanUserResize="False" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding Username}" Header="Username" Width="*" CanUserResize="False" IsReadOnly="True" />
-                            <DataGridTextColumn Binding="{Binding Project}" Header="Project Name" Width="*" CanUserResize="False" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="*" CanUserResize="False" IsReadOnly="True"/>
-                        </DataGrid.Columns>
+                <DataGrid Height="400" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="TimerDataGrid" ItemsSource="{Binding TimeCollectionUser}" Grid.ColumnSpan="2">
 
-                    </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding TimerId}" Header="#" Width="60" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding EndDateTime}" Header="End Date" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding EndTimerValue}" Header="Time" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Username}" Header="Username" Width="*" CanUserResize="False" IsReadOnly="True" />
+                        <DataGridTextColumn Binding="{Binding Project}" Header="Project Name" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Description}" Header="Description" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
 
             </Grid>
         </StackPanel>
