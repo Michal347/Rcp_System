@@ -105,11 +105,7 @@ namespace RCP_Sys.ViewModels
         private void StopTimer(object obj)
         {
             DateTime aDate = DateTime.Now;
-            var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
-
-                using (var context = new RcpDbContext())
-                {
-
+            var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);         
                         TimeCreate.Create(
                         new TimerModel()
                         {
@@ -125,8 +121,6 @@ namespace RCP_Sys.ViewModels
                         }
                     );
      
-            }
-
             IsVisible = true;
             IsTimerRunning = false;
             selectedDescription= string.Empty;
