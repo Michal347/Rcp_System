@@ -216,39 +216,39 @@
     <Compile Include="DAL\RcpDbContext.cs" />
     <Compile Include="DAL\Interface\IUserService.cs" />
     <Compile Include="DAL\Interface\ITimerService.cs" />
-    <Compile Include="Migrations\20230110121211_init.cs" />
-    <Compile Include="Migrations\20230110121211_init.designer.cs">
+    <Compile Include="DAL\Migrations\20230110121211_init.cs" />
+    <Compile Include="DAL\Migrations\20230110121211_init.designer.cs">
       <DependentUpon>20230110121211_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20230110121407_AddProject.cs" />
-    <Compile Include="Migrations\20230110121407_AddProject.designer.cs">
+    <Compile Include="DAL\Migrations\20230110121407_AddProject.cs" />
+    <Compile Include="DAL\Migrations\20230110121407_AddProject.designer.cs">
       <DependentUpon>20230110121407_AddProject.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20230110121436_AddDescription.cs" />
-    <Compile Include="Migrations\20230110121436_AddDescription.designer.cs">
+    <Compile Include="DAL\Migrations\20230110121436_AddDescription.cs" />
+    <Compile Include="DAL\Migrations\20230110121436_AddDescription.designer.cs">
       <DependentUpon>20230110121436_AddDescription.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20230110121655_AddTimeModel.cs" />
-    <Compile Include="Migrations\20230110121655_AddTimeModel.designer.cs">
+    <Compile Include="DAL\Migrations\20230110121655_AddTimeModel.cs" />
+    <Compile Include="DAL\Migrations\20230110121655_AddTimeModel.designer.cs">
       <DependentUpon>20230110121655_AddTimeModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20230110121725_AddDateCreateTimer.cs" />
-    <Compile Include="Migrations\20230110121725_AddDateCreateTimer.designer.cs">
+    <Compile Include="DAL\Migrations\20230110121725_AddDateCreateTimer.cs" />
+    <Compile Include="DAL\Migrations\20230110121725_AddDateCreateTimer.designer.cs">
       <DependentUpon>20230110121725_AddDateCreateTimer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20230110121812_AddStartEndValue.cs" />
-    <Compile Include="Migrations\20230110121812_AddStartEndValue.designer.cs">
+    <Compile Include="DAL\Migrations\20230110121812_AddStartEndValue.cs" />
+    <Compile Include="DAL\Migrations\20230110121812_AddStartEndValue.designer.cs">
       <DependentUpon>20230110121812_AddStartEndValue.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20230110121843_ChangeTimerModel.cs" />
-    <Compile Include="Migrations\20230110121843_ChangeTimerModel.designer.cs">
+    <Compile Include="DAL\Migrations\20230110121843_ChangeTimerModel.cs" />
+    <Compile Include="DAL\Migrations\20230110121843_ChangeTimerModel.designer.cs">
       <DependentUpon>20230110121843_ChangeTimerModel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20230110121939_SeedData.cs" />
-    <Compile Include="Migrations\20230110121939_SeedData.designer.cs">
+    <Compile Include="DAL\Migrations\20230110121939_SeedData.cs" />
+    <Compile Include="DAL\Migrations\20230110121939_SeedData.designer.cs">
       <DependentUpon>20230110121939_SeedData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\RcpDbContextModelSnapshot.cs" />
+    <Compile Include="DAL\Migrations\RcpDbContextModelSnapshot.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\TimerModel.cs" />
     <Compile Include="Models\UserAccountModel.cs" />
