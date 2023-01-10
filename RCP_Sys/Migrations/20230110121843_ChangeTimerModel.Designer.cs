@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RCP_Sys.Db;
 
 namespace RCP_Sys.Migrations
 {
     [DbContext(typeof(RcpDbContext))]
-    partial class RcpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230110121843_ChangeTimerModel")]
+    partial class ChangeTimerModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,19 +106,6 @@ namespace RCP_Sys.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateTimeJoined = new DateTime(2023, 1, 10, 13, 19, 38, 835, DateTimeKind.Local).AddTicks(367),
-                            Email = "admin@gmail.com",
-                            IsUserAdmin = true,
-                            Name = "Admin",
-                            Password = "uBuGeou9IhQUD714KfHi7X/qL5/B5aY/XXX6Vv7z4O1Yd0Aj",
-                            Surname = "Admin",
-                            Username = "Admin"
-                        });
                 });
 #pragma warning restore 612, 618
         }

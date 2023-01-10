@@ -30,9 +30,9 @@ namespace RCP_Sys.ViewModels
         {
             if (obj is TimerModel timermodel)
             {
-                return timermodel.EndDateTime.Contains(Filter) ||
-                    timermodel.Project.Contains(Filter);
-                    //timermodel.Username.Contains(Filter);
+                return  timermodel.EndDateTime.Contains(Filter) ||
+                        timermodel.Project.Contains(Filter)||
+                        timermodel.Username.Contains(Filter);
             }
 
             return false;

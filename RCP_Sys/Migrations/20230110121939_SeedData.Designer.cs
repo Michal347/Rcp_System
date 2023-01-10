@@ -10,8 +10,8 @@ using RCP_Sys.Db;
 namespace RCP_Sys.Migrations
 {
     [DbContext(typeof(RcpDbContext))]
-    [Migration("20230110110542_init")]
-    partial class init
+    [Migration("20230110121939_SeedData")]
+    partial class SeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -106,6 +106,19 @@ namespace RCP_Sys.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateTimeJoined = new DateTime(2023, 1, 10, 13, 19, 38, 835, DateTimeKind.Local).AddTicks(367),
+                            Email = "admin@gmail.com",
+                            IsUserAdmin = true,
+                            Name = "Admin",
+                            Password = "uBuGeou9IhQUD714KfHi7X/qL5/B5aY/XXX6Vv7z4O1Yd0Aj",
+                            Surname = "Admin",
+                            Username = "Admin"
+                        });
                 });
 #pragma warning restore 612, 618
         }

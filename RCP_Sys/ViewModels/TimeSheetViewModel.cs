@@ -15,6 +15,7 @@ namespace RCP_Sys.ViewModels
 {
     public class TimeSheetViewModel : BaseViewModel
     {
+
         #region Icommand 
 
         public ICommand RefreshTimes { get; private set; }
@@ -36,9 +37,9 @@ namespace RCP_Sys.ViewModels
                     timermodel.Project.Contains(Filter) ||
                     timermodel.Username.Contains(Filter);
             }
-            
-                return false;
-            
+
+            return false;
+
         }
 
         public void DataListView()
@@ -56,11 +57,11 @@ namespace RCP_Sys.ViewModels
 
             }
         }
-            public ICollectionView TimeCollection { get; set; }
+        public ICollectionView TimeCollection { get; set; }
 
-            private ObservableCollection<TimerModel> _TimeViewCollection;
+        private ObservableCollection<TimerModel> _TimeViewCollection;
 
-        public  ObservableCollection<TimerModel> TimeViewCollection
+        public ObservableCollection<TimerModel> TimeViewCollection
         {
             get { return _TimeViewCollection; }
             set { _TimeViewCollection = value; OnPropertyChanged("TimeViewCollection"); }
@@ -76,10 +77,10 @@ namespace RCP_Sys.ViewModels
             }
             set
             {
-                
-                    _Filter = value;
-                    OnPropertyChanged("Filter");
-                    TimeCollection.Refresh();
+
+                _Filter = value;
+                OnPropertyChanged("Filter");
+                TimeCollection.Refresh();
             }
         }
 

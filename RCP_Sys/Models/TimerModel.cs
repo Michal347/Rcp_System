@@ -15,8 +15,7 @@ namespace RCP_Sys.Models
         public DateTime StartDateTime { get; set; }
         public string EndDateTime { get; set; }
         public DateTime DateCreate { get; set; }
-        public TimeSpan StartTimerValue{ get; set; }
-
+        public TimeSpan StartTimerValue { get; set; }
         public TimeSpan EndTimerValue { get; set; }
         public string Project { get; set; }
         public string Description { get; set; }

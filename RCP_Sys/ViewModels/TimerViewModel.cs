@@ -17,6 +17,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using RCP_Sys.Models.Interface;
 
@@ -29,7 +30,7 @@ namespace RCP_Sys.ViewModels
 
         public ICommand StartTimerCommand { get; set; }
         public ICommand StopTimerCommand { get; set; }
-        public ICommand Refresh {get; set; }
+        public ICommand Refresh { get; set; }
         public ICommand RefreshDataGrid { get; set; }
         private IUserService getUsername;
         private ITimerService TimeCreate;
@@ -40,8 +41,8 @@ namespace RCP_Sys.ViewModels
         public SynchronizationContext synchronizationContext = SynchronizationContext.Current;
 
 
-          public TimerViewModel()
-            {
+        public TimerViewModel()
+        {
             StartTimerCommand = new RelayCommand(StartTimer);
             StopTimerCommand = new RelayCommand(StopTimer);
             Refresh = new RelayCommand(RefreshProject);
@@ -72,9 +73,9 @@ namespace RCP_Sys.ViewModels
 
 
             LoadProjects();
-            }
+        }
 
-      
+
         #region ICommand handlers
         private void StartTimerLoop()
         {
@@ -105,25 +106,25 @@ namespace RCP_Sys.ViewModels
         private void StopTimer(object obj)
         {
             DateTime aDate = DateTime.Now;
-            var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);         
-                        TimeCreate.Create(
-                        new TimerModel()
-                        {
-                            Username = user.Username,
-                            StartDateTime = DateTime.Today,
-                            EndDateTime = aDate.ToString("MM/dd/yyyy hh:mm tt"),
-                            StartTimerValue = TimeSpan.Zero,
-                            EndTimerValue = TimerBoxValue,
-                            Project = SelectedProject1,
-                            Description = selectedDescription,
-                            DateCreate = DateTime.Today,
+            var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
+            TimeCreate.Create(
+            new TimerModel()
+            {
+                Username = user.Username,
+                StartDateTime = DateTime.Today,
+                EndDateTime = aDate.ToString("MM/dd/yyyy hh:mm tt"),
+                StartTimerValue = TimeSpan.Zero,
+                EndTimerValue = TimerBoxValue,
+                Project = SelectedProject1,
+                Description = selectedDescription,
+                DateCreate = DateTime.Today,
 
-                        }
-                    );
-     
+            }
+        );
+
             IsVisible = true;
             IsTimerRunning = false;
-            selectedDescription= string.Empty;
+            selectedDescription = string.Empty;
             SelectedProject1 = string.Empty;
             TimerBoxValue = TimeSpan.Zero;
             _cancellationTokenSource.Cancel();
@@ -157,7 +158,7 @@ namespace RCP_Sys.ViewModels
             using (var context = new RcpDbContext())
             {
                 var q = from s in context.Projects
-                         select s;
+                        select s;
 
                 ProjectCollection = new ObservableCollection<ProjectModel>(q);
 
@@ -170,11 +171,11 @@ namespace RCP_Sys.ViewModels
             var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
             using (var context = new RcpDbContext())
             {
-                
-              
+
+
                 var Timer = from a in context.Times
                             where a.Username == Thread.CurrentPrincipal.Identity.Name &&
-                            a.DateCreate== DateTime.Today
+                            a.DateCreate == DateTime.Today
                             select a;
 
                 TimerCollection = new ObservableCollection<TimerModel>(Timer);
@@ -196,7 +197,7 @@ namespace RCP_Sys.ViewModels
         }
 
 
-            private string selectedProject;
+        private string selectedProject;
 
         public string SelectedProject1
         {
@@ -212,7 +213,7 @@ namespace RCP_Sys.ViewModels
             }
         }
 
-            private TimeSpan _timerBoxValue;
+        private TimeSpan _timerBoxValue;
 
         public TimeSpan TimerBoxValue
         {
@@ -221,7 +222,7 @@ namespace RCP_Sys.ViewModels
         }
 
 
-            private string SelectedDescription;
+        private string SelectedDescription;
 
         public string selectedDescription
         {
@@ -247,7 +248,7 @@ namespace RCP_Sys.ViewModels
 
         #region Collection
 
-            private ObservableCollection<ProjectModel> _projectCollection;
+        private ObservableCollection<ProjectModel> _projectCollection;
 
         public ObservableCollection<ProjectModel> ProjectCollection
         {
@@ -255,7 +256,7 @@ namespace RCP_Sys.ViewModels
             set { _projectCollection = value; OnPropertyChanged("ProjectCollection"); }
         }
 
-            private ObservableCollection<TimerModel> _TimerCollection;
+        private ObservableCollection<TimerModel> _TimerCollection;
 
         public ObservableCollection<TimerModel> TimerCollection
         {

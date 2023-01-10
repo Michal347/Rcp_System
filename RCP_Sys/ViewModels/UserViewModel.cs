@@ -53,11 +53,6 @@ namespace RCP_Sys.ViewModels
                     }
                 }
 
-                else
-                {
-                    
-
-                }
             }
             new UserViewModel();
         }

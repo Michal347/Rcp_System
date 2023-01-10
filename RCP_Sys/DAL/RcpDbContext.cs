@@ -36,7 +36,7 @@ namespace RCP_Sys.Db
                     Email = "admin@gmail.com",
                     IsUserAdmin = true,
 
-                }); 
+                });
             base.OnModelCreating(modelBuilder);
         }
 

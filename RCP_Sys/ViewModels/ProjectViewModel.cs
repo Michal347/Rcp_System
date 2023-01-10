@@ -28,6 +28,7 @@ namespace RCP_Sys.ViewModels
     public class ProjectViewModel : BaseViewModel, INotifyPropertyChanged
     {
 
+
         #region Icommand
 
         public ICommand AddProject { get; private set; }
@@ -39,8 +40,8 @@ namespace RCP_Sys.ViewModels
 
         #region Ctors
         public ProjectViewModel()
-        { 
-          
+        {
+
             AddProject = new RelayCommand(x => AddProj());
             RefreshProjects = new RelayCommand(x => Refresh());
 
@@ -60,28 +61,28 @@ namespace RCP_Sys.ViewModels
 
                         OnErrorCreated("ProjectName", "*Project already exist");
                         return;
-                        
+
                     }
-                    else if(string.IsNullOrWhiteSpace(ProjectName) || string.IsNullOrEmpty(Description))
-                       {
+                    else if (string.IsNullOrWhiteSpace(ProjectName) || string.IsNullOrEmpty(Description))
+                    {
                         OnErrorCreated("ProjectName", "*Fill the empty fields");
                         OnErrorCreated("Description", "*Fill the empty fields");
                     }
-                    else if(ProjectName != string.Empty || Description != string.Empty)
-                        {
-                            context.Projects.Add(
-                        new ProjectModel()
-                        {
+                    else if (ProjectName != string.Empty || Description != string.Empty)
+                    {
+                        context.Projects.Add(
+                    new ProjectModel()
+                    {
 
-                            Name = ProjectName,
-                            Description = Description,
+                        Name = ProjectName,
+                        Description = Description,
 
-                        }
-                        );
+                    }
+                    );
                         {
                             context.SaveChanges();
                             MysampleGrid = context.Projects.Where(x => x.Name != null).ToList();
-                            ErrorMessage = "";   
+                            ErrorMessage = "";
                         }
                     }
 
@@ -100,26 +101,26 @@ namespace RCP_Sys.ViewModels
 
         }
 
-     
+
         #endregion
 
         #region fields
 
-            private string _projectName;
+        private string _projectName;
 
         public string ProjectName
         {
             get { return _projectName; }
             set
             {
-                _projectName = value;   
+                _projectName = value;
                 OnPropertyChanged("ProjectName");
                 ClearPropertyErrors(this, "ProjectName");
-              
+
             }
         }
 
-            private string _descripiton;
+        private string _descripiton;
 
         public string Description
         {
@@ -135,7 +136,7 @@ namespace RCP_Sys.ViewModels
 
 
 
-            private string _selectedDataGridItem;
+        private string _selectedDataGridItem;
 
         public string SelectedDataGridItem
         {
@@ -149,7 +150,7 @@ namespace RCP_Sys.ViewModels
         }
 
 
-            private string _errorMessage;
+        private string _errorMessage;
         public string ErrorMessage
         {
             get
@@ -163,7 +164,7 @@ namespace RCP_Sys.ViewModels
             }
         }
 
-            private List<ProjectModel> mysampleGrid; 
+        private List<ProjectModel> mysampleGrid;
 
         public List<ProjectModel> MysampleGrid
         {
@@ -171,9 +172,9 @@ namespace RCP_Sys.ViewModels
             set { mysampleGrid = value; OnPropertyChanged("MysampleGrid"); }
         }
 
- 
+
     }
     #endregion
-  
+
 
 }

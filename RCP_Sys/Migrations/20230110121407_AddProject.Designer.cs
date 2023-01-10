@@ -10,8 +10,8 @@ using RCP_Sys.Db;
 namespace RCP_Sys.Migrations
 {
     [DbContext(typeof(RcpDbContext))]
-    [Migration("20230110111258_addAdmin")]
-    partial class addAdmin
+    [Migration("20230110121407_AddProject")]
+    partial class AddProject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,51 +28,12 @@ namespace RCP_Sys.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("RCP_Sys.Models.TimerModel", b =>
-                {
-                    b.Property<int>("TimerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DateCreate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EndDateTime")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeSpan>("EndTimerValue")
-                        .HasColumnType("time");
-
-                    b.Property<string>("Project")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<TimeSpan>("StartTimerValue")
-                        .HasColumnType("time");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TimerId");
-
-                    b.ToTable("Times");
                 });
 
             modelBuilder.Entity("RCP_Sys.Models.UserModel", b =>
@@ -106,19 +67,6 @@ namespace RCP_Sys.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateTimeJoined = new DateTime(2023, 1, 10, 12, 12, 57, 909, DateTimeKind.Local).AddTicks(4247),
-                            Email = "admin@gmail.com",
-                            IsUserAdmin = true,
-                            Name = "Admin",
-                            Password = "lgCvIqTtx1WDjy1qWm4lr7GbSwmWTVJcWPhR+SgqQXMEkfo9",
-                            Surname = "Admin",
-                            Username = "Admin"
-                        });
                 });
 #pragma warning restore 612, 618
         }

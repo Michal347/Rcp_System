@@ -22,9 +22,9 @@ namespace RCP_Sys.Models
 
         public DateTime DateJoin { get; set; }
 
-        public string Email { get; set; }  
+        public string Email { get; set; }
 
-        public bool IsUserAdmin {get; set; }
-        
+        public bool IsUserAdmin { get; set; }
+
     }
 }
