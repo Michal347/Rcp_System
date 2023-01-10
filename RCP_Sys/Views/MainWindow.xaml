@@ -94,7 +94,7 @@
                 </StackPanel>
             </Button>
             <Button Style="{StaticResource MenuButton}"
-                    >
+                    Command="{Binding ShowSettingView}">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="Cog" Style="{StaticResource MenuIcon}"/>
                     <TextBlock Style="{StaticResource MenuText}" Text="Setings" ></TextBlock>

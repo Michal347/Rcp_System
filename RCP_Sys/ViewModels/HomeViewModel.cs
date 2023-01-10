@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace RCP_Sys.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
         private UserAccountModel _UserInformation;
-        private IUserService getUsername;
+        private IUserService getUsername; 
 
         public UserAccountModel UserInformation
         {

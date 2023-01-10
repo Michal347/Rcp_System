@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace RCP_Sys
 {
@@ -18,6 +19,7 @@ namespace RCP_Sys
     {
         private Window loginWindow;
         private Window mainWindow;
+        private UserControl SettingWindow;
         private Window registerWindow;
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -35,7 +37,8 @@ namespace RCP_Sys
         {
             mainWindow = new MainWindow();
             mainWindow.DataContext = new MainViewModel();
-            
+            SettingWindow = new SettingsView();
+            SettingWindow.DataContext = new SettingsViewModel() { Login=e.Username, Email=e.Email, Name=e.Name, Surname=e.Surname};
 
             // dipose login component 
             var lvm = (loginWindow.DataContext as LoginViewModel);
@@ -106,6 +109,5 @@ namespace RCP_Sys
             loginWindow.Show();
         }
 
-      
     }
 }

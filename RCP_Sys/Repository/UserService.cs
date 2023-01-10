@@ -13,12 +13,15 @@ using System.Runtime.Remoting.Contexts;
 using System.Security.Principal;
 using System.Windows.Forms;
 using System.IO.Packaging;
+using Microsoft.EntityFrameworkCore;
+using System.Threading;
 
 namespace RCP_Sys.Repository
 {
     public class UserService: IUserService
     {
 
+ 
         public void Create(UserModel user)
         {
             using (var context = new RcpDbContext())
@@ -54,5 +57,7 @@ namespace RCP_Sys.Repository
                 context.SaveChanges();
             }
         }
+
+      
     }
 }

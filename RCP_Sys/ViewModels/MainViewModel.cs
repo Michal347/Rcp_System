@@ -9,6 +9,7 @@ using System.Security.AccessControl;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace RCP_Sys.ViewModels
@@ -24,6 +25,7 @@ namespace RCP_Sys.ViewModels
         public ICommand ShowTimesheetView { get; }
         public ICommand ShowUserView { get; }
         public ICommand ShowUserHistory { get; }
+        public ICommand ShowSettingView { get; }
 
 
         #endregion
@@ -39,6 +41,7 @@ namespace RCP_Sys.ViewModels
         public TimeSheetViewModel _timeSheetViewModel;
         public UserViewModel _userViewModel;
         public UserHistoryViewModel _userHistoryViewModel;
+        public SettingsViewModel _settingsViewModel;
 
         #endregion
         public MainViewModel()
@@ -76,6 +79,7 @@ namespace RCP_Sys.ViewModels
             _timeSheetViewModel = new TimeSheetViewModel();
             _userViewModel = new UserViewModel();
             _userHistoryViewModel = new UserHistoryViewModel();
+            _settingsViewModel = new SettingsViewModel();
             GetUsername = new UserService();
             UserAccount = new UserAccountModel();
             CurrentUserData();
@@ -87,6 +91,7 @@ namespace RCP_Sys.ViewModels
             ShowTimesheetView = new RelayCommand(Timesheet);
             ShowUserView = new RelayCommand(UserV);
             ShowUserHistory= new RelayCommand(UserHistory);
+            ShowSettingView = new RelayCommand(Setting);
 
 
 
@@ -117,7 +122,7 @@ namespace RCP_Sys.ViewModels
 
         private void Home(object obj)
         {
-            CurrentChildView = _homeViewModel;
+            CurrentChildView = new HomeViewModel();
 
         }
 
@@ -131,7 +136,13 @@ namespace RCP_Sys.ViewModels
         {
             CurrentChildView = _projectViewModel;
         }
-       
+
+        private void Setting(object obj)
+        {
+            CurrentChildView = new SettingsViewModel();
+            
+        }
+
         private void CurrentUserData()
         {
             var user = GetUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
