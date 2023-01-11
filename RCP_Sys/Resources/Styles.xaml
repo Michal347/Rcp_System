@@ -870,7 +870,7 @@
                 HorizontalAlignment="Left"
                 TextTrimming="CharacterEllipsis"
                 Margin="5 0 0 0"
-                FontSize="15"
+                FontSize="13"
                 Grid.ColumnSpan="2"
                 Panel.ZIndex="1">
                 
@@ -936,7 +936,7 @@
                 <Setter Property="Padding" Value="2"/>
                 <Setter Property="Template" Value="{StaticResource ComboBoxEditableTemplate}"/>
             </Trigger>
-            <Trigger Property="SelectedItem">
+            <Trigger Property="SelectedItem" Value="true">
                 <Setter Property="FontSize" Value="20"></Setter>
             </Trigger>
         </Style.Triggers>

@@ -134,5 +134,18 @@ namespace RCP_Sys.ViewModels
                 ClearPropertyErrors(this, "SelectedComboItem");
             }
         }
+
+        //public void Will_call_save_changes()
+        //{
+
+        //    var mockContext = new Mock<RcpDbContext>();
+        //    var userService = new UserService(mockContext.Object);
+
+        //    userService.Save();
+
+
+        //    mockContext.Verify(x => x.SaveChanges());
+
+        //}
     }
 }

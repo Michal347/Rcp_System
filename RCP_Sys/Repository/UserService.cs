@@ -15,49 +15,54 @@ using System.Windows.Forms;
 using System.IO.Packaging;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
+using System.Security.Cryptography;
 
 namespace RCP_Sys.Repository
 {
     public class UserService: IUserService
     {
+        private RcpDbContext context;
 
- 
-        public void Create(UserModel user)
+        public UserService(RcpDbContext context)
         {
-            using (var context = new RcpDbContext())
-            {
+            this.context = context;
+        }
+
+        public UserService()
+        {
+        }
+
+        public void Create(UserModel user)
+        {           
                context.Users.Add(user);
-               context.SaveChanges();
-            }
+               context.SaveChanges();    
         }
 
         public UserModel GetUserModels(string username)
         {
-            using (var context = new RcpDbContext())
-            {
-
-                return context.Users.FirstOrDefault(x => x.Username == username);
-            }
+                return context.Users.FirstOrDefault(x => x.Username == username);      
         }
 
         public void Save()
         {
-            using (var context = new RcpDbContext())
-            {
+            
                 context.SaveChanges();
-            }
+            
         }
 
         public void Remove(int id)
         {
-            using (var context = new RcpDbContext())
-            {
+
                 UserModel user = context.Users.Find(id);
                 context.Users.Remove(user);
                 context.SaveChanges();
-            }
+            
         }
 
-      
+        public List<UserModel> GetStudents()
+        {
+            return context.Users.ToList();
+        }
+
     }
 }

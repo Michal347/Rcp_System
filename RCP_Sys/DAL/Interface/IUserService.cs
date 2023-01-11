@@ -12,6 +12,7 @@ namespace RCP_Sys.Models
         void Create(UserModel user);
         void Save();
         void Remove(int id);
-        
+        List<UserModel> GetStudents();
+
     }
 }
