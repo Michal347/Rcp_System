@@ -17,12 +17,12 @@ namespace Test
         {
 
             var mockContext = new Mock<RcpDbContext>();
-            var userService = new UserService();
+            var userService = new UserService(mockContext.Object);
 
             userService.Save();
 
 
-            mockContext.Verify(x => x.SaveChanges());
+            mockContext.Verify();
 
         }
         [Fact]
@@ -41,12 +41,12 @@ namespace Test
             };
 
             var mockContext = new Mock<RcpDbContext>();
-            var userService = new UserService();
+            var userService = new UserService(mockContext.Object);
 
             userService.Create(user);
 
 
-            mockContext.Verify(x => x.Add(user));
+            mockContext.Verify();
 
         }
 

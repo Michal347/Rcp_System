@@ -22,7 +22,16 @@ namespace RCP_Sys.Repository
 {
     public class UserService : IUserService
     {
+        private readonly RcpDbContext _context;
 
+        public UserService(RcpDbContext context)
+        {
+            _context = context;
+        }
+
+        public UserService()
+        {
+        }
 
         public void Create(UserModel user)
         {
