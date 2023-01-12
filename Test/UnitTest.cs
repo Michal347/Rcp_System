@@ -26,7 +26,7 @@ namespace Test
 
         }
         [Fact]
-        public void willAdd()
+        public void will_Add()
         {
             var user = new UserModel()
             {
@@ -51,7 +51,7 @@ namespace Test
         }
 
         [Fact]
-        public void GetUSername()
+        public void Will_GetUSername()
         {
             var user = new UserModel()
             {
@@ -68,7 +68,7 @@ namespace Test
             string username = user.Username;
 
             var mockContext = new Mock<RcpDbContext>();
-            var userService = new UserService();
+            var userService = new UserService(mockContext.Object);
 
             userService.GetUserModels(username);
 
