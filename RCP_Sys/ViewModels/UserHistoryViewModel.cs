@@ -24,7 +24,7 @@ namespace RCP_Sys.ViewModels
             DataListView();
             TimeCollectionUser = CollectionViewSource.GetDefaultView(TimeViewCollectionUser);
             TimeCollectionUser.Filter = TimeFilter;
-            TimeCollectionUser.Filter = UsernameFilter;
+            
         }
 
         private bool TimeFilter(object obj)
@@ -40,18 +40,7 @@ namespace RCP_Sys.ViewModels
 
         }
 
-        private bool UsernameFilter(object obj)
-        {
-            if (obj is TimerModel timermodel)
-            {
-                return
-                    timermodel.Username.Contains(FilterUsername);
-            }
-
-            return false;
-
-        }
-
+       
         public void DataListView()
         {
 
