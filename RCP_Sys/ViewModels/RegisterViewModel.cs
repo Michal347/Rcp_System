@@ -1,4 +1,5 @@
-﻿using RCP_Sys.Db;
+﻿using Microsoft.EntityFrameworkCore;
+using RCP_Sys.Db;
 using RCP_Sys.Models;
 using RCP_Sys.Repository;
 using RCP_Sys.Utilities;
@@ -92,10 +93,12 @@ namespace RCP_Sys.ViewModels
                         DateTimeJoined = DateTime.Now, 
                         Email = Email, 
                         IsUserAdmin = false });
+                context.SaveChanges();
 
             }
-
+            
             RegisterSucceded.Invoke(this, output);
+            
 
         }
         #endregion
@@ -149,8 +152,9 @@ namespace RCP_Sys.ViewModels
                 OnPropertyChanged("Surname");      
             }
         }
+        
+        private string email;
 
-            private string email;
 
         public string Email
         {

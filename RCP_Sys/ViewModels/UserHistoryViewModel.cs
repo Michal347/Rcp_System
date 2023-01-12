@@ -15,6 +15,7 @@ namespace RCP_Sys.ViewModels
 {
     public class UserHistoryViewModel: BaseViewModel
     {
+
         public ICommand RefreshTimes { get; private set; }
 
 

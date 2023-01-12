@@ -187,7 +187,6 @@ namespace RCP_Sys.ViewModels
 
         #region Event Fields
 
-
         private bool _isTimerRunning;
 
         public bool IsTimerRunning

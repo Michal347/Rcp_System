@@ -91,7 +91,7 @@ namespace RCP_Sys.ViewModels
 
         #region Event rising fields
 
-            private string userLogin;
+        private string userLogin;
 
         public string UserLogin
         {

@@ -10,13 +10,22 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace RCP_Sys.Db
 {
     public class RcpDbContext : DbContext
     {
-       
+        public RcpDbContext(DbContextOptions<RcpDbContext> options)
+        : base(options)
+        {
+        }
+
+        public RcpDbContext()
+        {
+        }
+
         public DbSet<UserModel> Users { get; set; }
         public DbSet<ProjectModel> Projects { get; set; }
         public DbSet<TimerModel> Times { get; set; }

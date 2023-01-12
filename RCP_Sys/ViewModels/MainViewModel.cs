@@ -1,4 +1,5 @@
-﻿using RCP_Sys.Models;
+﻿using RCP_Sys.Db;
+using RCP_Sys.Models;
 using RCP_Sys.Repository;
 using RCP_Sys.Views;
 using System;
@@ -27,7 +28,6 @@ namespace RCP_Sys.ViewModels
         public ICommand ShowUserHistory { get; }
         public ICommand ShowSettingView { get; }
 
-
         #endregion
 
         #region View Fields
@@ -42,7 +42,6 @@ namespace RCP_Sys.ViewModels
         public UserViewModel _userViewModel;
         public UserHistoryViewModel _userHistoryViewModel;
         public SettingsViewModel _settingsViewModel;
-
         #endregion
         public MainViewModel()
         {

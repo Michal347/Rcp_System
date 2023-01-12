@@ -16,7 +16,6 @@ namespace RCP_Sys.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-
         private IUserService getUsername;
         private IUserService Modify;
         public ICommand Update { get; private set; }
