@@ -63,7 +63,7 @@ namespace RCP_Sys.ViewModels
         public ObservableCollection<TimerModel> TimeViewCollectionUser
         {
             get { return _TimeViewCollection; }
-            set { _TimeViewCollection = value; OnPropertyChanged("TimeViewCollection"); }
+            set { _TimeViewCollection = value; OnPropertyChanged("TimeViewCollectionUser"); }
         }
 
          private string _Filter = string.Empty;

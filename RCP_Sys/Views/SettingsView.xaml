@@ -36,7 +36,7 @@
                                        FontFamily="Montserrat"                             
                                        Margin="0,35,0,0" Height="14"/>
                     <TextBox x:Name="txtUser"
-                                     Text="{Binding Login, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
+                                     Text="{Binding  UserInformation.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
                                      FontSize="13" 
                                      FontWeight="Medium"
                                      FontFamily="Montserrat"                            
@@ -73,7 +73,7 @@
                                        Margin="0,20,0,0" Height="14"/>
 
                     <TextBox x:Name="txtName"
-                                     Text="{Binding Name}"
+                                     Text="{Binding  UserInformation.Name}"
                                      FontSize="13"
                                      FontWeight="Medium"
                                      FontFamily="Montserrat"                            
@@ -92,7 +92,7 @@
                                        Margin="0,20,0,0" Height="14"/>
 
                     <TextBox x:Name="txtSurname"
-                                     Text="{Binding Surname}"
+                                     Text="{Binding  UserInformation.Surname}"
                                      FontSize="13"
                                      FontWeight="Medium"
                                      FontFamily="Montserrat"                            
@@ -112,7 +112,7 @@
                                        Margin="0,20,0,0" Height="14"/>
 
                     <TextBox x:Name="txtEmail"
-                                     Text="{Binding Email}"
+                                     Text="{Binding  UserInformation.Email}"
                                      FontSize="13"
                                      FontWeight="Medium"
                                      FontFamily="Montserrat"                            

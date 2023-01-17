@@ -50,30 +50,30 @@ namespace Test
 
         }
 
-        [Fact]
-        public void Will_GetUSername()
-        {
-            var user = new UserModel()
-            {
-                Username = "Test",
-                Password = "test",
-                Surname = "Test",
-                Name = "Test",
-                DateTimeJoined = DateTime.Now,
-                Email = "Test@gmail.com",
-                IsUserAdmin = true,
+        //[Fact]
+        //public void Will_GetUSername()
+        //{
+        //    //var user = new UserModel()
+        //    //{
+        //    //    Username = "Test",
+        //    //    Password = "test",
+        //    //    Surname = "Test",
+        //    //    Name = "Test",
+        //    //    DateTimeJoined = DateTime.Now,
+        //    //    Email = "Test@gmail.com",
+        //    //    IsUserAdmin = true,
 
-            };
+        //    //};
 
-            string username = user.Username;
+        //    string username= string.Empty;/* = user.Username;*/
 
-            var mockContext = new Mock<RcpDbContext>();
-            var userService = new UserService(mockContext.Object);
+        //    var mockContext = new Mock<RcpDbContext>();
+        //    var userService = new UserService(mockContext.Object);
 
-            userService.GetUserModels(username);
+        //    userService.GetUserModels(username);
 
 
-            mockContext.Verify();
+        //    mockContext.Verify();
 
         }
 

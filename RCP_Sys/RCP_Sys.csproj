@@ -253,8 +253,8 @@
     <Compile Include="Models\TimerModel.cs" />
     <Compile Include="Models\UserAccountModel.cs" />
     <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Repository\UserService.cs" />
-    <Compile Include="Repository\TimerService.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\TimerService.cs" />
     <Compile Include="Resources\Converters\InversedBooleanToVisibilityConverter.cs" />
     <Compile Include="Utilities\EmailValidation.cs" />
     <Compile Include="Utilities\PasswordHasher.cs" />

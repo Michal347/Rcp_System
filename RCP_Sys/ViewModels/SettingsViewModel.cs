@@ -21,7 +21,7 @@ namespace RCP_Sys.ViewModels
         public ICommand Update { get; private set; }
 
 
-        private UserAccountModel _UserInformation;
+         private UserAccountModel _UserInformation;
         public UserAccountModel UserInformation
         {
             get
@@ -51,14 +51,14 @@ namespace RCP_Sys.ViewModels
                 var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
                 if (user != null)
                 {
-                    user.Username = Login;
-                    user.Name = Name;
-                    user.Surname = surname;
-                    user.Email = Email;
+                    user.Username = UserInformation.Username;
+                    user.Name = UserInformation.Name;
+                    user.Surname = UserInformation.Surname;
+                    user.Email = UserInformation.Email;
 
                     context.Users.Update(user);
                     context.SaveChanges();
-                    Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(Login), null); ;
+                    Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserInformation.Username), null); ;
                 }
             }
         }
@@ -89,8 +89,6 @@ namespace RCP_Sys.ViewModels
 
             get
             {
-                var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
-                login=user.Username;
                 return login;
             }
             set
