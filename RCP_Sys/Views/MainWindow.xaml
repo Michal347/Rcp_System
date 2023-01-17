@@ -111,9 +111,13 @@
         </StackPanel>
 
         <!--Main Window-->
-        <Border CornerRadius="0 20 20 0"
-                Grid.Column="1">
+        <Border  Grid.Column="1">
             <Border.Background>
+                <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+            </Border.Background>
+            <Border CornerRadius="0 20 20 0"
+                Grid.Column="1">
+                <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                     <GradientStop Color="#7028e4" Offset="0"/>
                     <GradientStop Color="#e5b2ca" Offset="1"/>
@@ -121,10 +125,10 @@
             </Border.Background>
 
             <Grid>
-                <Grid.ColumnDefinitions>
+                <!--<Grid.ColumnDefinitions>
                     <ColumnDefinition Width="519*"/>
                     <ColumnDefinition Width="511*"/>
-                </Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>-->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="*"/>
@@ -164,11 +168,13 @@
                 <ContentControl
                     Content="{Binding CurrentChildView}"
                     Grid.Row="1"
-                    Margin="10,10,10,10" Grid.ColumnSpan="2" >
+                    Margin="10,10,10,10" Grid.ColumnSpan="2" 
+                    Opacity="1">
 
 
                 </ContentControl>
             </Grid>
+        </Border>
         </Border>
     </Grid>
 </Window>

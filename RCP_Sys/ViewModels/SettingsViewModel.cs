@@ -4,6 +4,7 @@ using RCP_Sys.Models;
 using RCP_Sys.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -39,7 +40,7 @@ namespace RCP_Sys.ViewModels
             UserInformation = new UserAccountModel();
             getUsername = new UserService();
             Modify = new UserService();
-            CurrentUserData();
+            CurrentUserLogged();
             Update = new RelayCommand(x=>UpdateData());
         }
 
@@ -58,13 +59,13 @@ namespace RCP_Sys.ViewModels
 
                     context.Users.Update(user);
                     context.SaveChanges();
-                    Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserInformation.Username), null); ;
+                    Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserInformation.Username), null);
+                    
                 }
             }
         }
 
-
-        private void CurrentUserData()
+        private void CurrentUserLogged()
         {
             var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
             if (user != null)
@@ -81,59 +82,6 @@ namespace RCP_Sys.ViewModels
 
             }     
         }
-
-            private string login;
-
-        public string Login
-        {
-
-            get
-            {
-                return login;
-            }
-            set
-            {
-                login = value;
-                OnPropertyChanged("Login");
-                ClearPropertyErrors(this, "Login");
-            }
-        }
-
-            private string name;
-
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                name = value;
-                OnPropertyChanged("Name");
-            }
-        }
-
-            private string surname;
-
-        public string Surname
-        {
-            get { return surname; }
-            set
-            {
-                surname = value;
-                OnPropertyChanged("Surname");
-            }
-        }
-
-            private string email;
-
-        public string Email
-        {
-            get { return email; }
-            set
-            {
-                email = value;
-                OnPropertyChanged("Email");
-                ClearPropertyErrors(this, "Email");
-            }
-        }
+           
     }
 }

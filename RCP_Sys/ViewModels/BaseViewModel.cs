@@ -11,6 +11,7 @@ namespace RCP_Sys.ViewModels
 {
     public abstract class BaseViewModel : INotifyPropertyChanged, INotifyDataErrorInfo
     {
+     
         #region Error handling
         public readonly Dictionary<string, List<string>> errors = new Dictionary<string, List<string>>();
 

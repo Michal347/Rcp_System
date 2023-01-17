@@ -101,45 +101,46 @@ namespace RCP_Sys.ViewModels
 
         }
 
+        #region ICommand handlers
         private void UserV(object obj)
         {
             CurrentChildView = new UserViewModel();
+            CurrentUserData();
         }
-
-        #region ICommand handlers
 
         private void Timesheet(object obj)
         {
             CurrentChildView = new TimeSheetViewModel();
-
+            CurrentUserData();
         }
         private void Timer(object obj)
         {
             CurrentChildView = _timerViewModel;
-            
+            CurrentUserData();
         }
 
         private void Home(object obj)
         {
             CurrentChildView = new HomeViewModel();
-
+            CurrentUserData();
         }
 
         private void UserHistory(object obj)
         {
             CurrentChildView = _userHistoryViewModel;
-
+            CurrentUserData();
         }
 
         private void Project(object obj)
         {
             CurrentChildView = _projectViewModel;
+            CurrentUserData();
         }
 
         private void Setting(object obj)
         {
             CurrentChildView = new SettingsViewModel();
-            
+            CurrentUserData();
         }
 
         private void CurrentUserData()
@@ -194,7 +195,7 @@ namespace RCP_Sys.ViewModels
 
             set
             {
-
+               
                 userAccount = value;
                 OnPropertyChanged(nameof(UserAccount));
             }
