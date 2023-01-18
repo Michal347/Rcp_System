@@ -5,39 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RCP_Sys.Views"
              mc:Ignorable="d" 
-             Height="600" Width="1000">
+             Height="600" Width="1000"
+             Background="White">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Border CornerRadius="50 0 0 50"        
-                                    Grid.Column="0">
-
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
-                    <GradientStop Color="{StaticResource LoginColor1}" Offset="0"/>
-                    <GradientStop Color="{StaticResource LoginColor2}" Offset="0.667"/>
-                </LinearGradientBrush>
-            </Border.Background>
-  
-        </Border>
-
-        <Border Background="White" 
-                        Grid.Column="1">
-            <Grid>
-                <StackPanel
-                            Width="250" Margin="100,53,100,12">
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border>
+            <StackPanel>
+                <StackPanel Width="250" Margin="10" Grid.Row="0">
                     <TextBlock Text="Username"
                                        Foreground="Gray"
                                        FontSize="12"
                                        FontWeight="Medium"
                                        FontFamily="Montserrat"                             
-                                       Margin="0,35,0,0" Height="14"/>
+                                       Margin="0,35,0,0" Height="26"/>
                     <TextBox x:Name="txtUser"
                                      Text="{Binding  UserInformation.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
                                      FontSize="13" 
+                                    IsEnabled="{Binding IsVisibleUsername}"
                                      FontWeight="Medium"
                                      FontFamily="Montserrat"                            
                                      Foreground="Black"
@@ -71,19 +61,7 @@
                                        FontWeight="Medium"
                                        FontFamily="Montserrat"                             
                                        Margin="0,20,0,0" Height="14"/>
-
-                    <TextBox x:Name="txtName"
-                                     Text="{Binding  UserInformation.Name}"
-                                     FontSize="13"
-                                     FontWeight="Medium"
-                                     FontFamily="Montserrat"                            
-                                     Foreground="Black"
-                                     CaretBrush="Black"
-                                     BorderBrush="Gray"
-                                     BorderThickness="0,0,0,2"
-                                     Height="28"
-                                     VerticalContentAlignment="Center"
-                                     Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682"/>
+ 
                     <TextBlock Text="Surname"
                                        Foreground="Gray"
                                        FontSize="12"
@@ -91,18 +69,7 @@
                                        FontFamily="Montserrat"                             
                                        Margin="0,20,0,0" Height="14"/>
 
-                    <TextBox x:Name="txtSurname"
-                                     Text="{Binding  UserInformation.Surname}"
-                                     FontSize="13"
-                                     FontWeight="Medium"
-                                     FontFamily="Montserrat"                            
-                                     Foreground="Black"
-                                     CaretBrush="Black"
-                                     BorderBrush="Gray"
-                                     BorderThickness="0,0,0,2"
-                                     Height="28"
-                                     VerticalContentAlignment="Center"
-                                     Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682"/>
+                   
 
                     <TextBlock Text="Email"
                                        Foreground="Gray"
@@ -110,36 +77,7 @@
                                        FontWeight="Medium"
                                        FontFamily="Montserrat"                             
                                        Margin="0,20,0,0" Height="14"/>
-
-                    <TextBox x:Name="txtEmail"
-                                     Text="{Binding  UserInformation.Email}"
-                                     FontSize="13"
-                                     FontWeight="Medium"
-                                     FontFamily="Montserrat"                            
-                                     Foreground="Black"
-                                     CaretBrush="Black"
-                                     BorderBrush="Gray"
-                                     BorderThickness="0,0,0,2"
-                                     Height="28"
-                                     VerticalContentAlignment="Center"
-                                     Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682">
-                        <Validation.ErrorTemplate>
-                            <ControlTemplate>
-
-                                <StackPanel Orientation="Vertical">
-
-                                    <AdornedElementPlaceholder x:Name="textBox"/>
-                                    <ItemsControl ItemsSource="{Binding}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </StackPanel>
-                            </ControlTemplate>
-                        </Validation.ErrorTemplate>
-                    </TextBox>
+          
                     <Button         
                                     Style="{StaticResource Overmouse}"
                                     x:Name="btnRegister" 
@@ -164,8 +102,122 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
+                    <Button         
+                                    Style="{StaticResource Overmouse}"
+                                    x:Name="btnmodify" 
+                                    Command="{Binding ModifyText}"
+                                    BorderThickness="0"
+                                    Content="modify"
+                                    Foreground="White"
+                                    FontSize="12"
+                                    Margin="20"
+                                    FontFamily="Montserrat"
+                                    Cursor="Hand"
+                                    RenderTransformOrigin="0.532,-0.627">
+
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="150" Height="40"
+                                                CornerRadius="20"
+                                                Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                 </StackPanel>
-            </Grid>
+            </StackPanel>
         </Border>
+        <StackPanel Grid.Column="2">
+            <StackPanel Grid.Column="2"  Width="250" Margin="10">
+                <TextBox x:Name="txtUser"
+                                     Text="{Binding  UserInformation.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
+                                     FontSize="13" 
+                                    IsEnabled="{Binding IsVisibleUsername}"
+                                     FontWeight="Medium"
+                                     FontFamily="Montserrat"                            
+                                     Foreground="Black"
+                                     CaretBrush="Black"
+                                     BorderBrush="Gray"
+                                     BorderThickness="0,0,0,2"
+                                     Height="28"
+                                     VerticalContentAlignment="Center"
+                                     Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+
+                            <StackPanel Orientation="Vertical">
+                                <AdornedElementPlaceholder x:Name="textBox"/>
+                                <ItemsControl ItemsSource="{Binding}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+                <TextBox x:Name="TxtName"
+                                     Text="{Binding  UserInformation.Name}"
+                                     FontSize="13"
+                                     FontWeight="Medium"
+                                     FontFamily="Montserrat"                            
+                                     Foreground="Black"
+                                     CaretBrush="Black"
+                                     IsEnabled="{Binding IsVisible}"
+                                     BorderBrush="Gray"
+                                     BorderThickness="0,0,0,2"
+                                     Height="28"
+                                     VerticalContentAlignment="Center"
+                                     Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682"/>
+                <TextBox x:Name="txtSurname"
+                                     Text="{Binding  UserInformation.Surname}"
+                                     FontSize="13"
+                                     FontWeight="Medium"
+                                     FontFamily="Montserrat"                            
+                                     Foreground="Black"
+                                     CaretBrush="Black"
+                                     IsEnabled="{Binding IsVisible}"
+                                     BorderBrush="Gray"
+                                     BorderThickness="0,0,0,2"
+                                     Height="28"
+                                     VerticalContentAlignment="Center"
+                                     Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682"/>
+                <TextBox x:Name="txtEmail"
+                                     Text="{Binding  UserInformation.Email}"
+                                     FontSize="13"
+                                     FontWeight="Medium"
+                                     FontFamily="Montserrat"                            
+                                     Foreground="Black"
+                                     CaretBrush="Black"
+                                     IsEnabled="{Binding IsVisible}"
+                                     BorderBrush="Gray"
+                                     BorderThickness="0,0,0,2"
+                                     Height="28"
+                                     VerticalContentAlignment="Center"
+                                     Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+
+                            <StackPanel Orientation="Vertical">
+
+                                <AdornedElementPlaceholder x:Name="textBox"/>
+                                <ItemsControl ItemsSource="{Binding}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </UserControl>

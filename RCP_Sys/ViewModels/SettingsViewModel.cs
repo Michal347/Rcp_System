@@ -18,7 +18,7 @@ namespace RCP_Sys.ViewModels
     public class SettingsViewModel : BaseViewModel
     {
         private IUserService getUsername;
-        private IUserService Modify;
+        public ICommand ModifyText { get; private set; }
         public ICommand Update { get; private set; }
 
 
@@ -39,12 +39,18 @@ namespace RCP_Sys.ViewModels
         {
             UserInformation = new UserAccountModel();
             getUsername = new UserService();
-            Modify = new UserService();
+           
             CurrentUserLogged();
             Update = new RelayCommand(x=>UpdateData());
+            ModifyText = new RelayCommand(x => Modify());
+            IsVisibleUsername = false;
         }
 
-    
+        private void Modify()
+        {
+            IsVisibleUsername = true;
+        }
+
         private void UpdateData()
         {
             using (var context = new RcpDbContext())
@@ -82,6 +88,18 @@ namespace RCP_Sys.ViewModels
 
             }     
         }
-           
+
+            private bool _IsVisibleUsername = true;
+        public bool IsVisibleUsername
+        {
+            get => _IsVisibleUsername;
+            set
+            {
+                _IsVisibleUsername = value;
+                OnPropertyChanged(nameof(IsVisibleUsername));
+            }
+
+        }
+
     }
 }

@@ -117,18 +117,19 @@ namespace RCP_Sys.ViewModels
         {
             CurrentChildView = _timerViewModel;
             CurrentUserData();
+            new MainViewModel();
         }
 
         private void Home(object obj)
         {
-            CurrentChildView = new HomeViewModel();
-            CurrentUserData();
+            CurrentChildView = new HomeViewModel();       
         }
 
         private void UserHistory(object obj)
         {
             CurrentChildView = _userHistoryViewModel;
             CurrentUserData();
+            new MainViewModel();
         }
 
         private void Project(object obj)
@@ -140,7 +141,6 @@ namespace RCP_Sys.ViewModels
         private void Setting(object obj)
         {
             CurrentChildView = new SettingsViewModel();
-            CurrentUserData();
         }
 
         private void CurrentUserData()
@@ -205,11 +205,13 @@ namespace RCP_Sys.ViewModels
             get
             {
                 return _CurrentChildView;
+                
             }
             
             set
             {
                 _CurrentChildView = value;
+                
               OnPropertyChanged(nameof(CurrentChildView));  
             }
              
