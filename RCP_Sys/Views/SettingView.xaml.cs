@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace RCP_Sys.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy SettingsView.xaml
+    /// Logika interakcji dla klasy SettingView.xaml
     /// </summary>
-    public partial class SettingsView : UserControl
+    public partial class SettingView : UserControl
     {
-        public SettingsView()
+        public SettingView()
         {
             InitializeComponent();
         }

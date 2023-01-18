@@ -32,6 +32,6 @@
         <vw:UserHistory/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
-        <vw:SettingsView/>
+        <vw:SettingView/>
     </DataTemplate>
 </ResourceDictionary>

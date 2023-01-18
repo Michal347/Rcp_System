@@ -193,6 +193,27 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style TargetType="Button" x:Key="SettingButton">
+        <Setter Property="Background" Value="LightGray"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#28AEED"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style TargetType="Button" x:Key="SaveButton">
+        <Setter Property="Background" Value="#7028e4"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#28AEED"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    
     <Style TargetType="Button" x:Key="None">
         <Setter Property="Background" Value="Transparent"/>
         <Style.Triggers>
@@ -201,6 +222,8 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
 
 
     <Style TargetType="Button" x:Key="ProjectButton">
