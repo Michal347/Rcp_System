@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0"></StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <TextBlock Text="Username:"
+            <TextBlock Text="Username"
                                        Foreground="Black"
                                        FontSize="20"
                                        FontWeight="Medium"
@@ -59,7 +59,6 @@
                                     Command="{Binding ModifyText}"
                                     BorderThickness="0"
                                     Content="modify"
-                                    IsEnabled="{Binding IsVisibleModifyUsername}"
                                     Foreground="Black"
                                     FontWeight="Bold"
                                     FontSize="16"
@@ -80,7 +79,7 @@
             <Button         
                                     Style="{StaticResource SaveButton}"
                                     x:Name="btnsave4" 
-                                    Command="{Binding SaveUsername}"
+                                    Command="{Binding ModifyText}"
                                     BorderThickness="0"
                                     Content="Save"
                                     Foreground="Black"
@@ -102,7 +101,7 @@
             </Button>
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Text="Name:"
+            <TextBlock Text="Name"
                                        Foreground="Black"
                                        FontSize="20"
                                        FontWeight="Medium"
@@ -188,7 +187,7 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <TextBlock Text="Surname:"
+            <TextBlock Text="Surname"
                                        Foreground="Black"
                                        FontSize="20"
                                        FontWeight="Medium"
@@ -229,7 +228,6 @@
                                     Command="{Binding ModifySurname}"
                                     BorderThickness="0"
                                     Content="modify"
-                                    IsEnabled="{Binding IsVisibleModifySurname}"
                                     Foreground="Black"
                                     FontWeight="Bold"
                                     FontSize="16"
@@ -250,7 +248,7 @@
             <Button         
                                     Style="{StaticResource SaveButton}"
                                     x:Name="btnsave2" 
-                                    Command="{Binding SaveSurname}"
+                                    Command="{Binding ModifyText}"
                                     BorderThickness="0"
                                     Content="Save"
                                     Foreground="Black"
@@ -272,7 +270,7 @@
             </Button>
         </StackPanel>
         <StackPanel Grid.Row="3" Orientation="Horizontal">
-            <TextBlock Text="Email:"
+            <TextBlock Text="Email"
                                        Foreground="Black"
                                        FontSize="20"
                                        FontWeight="Medium"
@@ -313,7 +311,6 @@
                                     Command="{Binding ModifyEmail}"
                                     BorderThickness="0"
                                     Content="modify"
-                                    IsEnabled="{Binding IsVisibleModifyEmail}"   
                                     Foreground="Black"
                                     FontWeight="Bold"
                                     FontSize="16"
@@ -334,7 +331,7 @@
             <Button         
                                     Style="{StaticResource SaveButton}"
                                     x:Name="btnsave3" 
-                                    Command="{Binding SaveEmail}"
+                                    Command="{Binding ModifyText}"
                                     BorderThickness="0"
                                     Content="Save"
                                     Foreground="Black"
