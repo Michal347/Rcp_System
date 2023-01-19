@@ -101,7 +101,7 @@
     <!--close minimalize button-->
 
     <Style x:Key="ControlPanelButton" TargetType="fa:IconImage">
-        <Setter Property="Foreground" Value="#351c75"/>
+        <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Height" Value="40"/>
         <Setter Property="Margin" Value="10 0 0 0"/>
         <Setter Property="Height" Value="15"/>

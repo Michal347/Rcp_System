@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:RCP_Sys.Views"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
-             Height="600" Width="1000">
+             Height="685" Width="1010">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>

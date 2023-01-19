@@ -79,24 +79,26 @@ namespace RCP_Sys.ViewModels
         private void SvUsername()
         {
             using (var context = new RcpDbContext())
-            {
+            {    
                 var user = context.Users.FirstOrDefault(x => x.Username == UserInformation.Username);
 
                 if (string.IsNullOrWhiteSpace(UserInformation.Username))
                 {
-                    OnErrorCreated("UserInformation.Username", "Cannot be empty");
+                    ErrorMessageUsername = "*Cannot be empty";
                     return;
                 }
 
-                else if(user != null)
+                else if (user != null &&  UserInformation.Username != Thread.CurrentPrincipal.Identity.Name)
                 {
-                    OnErrorCreated("UserInformation.Username", "*Username Already exist");
+                    ErrorMessageUsername = "*Username already exist";
                     return;
                 }
+
             }
             IsVisibleUsername = false;
             IsVisibleModifyUsername = true;
             IsVisibleSaveChange = true;
+            ErrorMessageUsername = "";
         }
 
         private void SvEmail()
@@ -104,19 +106,20 @@ namespace RCP_Sys.ViewModels
             var validEmail = EmailValidation.IsValidEmail(UserInformation.Email);
             if (string.IsNullOrWhiteSpace(UserInformation.Email))
             {
-                OnErrorCreated("UserInformation.Email", "Cannot be empty");
+                ErrorMessageEmail = "*Cannot be empty";
                 return;
             }
 
             else if (validEmail == false)
             {
-                OnErrorCreated("UserInformation.Email", "*Invalid email");
+                ErrorMessageEmail = "*Invalid Email";
                 return;
 
             }
             IsVisibleEmail = false;
             IsVisibleModifyEmail = true;
             IsVisibleSaveChange = true;
+            ErrorMessageEmail = "";
         }
 
         private void SvName()
@@ -303,6 +306,30 @@ namespace RCP_Sys.ViewModels
             {
                 _IsVisibleModifyUsername = value;
                 OnPropertyChanged(nameof(IsVisibleModifyUsername));
+            }
+
+        }
+
+        private string _ErrorMessageUsername;
+        public string ErrorMessageUsername
+        {
+            get => _ErrorMessageUsername;
+            set
+            {
+                _ErrorMessageUsername = value;
+                OnPropertyChanged(nameof(ErrorMessageUsername));
+            }
+
+        }
+
+        private string _ErrorMessageEmail;
+        public string ErrorMessageEmail
+        {
+            get => _ErrorMessageEmail;
+            set
+            {
+                _ErrorMessageEmail = value;
+                OnPropertyChanged(nameof(ErrorMessageEmail));
             }
 
         }
