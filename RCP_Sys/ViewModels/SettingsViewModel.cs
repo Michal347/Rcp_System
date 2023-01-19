@@ -1,16 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RCP_Sys.Db;
+﻿using RCP_Sys.Db;
 using RCP_Sys.Models;
 using RCP_Sys.Repository;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
+using RCP_Sys.Utilities;
 using System.Linq;
 using System.Security.Principal;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace RCP_Sys.ViewModels
@@ -25,6 +19,9 @@ namespace RCP_Sys.ViewModels
         public ICommand Update { get; private set; }
         
         public ICommand SaveName { get; private set; }
+        public ICommand SaveSurname { get; private set; }
+        public ICommand SaveEmail { get; private set; }
+        public ICommand SaveUsername { get; private set; }
 
 
         private UserAccountModel _UserInformation;
@@ -55,11 +52,71 @@ namespace RCP_Sys.ViewModels
             ModifySurname = new RelayCommand(x => ModSurname());
 
             SaveName= new RelayCommand(x => SvName());
+            SaveEmail = new RelayCommand(x => SvEmail());
+            SaveUsername = new RelayCommand(x => SvUsername());
+            SaveSurname = new RelayCommand(x => SvSurname());
+         
 
             IsVisibleUsername = false;
             IsVisibleSurname= false;
             IsVisibleEmail = false;
             IsVisibleName = false;
+        }
+
+        private void SvSurname()
+        {
+            if (string.IsNullOrWhiteSpace(UserInformation.Surname))
+            {
+                OnErrorCreated("UserInformation.Surname", "Cannot be empty");
+                return;
+            }
+
+            IsVisibleSurname = false;
+            IsVisibleModifySurname = true;
+            IsVisibleSaveChange = true;
+        }
+
+        private void SvUsername()
+        {
+            using (var context = new RcpDbContext())
+            {
+                var user = context.Users.FirstOrDefault(x => x.Username == UserInformation.Username);
+
+                if (string.IsNullOrWhiteSpace(UserInformation.Username))
+                {
+                    OnErrorCreated("UserInformation.Username", "Cannot be empty");
+                    return;
+                }
+
+                else if(user != null)
+                {
+                    OnErrorCreated("UserInformation.Username", "*Username Already exist");
+                    return;
+                }
+            }
+            IsVisibleUsername = false;
+            IsVisibleModifyUsername = true;
+            IsVisibleSaveChange = true;
+        }
+
+        private void SvEmail()
+        {
+            var validEmail = EmailValidation.IsValidEmail(UserInformation.Email);
+            if (string.IsNullOrWhiteSpace(UserInformation.Email))
+            {
+                OnErrorCreated("UserInformation.Email", "Cannot be empty");
+                return;
+            }
+
+            else if (validEmail == false)
+            {
+                OnErrorCreated("UserInformation.Email", "*Invalid email");
+                return;
+
+            }
+            IsVisibleEmail = false;
+            IsVisibleModifyEmail = true;
+            IsVisibleSaveChange = true;
         }
 
         private void SvName()
@@ -79,6 +136,7 @@ namespace RCP_Sys.ViewModels
         {
            IsVisibleSurname = true;
             IsVisibleSaveChange = false;
+            IsVisibleModifySurname = false;
         }
 
         private void ModName()
@@ -92,12 +150,14 @@ namespace RCP_Sys.ViewModels
         {
             IsVisibleEmail=true;
             IsVisibleSaveChange = false;
+            IsVisibleModifyEmail = false;
         }
 
         private void ModifyUsername()
         {
             IsVisibleUsername = true;
             IsVisibleSaveChange = false;
+            IsVisibleModifyUsername = false;
         }
 
         private void UpdateData()
@@ -151,7 +211,7 @@ namespace RCP_Sys.ViewModels
         }
 
 
-        private bool _IsVisibleName = true;
+            private bool _IsVisibleName = true;
         public bool IsVisibleName
         {
             get => _IsVisibleName;
@@ -163,7 +223,7 @@ namespace RCP_Sys.ViewModels
 
         }
 
-        private bool _IsVisibleSurname = true;
+            private bool _IsVisibleSurname = true;
         public bool IsVisibleSurname
         {
             get => _IsVisibleSurname;
@@ -175,7 +235,7 @@ namespace RCP_Sys.ViewModels
 
         }
 
-        private bool _IsVisibleEmail = true;
+            private bool _IsVisibleEmail = true;
         public bool IsVisibleEmail
         {
             get => _IsVisibleEmail;
@@ -187,7 +247,20 @@ namespace RCP_Sys.ViewModels
 
         }
 
-        private bool _IsVisibleModifyName = true;
+    
+            private bool _IsVisibleSaveChange = true;
+        public bool IsVisibleSaveChange
+        {
+            get => _IsVisibleSaveChange;
+            set
+            {
+                _IsVisibleSaveChange = value;
+                OnPropertyChanged(nameof(IsVisibleSaveChange));
+            }
+
+        }
+
+            private bool _IsVisibleModifyName = true;
         public bool IsVisibleModifyName
         {
             get => _IsVisibleModifyName;
@@ -199,14 +272,37 @@ namespace RCP_Sys.ViewModels
 
         }
 
-        private bool _IsVisibleSaveChange = true;
-        public bool IsVisibleSaveChange
+            private bool _IsVisibleModifySurname = true;
+        public bool IsVisibleModifySurname
         {
-            get => _IsVisibleSaveChange;
+            get => _IsVisibleModifySurname;
             set
             {
-                _IsVisibleSaveChange = value;
-                OnPropertyChanged(nameof(IsVisibleSaveChange));
+                _IsVisibleModifySurname = value;
+                OnPropertyChanged(nameof(IsVisibleModifySurname));
+            }
+
+        }
+
+            private bool _IsVisibleModifyEmail = true;
+        public bool IsVisibleModifyEmail
+        {
+            get => _IsVisibleModifyEmail;
+            set
+            {
+                _IsVisibleModifyEmail = value;
+                OnPropertyChanged(nameof(IsVisibleModifyEmail));
+            }
+
+        }
+            private bool _IsVisibleModifyUsername = true;
+        public bool IsVisibleModifyUsername
+        {
+            get => _IsVisibleModifyUsername;
+            set
+            {
+                _IsVisibleModifyUsername = value;
+                OnPropertyChanged(nameof(IsVisibleModifyUsername));
             }
 
         }
