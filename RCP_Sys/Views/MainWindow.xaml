@@ -19,27 +19,15 @@
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
-        <Border CornerRadius="20 0 0 20"
-                Grid.Column="0">
+        <Border CornerRadius="20 0 0 20" Grid.Column="0">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                    <GradientStop Color="{StaticResource PrimiaryColor2}" Offset="0"/>
-                    <GradientStop Color="{StaticResource PrimaryColor}" Offset="1"/>
+                    <GradientStop Color="#24105f" Offset="0.5"/>
+                    <GradientStop Color="{StaticResource PrimaryColor}" Offset="0.1"/>
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
 
-        <Border CornerRadius="20 0 0 20"
-                Grid.Row="0"
-                Grid.Column="1">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
-                    <GradientStop Color="{StaticResource PrimiaryColor2}" Offset="0"/>
-                    <GradientStop Color="{StaticResource PrimaryColor}" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-        </Border>
         <StackPanel Orientation="Vertical">
 
             <StackPanel Orientation="Horizontal" Margin="35 35 0 0">
@@ -125,10 +113,13 @@
         <!--Main Window-->
         <Border  Grid.Column="1">
             <Border.Background>
-                <ImageBrush ImageSource="/Images/background.jpg"></ImageBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                    <GradientStop Color="#24105f" Offset="0"/>
+                    <GradientStop Color="#210f55" Offset="1"/>
+                </LinearGradientBrush>
             </Border.Background>
             <Border CornerRadius="0 0 0 0"
-                Grid.Column="1" Background="#351c75">
+                Grid.Column="1">
                 <!--<Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                         <GradientStop Color="#7028e4" Offset="0"/>
