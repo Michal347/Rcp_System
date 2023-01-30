@@ -44,14 +44,8 @@
                     Grid.Column="1" 
                     Margin="40">
             <StackPanel Height="70" Orientation="Horizontal" Margin="0 20 0 0">
-                <fa:IconImage Icon="ProjectDiagram" 
-                              Style="{StaticResource MenuIcon}" 
-                              Height="55"
-                              Foreground="#351c75"
-                              Width="58"
-                              Margin="30 10 0 0" />
                 <Label FontSize="30"
-                       FontWeight="DemiBold"
+                       FontWeight="Bold"
                        Foreground="Black"
                        VerticalContentAlignment="Center"
                        Margin="20 0 0 0">Add Project</Label>

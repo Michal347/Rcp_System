@@ -1,4 +1,5 @@
-﻿using RCP_Sys.Db;
+﻿using FontAwesome.Sharp;
+using RCP_Sys.Db;
 using RCP_Sys.Models;
 using RCP_Sys.Repository;
 using RCP_Sys.Views;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace RCP_Sys.ViewModels
 {
@@ -31,7 +33,8 @@ namespace RCP_Sys.ViewModels
         #endregion
 
         #region View Fields
-
+       
+      
         private UserAccountModel userAccount;
         private IUserService GetUsername;
         private object _CurrentChildView;
@@ -106,23 +109,31 @@ namespace RCP_Sys.ViewModels
         {
             CurrentChildView = new UserViewModel();
             CurrentUserData();
+            caption = "User";
+            icon = IconChar.UserCheck;
         }
 
         private void Timesheet(object obj)
         {
             CurrentChildView = new TimeSheetViewModel();
             CurrentUserData();
+            caption = "Timesheet";
+            icon = IconChar.Calendar;
         }
         private void Timer(object obj)
         {
             CurrentChildView = _timerViewModel;
             CurrentUserData();
             new MainViewModel();
+            caption = "Timer";
+            icon = IconChar.Clock;
         }
 
         private void Home(object obj)
         {
-            CurrentChildView = new HomeViewModel();       
+            CurrentChildView = new HomeViewModel();
+            caption = "Home";
+            icon = IconChar.Home;
         }
 
         private void UserHistory(object obj)
@@ -130,17 +141,23 @@ namespace RCP_Sys.ViewModels
             CurrentChildView = _userHistoryViewModel;
             CurrentUserData();
             new MainViewModel();
+            caption = "User History";
+            icon = IconChar.History;
         }
 
         private void Project(object obj)
         {
             CurrentChildView = _projectViewModel;
             CurrentUserData();
+            caption = "Project";
+            icon = IconChar.ProjectDiagram;
         }
 
         private void Setting(object obj)
         {
             CurrentChildView = new SettingsViewModel();
+            caption = "Setting";
+            icon = IconChar.Cog;
         }
 
         private void CurrentUserData()
@@ -166,7 +183,24 @@ namespace RCP_Sys.ViewModels
 
         #region Event rising fields
 
-            private bool _btnUpdateVisibility;
+            private IconChar _icon;
+        public IconChar icon
+        {
+            get { return _icon; }
+            set { _icon = value; OnPropertyChanged(nameof(icon)); }
+
+
+        }
+            private string _caption;
+        public string caption
+        {
+            get { return _caption; }
+            set { _caption = value; OnPropertyChanged(nameof(caption)); }
+
+
+        }
+
+        private bool _btnUpdateVisibility;
 
         public bool btnUpdateVisibility
         {
