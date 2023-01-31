@@ -6,27 +6,21 @@
              xmlns:local="clr-namespace:RCP_Sys.Views"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
-             Height="685" Width="1010">
-    <Grid Background="White">
+             Height="670" Width="1030">
+    <Grid Background="White" Margin="0 30 0 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Background="White" Margin="10" Orientation="Horizontal">
-            <fa:IconImage Icon="Calendar" Style="{StaticResource MenuIcon}" Height="36" Width="52"/>
-            <Label FontSize="30"
-                       FontWeight="ExtraBlack"
-                       Foreground="Black"
-                       VerticalContentAlignment="Center"
-                       Margin="20 0 0 0">User History</Label>
-            <StackPanel Margin="150 0 0 0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!--<StackPanel Margin="500 0 0 0" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
                 <TextBlock Text="Username:"
                        FontSize="20"
                        VerticalAlignment="Center"
                        Margin="0 0 0 0">
                 </TextBlock>
-                <TextBox 
+                --><!--<TextBox 
                         x:Name="WhatWorkTextbox"
                         Text="{Binding FilterUsername, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource TimesheetBox1}"
@@ -38,9 +32,9 @@
                         Margin="0 0 0 0"
                         Width="200"
                         Height="40">
-                </TextBox>
-            </StackPanel>
-            <StackPanel Margin="30 0 0 0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                </TextBox>--><!--
+            </StackPanel>-->
+            <StackPanel Margin="700 0 0 0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Text="Filtr By:"
                        FontSize="20"
                        VerticalAlignment="Center"

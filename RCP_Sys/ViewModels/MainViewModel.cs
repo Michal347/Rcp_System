@@ -167,7 +167,7 @@ namespace RCP_Sys.ViewModels
             {
                 {
                     UserAccount.Username = user.Username;
-                    UserAccount.DisplayName = $"{user.Username}";
+                    UserAccount.DisplayName = $"{user.Name} {user.Surname}";
                     
                 };
 

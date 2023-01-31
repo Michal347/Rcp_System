@@ -6,9 +6,9 @@
              xmlns:local="clr-namespace:RCP_Sys.ViewModels"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" 
              mc:Ignorable="d"   
-             Height="600" Width="1000">
+             Height="670" Width="1030">
 
-    <Grid Background="#351c75">
+    <Grid Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>

@@ -114,7 +114,7 @@
         <Border  Grid.Column="1">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
-                    <GradientStop Color="#24105f" Offset="0"/>
+                    <GradientStop Color="#41518f" Offset="0"/>
                     <GradientStop Color="#210f55" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
