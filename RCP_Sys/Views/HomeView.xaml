@@ -7,11 +7,11 @@
              xmlns:vm="clr-namespace:RCP_Sys.ViewModels"
              mc:Ignorable="d"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="670" d:DesignWidth="1030"
              Background="Transparent">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="730"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
@@ -27,10 +27,8 @@
                 BorderThickness="2">
             <StackPanel Grid.Column="1"
                     Margin="0 30 0 0"
-                        HorizontalAlignment="Center"
-                        >
-
-                        <StackPanel>
+                    HorizontalAlignment="Center">
+                <StackPanel>
                             <TextBlock Text="Information About User:"
                                Foreground="Black"
                                FontSize="20"
@@ -131,5 +129,10 @@
                         </StackPanel>
                     </StackPanel>
                 </Border>
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
+            <Viewbox Margin="0">
+                <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle}" CalendarItemStyle="{DynamicResource CalendarCalendarItemStyle}" Style="{DynamicResource CalendarStyles}" Margin="30"/>
+            </Viewbox>
+        </StackPanel>
             </Grid>
 </UserControl>
