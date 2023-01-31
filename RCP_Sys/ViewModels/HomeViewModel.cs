@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace RCP_Sys.ViewModels
 {
@@ -58,6 +60,17 @@ namespace RCP_Sys.ViewModels
                 UserInformation.Surname = "Invalid, Information";
                
 
+            }
+        }
+
+            private ImageSource _yourImage;
+        public ImageSource YourImage
+        {
+            get { return _yourImage; }
+            set
+            {
+                _yourImage = value;
+                OnPropertyChanged(nameof(YourImage));
             }
         }
     }

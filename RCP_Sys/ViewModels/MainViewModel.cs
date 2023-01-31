@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace RCP_Sys.ViewModels
@@ -47,7 +49,7 @@ namespace RCP_Sys.ViewModels
         public SettingsViewModel _settingsViewModel;
         #endregion
         public MainViewModel()
-        {
+        {         
             GetUsername = new UserService();
             var user = GetUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
             if (user != null)
@@ -183,7 +185,8 @@ namespace RCP_Sys.ViewModels
 
         #region Event rising fields
 
-            private IconChar _icon;
+           
+        private IconChar _icon;
         public IconChar icon
         {
             get { return _icon; }

@@ -7,7 +7,7 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              Height="670" Width="1030">
-    <Grid Background="White" Margin="0 30 0 0">
+    <Grid Background="White" Margin="10 30 10 10">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
