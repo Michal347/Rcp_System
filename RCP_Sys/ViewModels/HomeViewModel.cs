@@ -1,4 +1,5 @@
-﻿using RCP_Sys.Db;
+﻿
+using RCP_Sys.Db;
 using RCP_Sys.Models;
 using RCP_Sys.Repository;
 using System;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -18,6 +20,7 @@ namespace RCP_Sys.ViewModels
         private UserAccountModel _UserInformation;
         private IUserService getUsername;
         private IUserService getGender;
+        public ICommand OpenFile { get; set; }
 
         public UserAccountModel UserInformation
         {
@@ -50,9 +53,15 @@ namespace RCP_Sys.ViewModels
                     string imagePath = "\\Images\\woman.png";
                     this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                 }
-                else
+                if(result == false)
                 {
                     string imagePath = "\\Images\\man.png";
+                    this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                }
+
+               if(result == false && gender.IsUserAdmin == true)
+                {
+                    string imagePath = "\\Images\\businessman.png";
                     this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                 }
             }
@@ -90,7 +99,6 @@ namespace RCP_Sys.ViewModels
             set { this._ImageSource = value; this.OnPropertyChanged("ImageSource"); }
         }
 
-       
     }
 
 }

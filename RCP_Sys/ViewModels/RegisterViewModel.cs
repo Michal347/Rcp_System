@@ -109,7 +109,7 @@ namespace RCP_Sys.ViewModels
                         Name = Name, 
                         Password = hash, 
                         Surname = Surname, 
-                        DateTimeJoined = DateTime.Now, 
+                        DateTimeJoined = DateTime.Today, 
                         Email = Email, 
                         IsUserAdmin = false,
                         Gender= Gender });

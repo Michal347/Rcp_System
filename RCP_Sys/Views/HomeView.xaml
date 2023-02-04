@@ -27,7 +27,7 @@
                 HorizontalAlignment="Right"
                 BorderBrush="Gray"
                 BorderThickness="2">
-            <StackPanel Grid.Column="1"
+            <StackPanel Grid.Column="1" Width="270"
                     Margin="0 30 0 0"
                     HorizontalAlignment="Center"
                         Orientation="Vertical">
@@ -36,17 +36,7 @@
                         <Image Source="{Binding ImageSource,UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                 </StackPanel>
-                <StackPanel Margin="0 20 0 0">
-                            <TextBlock Text="Information About User:"
-                               Foreground="Black"
-                               FontSize="20"
-                                       Margin="0 0 0 30"
-                               FontWeight="Bold"
-                               FontFamily="Montserrat"                             
-                               HorizontalAlignment="Center"/>
-                        </StackPanel>
-                <Separator Height="1" Margin=" 0" Background="Black"/>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="0 30 0 0">
                             <TextBlock Text="Username:"
                                Foreground="#747474"
                                FontSize="16"
@@ -99,7 +89,7 @@
                                Margin="20,20 0 0"/>
                     
                 </StackPanel>
-                <Separator Height="1" Margin="10 10 10 0" Background="Black"/>
+                <Separator Height="1" Margin="10 11 10 0" Background="Black"/>
                 <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Email:"
                                Foreground="#747474"
