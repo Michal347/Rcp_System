@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:RCP_Sys"
         xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" 
         mc:Ignorable="d"
-        Title="LoginView" Height="550" Width="800"
+        Title="LoginView" Height="650" Width="900"
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -84,10 +84,10 @@
                     </Button.Template>
                 </Button>
             </Grid>
-            <StackPanel Width="220"
+            <StackPanel Width="270"
                             Grid.Row="1"
                             Orientation="Vertical"
-                            Margin="0,35,0,0">
+                            Margin="0,85,0,0">
                 <fa:IconImage Icon="UserClock" Width="88" Style="{StaticResource ClockIcon}"/>
 
                 <TextBlock Text="Log in up to work record time system or sign up"
