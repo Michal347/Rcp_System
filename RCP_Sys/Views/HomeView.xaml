@@ -33,7 +33,7 @@
                         Orientation="Vertical">
                 <StackPanel Height="100">
                     <Border Height="100" Width="100" CornerRadius="80">
-                        <Image Source="/Images/man.png"/>
+                        <Image Source="{Binding ImageSource,UpdateSourceTrigger=PropertyChanged}"/>
                     </Border>
                 </StackPanel>
                 <StackPanel Margin="0 20 0 0">

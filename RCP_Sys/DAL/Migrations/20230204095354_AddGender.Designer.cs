@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RCP_Sys.Db;
 
 namespace RCP_Sys.Migrations
 {
     [DbContext(typeof(RcpDbContext))]
-    partial class RcpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230204095354_AddGender")]
+    partial class AddGender
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,12 +114,11 @@ namespace RCP_Sys.Migrations
                         new
                         {
                             Id = 1,
-                            DateTimeJoined = new DateTime(2023, 2, 4, 11, 8, 58, 822, DateTimeKind.Local).AddTicks(5472),
+                            DateTimeJoined = new DateTime(2023, 2, 4, 10, 53, 54, 292, DateTimeKind.Local).AddTicks(7958),
                             Email = "admin@gmail.com",
-                            Gender = "Male",
                             IsUserAdmin = true,
                             Name = "Admin",
-                            Password = "ZCD+ZygQt+sHS+JIJ/WscAH9e09kzWyaGxJhYK+5eOqrksmu",
+                            Password = "exuBHjAoku6CuNsAhBcfH7aCT+6c39Q4PAeyF5SIdoR4KhJY",
                             Surname = "Admin",
                             Username = "Admin"
                         });

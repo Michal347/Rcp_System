@@ -213,6 +213,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DAL\Migrations\20230204095354_AddGender.cs" />
+    <Compile Include="DAL\Migrations\20230204095354_AddGender.designer.cs">
+      <DependentUpon>20230204095354_AddGender.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Migrations\20230204100859_changeAdmin.cs" />
+    <Compile Include="DAL\Migrations\20230204100859_changeAdmin.designer.cs">
+      <DependentUpon>20230204100859_changeAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\RcpDbContext.cs" />
     <Compile Include="DAL\Interface\IUserService.cs" />
     <Compile Include="DAL\Interface\ITimerService.cs" />

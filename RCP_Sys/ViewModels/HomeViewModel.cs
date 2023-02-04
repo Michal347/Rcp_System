@@ -16,7 +16,8 @@ namespace RCP_Sys.ViewModels
     public class HomeViewModel : BaseViewModel
     {
         private UserAccountModel _UserInformation;
-        private IUserService getUsername; 
+        private IUserService getUsername;
+        private IUserService getGender;
 
         public UserAccountModel UserInformation
         {
@@ -33,10 +34,29 @@ namespace RCP_Sys.ViewModels
 
             public HomeViewModel()
             {
-            getUsername = new UserService();
-            UserInformation = new UserAccountModel();
+                getUsername = new UserService();
+                getGender = new UserService();
+                UserInformation = new UserAccountModel();
                 CurrentUserInformation();
+
+
+            var gender = getGender.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
+            if (gender != null)
+            {
+                var value = "Female";
+                Boolean result = gender.Gender.Contains(value);
+                if (result == true)
+                {
+                    string imagePath = "\\Images\\woman.png";
+                    this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                }
+                else
+                {
+                    string imagePath = "\\Images\\man.png";
+                    this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                }
             }
+        }
         private void CurrentUserInformation()
         {
             var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
@@ -48,7 +68,8 @@ namespace RCP_Sys.ViewModels
                     UserInformation.Surname = user.Surname;
                     UserInformation.DateJoin = user.DateTimeJoined;
                     UserInformation.Email = user.Email;
-
+                    
+                    
                 };
                 
 
@@ -62,17 +83,14 @@ namespace RCP_Sys.ViewModels
 
             }
         }
-
-            private ImageSource _yourImage;
-        public ImageSource YourImage
+            private BitmapImage _ImageSource;
+        public BitmapImage ImageSource
         {
-            get { return _yourImage; }
-            set
-            {
-                _yourImage = value;
-                OnPropertyChanged(nameof(YourImage));
-            }
+            get { return this._ImageSource; }
+            set { this._ImageSource = value; this.OnPropertyChanged("ImageSource"); }
         }
+
+       
     }
-    
+
 }

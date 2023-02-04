@@ -44,8 +44,9 @@ namespace RCP_Sys.Db
                     DateTimeJoined = DateTime.Now,
                     Email = "admin@gmail.com",
                     IsUserAdmin = true,
+                    Gender = "male",
 
-                });
+                }) ;
             base.OnModelCreating(modelBuilder);
         }
 

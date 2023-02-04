@@ -55,7 +55,7 @@ namespace RCP_Sys.ViewModels
                         return;
                         
                     }
-                    output = new UserModel() { Name = found.Name, Surname = found.Surname, Id = found.Id, DateTimeJoined= found.DateTimeJoined, Email=found.Email};
+                    output = new UserModel() { Name = found.Name, Surname = found.Surname, Id = found.Id, DateTimeJoined= found.DateTimeJoined, Email=found.Email, Gender=found.Gender};
                     Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserLogin), null);
                 }
                 else

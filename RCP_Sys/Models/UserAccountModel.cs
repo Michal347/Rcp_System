@@ -26,5 +26,7 @@ namespace RCP_Sys.Models
 
         public bool IsUserAdmin { get; set; }
 
+        public string Gender { get; set; }
+
     }
 }

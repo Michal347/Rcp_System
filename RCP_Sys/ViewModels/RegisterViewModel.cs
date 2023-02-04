@@ -22,6 +22,7 @@ namespace RCP_Sys.ViewModels
         #region ICommands
         public ICommand GoBack { get; private set; }
         public ICommand Register { get; private set; }
+        public ICommand GetGender { get; set; }
         public IUserService UserAdd;
         
         #endregion
@@ -33,6 +34,7 @@ namespace RCP_Sys.ViewModels
         {
             GoBack = new RelayCommand(x => GoBackHandler());
             Register = new RelayCommand(x => RegisterUser(), CanExecuteRegister);
+            GetGender = new RelayCommand(executemethod, canexecutemethod);
             UserAdd = new UserService();
             
         }
@@ -53,7 +55,24 @@ namespace RCP_Sys.ViewModels
 
 
         }
-        
+
+        private bool canexecutemethod(object parameter)
+        {
+            if (parameter != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void executemethod(object parameter)
+        {
+            Gender = (string)parameter;
+        }
+
         private void GoBackHandler()
         {
             CancelRequested.Invoke(this, null);
@@ -92,7 +111,8 @@ namespace RCP_Sys.ViewModels
                         Surname = Surname, 
                         DateTimeJoined = DateTime.Now, 
                         Email = Email, 
-                        IsUserAdmin = false });
+                        IsUserAdmin = false,
+                        Gender= Gender });
                 context.SaveChanges();
 
             }
@@ -152,7 +172,18 @@ namespace RCP_Sys.ViewModels
                 OnPropertyChanged("Surname");      
             }
         }
-        
+         private string _gender;
+
+        public string Gender
+        {
+            get { return _gender; }
+            set
+            {
+                _gender = value;
+                OnPropertyChanged("Gender");
+            }
+        }
+
         private string email;
 
 
@@ -167,8 +198,10 @@ namespace RCP_Sys.ViewModels
             }
         }
 
+            private int _isSuccess;
+        public int IsSuccess { get { return _isSuccess; } set { _isSuccess = value; } }
         #endregion
-       
+
 
 
     }
