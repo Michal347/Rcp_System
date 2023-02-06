@@ -8,14 +8,14 @@
                  xmlns:vm="clr-namespace:RCP_Sys.ViewModels"  
                  xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" 
                  mc:Ignorable="d" 
-                 Height="670" Width="1010">
-    <Grid    Background="Transparent">
+                 Height="660" Width="1010">
+    <Grid Background="White" Margin="0 10 0 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Border Margin="10" Grid.Row="0" CornerRadius="10" Background="White">
+        <Border  BorderBrush="LightGray" Margin="10" Grid.Row="0" CornerRadius="0" Background="White" BorderThickness="3">
             <StackPanel Grid.Row="0"
                         Background="Transparent" Margin="14,0,-14,0"
                             Orientation="Horizontal">
@@ -64,7 +64,7 @@
                     <Button     Style="{StaticResource RefreshButton}" 
                                 x:Name="BtnRefresh"                          
                                 BorderThickness="0"
-                                Content="Refresh project"
+                                Content="Refresh"
                                 Foreground="White"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
@@ -105,17 +105,17 @@
                                 Foreground="White"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
-                                FontSize="12"
+                                FontSize="20"
                                 FontFamily="Montserrat"
                                 Cursor="Hand"                           
-                                Margin="30,0,0,0"
+                                Margin="10,0,0,0"
                                 Command="{Binding StartTimerCommand}"
                                 Visibility="{Binding IsTimerRunning, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
 
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Width="80" Height="30"
-                                            CornerRadius="5"
+                                <Border Width="100" Height="40"
+                                            CornerRadius="0"
                                             Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
                                                           HorizontalAlignment="Center"/>
@@ -128,7 +128,7 @@
                                 BorderThickness="0"
                                 Content="Stop"
                                 Foreground="White"
-                                FontSize="12"
+                                FontSize="20"
                                 FontFamily="Montserrat"
                                 Cursor="Hand"
                                 Margin="30 0 0 0"
@@ -151,7 +151,7 @@
         </Border>
         <Border Grid.Row="1"  
                     Margin="10" 
-                    CornerRadius="10 10 20 20" 
+                    CornerRadius="0" 
                     Background="White"
                     BorderBrush="LightGray"
                     BorderThickness="3">
@@ -159,40 +159,11 @@
                         Margin="0 0 0 10" Background="white">
                 <StackPanel Grid.Row="1"
                                 Height="70"
-                                Background="LightGray"
+                                Background="#e2e2e2"
                                 Orientation="Horizontal">
-                    <StackPanel Width="350" 
-                                Orientation="Horizontal">
-                        <fa:IconImage 
-                            Icon="Clock" 
-                            Style="{StaticResource MenuIcon}"
-                            Height="50"
-                            Foreground="#5F0A87"
-                            Width="80"
-                            VerticalAlignment="Center"
-                            HorizontalAlignment="Left"/>
-                        <TextBlock
-                            Height="50"
-                            Width="200"
-                            FontWeight="Bold"
-                            VerticalAlignment="Center"
-                            Foreground="#5F0A87"
-                            Margin="0 0 0 0"
-                            FontSize="25"
-                            TextAlignment="Center"
-                            Text="Timesheet Today"/>
-                    </StackPanel>
-                    <TextBlock
-                            Height="50"
-                            Width="86"
-                            FontWeight="Bold"
-                            VerticalAlignment="Center"
-                            Foreground="#5F0A87"
-                            Margin="300 0 0 0"
-                            FontSize="25"
-                            TextAlignment="Center"
-                            Text="Today:"/>
-                    <TextBlock
+                    <Label VerticalAlignment="Center" Margin="20 0 0 0" FontSize="30" FontWeight="Bold" Foreground="Gray">Today</Label>
+            
+                    <!--<TextBlock
                             Height="50"
                             Width="219"
                             FontWeight="Bold"
@@ -202,11 +173,15 @@
                             FontSize="25"
                             TextAlignment="Center"
                             Text="{Binding Source={x:Static sys:DateTime.Now},
-                            StringFormat='{}{0: ddd, dd MMM yyyy }'}"/>
+                            StringFormat='{}{0: ddd, dd MMM yyyy }'}"/>-->
                 </StackPanel>
                 <StackPanel Height="370">
                     <Grid  x:Name="GridTimer" Grid.Row="1">
-                        <DataGrid Height="370" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="4" x:Name="TimerDataGrid" ItemsSource="{Binding TimerCollection}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="115*"/>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid Height="370" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="TimerDataGrid" ItemsSource="{Binding TimerCollection}" Grid.ColumnSpan="2">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding TimerId}" Header="#" Width="60" CanUserResize="False" IsReadOnly="True"/>
                                 <DataGridTextColumn Binding="{Binding EndDateTime}" Header="End Date" Width="*" CanUserResize="False" IsReadOnly="True" />
