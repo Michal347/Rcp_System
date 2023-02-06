@@ -77,7 +77,7 @@
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Width="100" Height="30"
-                                            CornerRadius="10"
+                                            CornerRadius="0"
                                             Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
                                                           HorizontalAlignment="Center"/>
@@ -131,14 +131,14 @@
                                 FontSize="20"
                                 FontFamily="Montserrat"
                                 Cursor="Hand"
-                                Margin="30 0 0 0"
+                                Margin="10 0 0 0"
                                 Command="{Binding StopTimerCommand}"
                                 Visibility="{Binding IsTimerRunning, Converter={StaticResource BooleanToVisibilityConverter}}">
 
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Width="80" Height="30"
-                                            CornerRadius="5"
+                                <Border Width="100" Height="40"
+                                            CornerRadius="0"
                                             Background="{TemplateBinding Background}">
                                     <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Center"/>
@@ -161,19 +161,18 @@
                                 Height="70"
                                 Background="#e2e2e2"
                                 Orientation="Horizontal">
-                    <Label VerticalAlignment="Center" Margin="20 0 0 0" FontSize="30" FontWeight="Bold" Foreground="Gray">Today</Label>
+                    <Label VerticalAlignment="Center" Margin="20 0 0 0" FontSize="30" FontWeight="Bold" Foreground="Gray">Today:</Label>
             
-                    <!--<TextBlock
+                    <TextBlock
                             Height="50"
-                            Width="219"
-                            FontWeight="Bold"
+                            Width="354"   
                             VerticalAlignment="Center"
-                            Foreground="#5F0A87"
-                            Margin="0 0 0 0"
-                            FontSize="25"
+                            Foreground="Black"
+                            Margin="500 10 0 0"
+                            FontSize="26"
                             TextAlignment="Center"
                             Text="{Binding Source={x:Static sys:DateTime.Now},
-                            StringFormat='{}{0: ddd, dd MMM yyyy }'}"/>-->
+                            StringFormat='{}{0: ddd, dd MMM yyyy }'}"/>
                 </StackPanel>
                 <StackPanel Height="370">
                     <Grid  x:Name="GridTimer" Grid.Row="1">

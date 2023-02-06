@@ -16,9 +16,9 @@
     <Border CornerRadius="12"
             BorderThickness="5">
         <Border.Background>
-            <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
-                <GradientStop Color="{StaticResource LoginColor1}" Offset="0"/>
-                <GradientStop Color="{StaticResource LoginColor2}" Offset="0.667"/>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                <GradientStop Color="{StaticResource LoginColor1}" Offset="0.3"/>
+                <GradientStop Color="{StaticResource LoginColor2}" Offset="1"/>
             </LinearGradientBrush>
         </Border.Background>
         <Grid>
