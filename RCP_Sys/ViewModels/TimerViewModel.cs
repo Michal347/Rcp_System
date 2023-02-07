@@ -9,6 +9,10 @@ using System.Threading;
 using RCP_Sys.Repository;
 using System.Collections.ObjectModel;
 using RCP_Sys.Models.Interface;
+using System.Runtime.Remoting.Contexts;
+using System.Xml;
+using System.Windows.Media;
+using System.Collections.Generic;
 
 namespace RCP_Sys.ViewModels
 {
@@ -68,6 +72,20 @@ namespace RCP_Sys.ViewModels
         #region ICommand handlers
         private void StartTimerLoop()
         {
+            DateTime aDate = DateTime.Now;
+            var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
+            TimeCreate.Create(
+            new TimerModel()
+            {
+                Username = user.Username,
+                StartDateTime = DateTime.Today,
+                StartTimerValue = TimerBoxValue,
+                Project = SelectedProject1,
+                Description = selectedDescription,
+                DateCreate = DateTime.Today,
+
+            }
+        );
             _cancellationTokenSource = new CancellationTokenSource();
             IsTimerRunning = true;
             Task.Factory.StartNew(TimerLoop, _cancellationTokenSource.Token, _cancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Current);
@@ -94,22 +112,36 @@ namespace RCP_Sys.ViewModels
 
         private void StopTimer(object obj)
         {
-            DateTime aDate = DateTime.Now;
             var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
-            TimeCreate.Create(
-            new TimerModel()
+            DateTime aDate = DateTime.Now;
+            using (var context = new RcpDbContext())
             {
-                Username = user.Username,
-                StartDateTime = DateTime.Today,
-                EndDateTime = aDate.ToString("MM/dd/yyyy hh:mm tt"),
-                StartTimerValue = TimeSpan.Zero,
-                EndTimerValue = TimerBoxValue,
-                Project = SelectedProject1,
-                Description = selectedDescription,
-                DateCreate = DateTime.Today,
-
+                MysampleGrid = context.Times.Where(x => x.Username == Thread.CurrentPrincipal.Identity.Name).ToList();
+                var found = MysampleGrid.LastOrDefault();
+                if(found!=null)
+                {
+                    found.EndTimerValue = TimerBoxValue;
+                    found.EndDateTime = aDate.ToString("MM/dd/yyyy hh:mm tt");
+                    context.Times.Update(found);
+                    context.SaveChanges();
+                }
             }
-        );
+        //        DateTime aDate = DateTime.Now;
+        //    var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
+        //    TimeCreate.Create(
+        //    new TimerModel()
+        //    {
+        //        Username = user.Username,
+        //        StartDateTime = DateTime.Today,
+        //        EndDateTime = aDate.ToString("MM/dd/yyyy hh:mm tt"),
+        //        StartTimerValue = TimeSpan.Zero,
+        //        EndTimerValue = TimerBoxValue,
+        //        Project = SelectedProject1,
+        //        Description = selectedDescription,
+        //        DateCreate = DateTime.Today,
+
+        //    }
+        //);
 
             IsVisible = true;
             IsTimerRunning = false;
@@ -250,6 +282,15 @@ namespace RCP_Sys.ViewModels
         {
             get { return _TimerCollection; }
             set { _TimerCollection = value; OnPropertyChanged("TimerCollection"); }
+        }
+
+
+            private List<TimerModel> mysampleGrid;
+
+        public List<TimerModel> MysampleGrid
+        {
+            get { return mysampleGrid; }
+            set { mysampleGrid = value; OnPropertyChanged("MysampleGrid"); }
         }
 
         #endregion
