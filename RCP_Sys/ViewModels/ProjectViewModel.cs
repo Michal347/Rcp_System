@@ -32,7 +32,6 @@ namespace RCP_Sys.ViewModels
         #region Icommand
 
         public ICommand AddProject { get; private set; }
-        public ICommand RefreshProjects { get; private set; }
 
 
         #endregion
@@ -43,7 +42,7 @@ namespace RCP_Sys.ViewModels
         {
 
             AddProject = new RelayCommand(x => AddProj());
-            RefreshProjects = new RelayCommand(x => Refresh());
+            Refresh();
 
         }
 

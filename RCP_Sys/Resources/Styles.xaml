@@ -613,7 +613,7 @@
 
 
     <Style TargetType="Button" x:Key="SaveButton">
-        <Setter Property="Background" Value="#7028e4"/>
+        <Setter Property="Background" Value="#210f55"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#28AEED"/>
@@ -635,7 +635,7 @@
 
 
     <Style TargetType="Button" x:Key="ProjectButton">
-        <Setter Property="Background" Value="#8412d0 "/>
+        <Setter Property="Background" Value="#210f55 "/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#c993e9 "/>

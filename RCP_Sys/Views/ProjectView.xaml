@@ -8,26 +8,26 @@
              mc:Ignorable="d"   
              Height="670" Width="1030">
 
-    <Grid Background="Transparent">
+    <Grid Background="White" Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
+        <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="3"></Border>
         <StackPanel Grid.Column="0"
-                    Background="White"
-                    Margin="40">
+                    
+                    Margin="0">
             <Grid>
-                <DataGrid 
-                          Height="520"
+                <DataGrid
                           BorderThickness="2"
                           BorderBrush="Gray"
+                          
                           ItemsSource="{Binding Path=MysampleGrid,Mode=TwoWay,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
                           x:Name="TimerDataGrid"
                           Style="{DynamicResource DataGridStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" 
-                          SelectedItem="{Binding SelectedDataGridItem}">
+                          SelectedItem="{Binding SelectedDataGridItem}" Margin="10,10,10,-634">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Project Name" 
                                             Width="*"
@@ -37,9 +37,9 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
-            <StackPanel>
-            </StackPanel>
+
         </StackPanel>
+        <Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="3"></Border>
         <StackPanel Background="White" 
                     Grid.Column="1" 
                     Margin="40">
@@ -133,15 +133,16 @@
                                     Foreground="White"
                                     FontSize="20"
                                     FontWeight="Bold"
-                                    Margin="20"
+                                    Margin="20 100 0 0"
                                     FontFamily="Montserrat"
                                     Cursor="Hand"
                                     RenderTransformOrigin="0.532,-0.627">
+                    
 
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border Width="200" Height="40"
-                                                CornerRadius="20"
+                                                CornerRadius="0"
                                                 Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center"
                                                               HorizontalAlignment="Center"/>
@@ -149,9 +150,9 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-                <Button         
+                <!--<Button         
                                     Style="{StaticResource ProjectButton}"
-                                    x:Name="btnshow" 
+                                    x:Name="btnshowp" 
                                     BorderThickness="1" 
                                     Content="Show Project"
                                     Foreground="White"
@@ -165,14 +166,14 @@
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Border Width="200" Height="40"
-                                                CornerRadius="20"
+                                                CornerRadius="0"
                                                 Background="{TemplateBinding Background}">
                                 <ContentPresenter VerticalAlignment="Center"
                                                               HorizontalAlignment="Center"/>
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
-                </Button>
+                </Button>-->
             </StackPanel>
         </StackPanel>
     </Grid>

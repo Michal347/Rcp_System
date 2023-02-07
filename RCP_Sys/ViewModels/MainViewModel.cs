@@ -149,7 +149,7 @@ namespace RCP_Sys.ViewModels
 
         private void Project(object obj)
         {
-            CurrentChildView = _projectViewModel;
+            CurrentChildView = new ProjectViewModel();
             CurrentUserData();
             caption = "Project";
             icon = IconChar.ProjectDiagram;
