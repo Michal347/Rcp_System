@@ -50,6 +50,7 @@ namespace RCP_Sys.ViewModels
         #endregion
         public MainViewModel()
         {         
+            
             GetUsername = new UserService();
             var user = GetUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
             if (user != null)
@@ -140,7 +141,7 @@ namespace RCP_Sys.ViewModels
 
         private void UserHistory(object obj)
         {
-            CurrentChildView = _userHistoryViewModel;
+            CurrentChildView = new UserHistoryViewModel();
             CurrentUserData();
             new MainViewModel();
             caption = "User History";

@@ -221,6 +221,10 @@
     <Compile Include="DAL\Migrations\20230204100859_changeAdmin.designer.cs">
       <DependentUpon>20230204100859_changeAdmin.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Migrations\20230207203828_ChangeTimerModel_key.cs" />
+    <Compile Include="DAL\Migrations\20230207203828_ChangeTimerModel_key.designer.cs">
+      <DependentUpon>20230207203828_ChangeTimerModel_key.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\RcpDbContext.cs" />
     <Compile Include="DAL\Interface\IUserService.cs" />
     <Compile Include="DAL\Interface\ITimerService.cs" />

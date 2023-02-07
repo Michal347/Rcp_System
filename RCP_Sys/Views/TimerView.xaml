@@ -183,8 +183,9 @@
                         <DataGrid Height="370" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="TimerDataGrid" ItemsSource="{Binding TimerCollection}" Grid.ColumnSpan="2">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding TimerId}" Header="#" Width="60" CanUserResize="False" IsReadOnly="True"/>
-                                <DataGridTextColumn Binding="{Binding EndDateTime}" Header="End Date" Width="*" CanUserResize="False" IsReadOnly="True" />
-                                <DataGridTextColumn Binding="{Binding Project}" Header="Project Name" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                                <DataGridTextColumn Binding="{Binding StartDateTime}" Header="Start date " Width="*" CanUserResize="False" IsReadOnly="True" />
+                                <DataGridTextColumn Binding="{Binding EndDateTime}" Header="End date" Width="*" CanUserResize="False" IsReadOnly="True" />
+                                <DataGridTextColumn Binding="{Binding Project}" Header="Project name" Width="*" CanUserResize="False" IsReadOnly="True"/>
                                 <DataGridTextColumn Binding="{Binding EndTimerValue}" Header="Time" Width="*" CanUserResize="False" IsReadOnly="True"/>
                             </DataGrid.Columns>
                         </DataGrid>

@@ -4,11 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace RCP_Sys.Models
 {
     public class TimerModel
     {
+        [Key]
         public int TimerId { get; set; }
         public string Username { get; set; }
         public string StartDateTime { get; set; }

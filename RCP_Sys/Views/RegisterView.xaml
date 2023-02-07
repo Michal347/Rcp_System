@@ -223,6 +223,7 @@
                                      Command="{Binding Path=GetGender}" 
                                      Content="Male" 
                                      Name="rbMale"
+                                     IsChecked="true"
                                      CommandParameter="{Binding ElementName=rbMale, Path=Content}"></RadioButton>
                         <RadioButton FontFamily="Montserrat" 
                                      Width="150" 

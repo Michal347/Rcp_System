@@ -64,6 +64,7 @@ namespace RCP_Sys.ViewModels
                 TimerBoxValue = TimeSpan.Zero;
             }
 
+            
 
             LoadProjects();
         }
@@ -71,7 +72,7 @@ namespace RCP_Sys.ViewModels
 
         #region ICommand handlers
         private void StartTimerLoop()
-        {
+        {      
             DateTime aDate = DateTime.Now;
             var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
             TimeCreate.Create(
@@ -82,11 +83,12 @@ namespace RCP_Sys.ViewModels
                 StartTimerValue = TimerBoxValue,
                 Project = SelectedProject1,
                 Description = selectedDescription,
+                EndDateTime = "     --------",
                 DateCreate = DateTime.Today,
 
             }
-        );
-            RefreshDataGridTimer(obj);
+        ); ;
+            DataGridTimer();
             _cancellationTokenSource = new CancellationTokenSource();
             IsTimerRunning = true;
             Task.Factory.StartNew(TimerLoop, _cancellationTokenSource.Token, _cancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Current);
@@ -127,22 +129,6 @@ namespace RCP_Sys.ViewModels
                     context.SaveChanges();
                 }
             }
-        //        DateTime aDate = DateTime.Now;
-        //    var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
-        //    TimeCreate.Create(
-        //    new TimerModel()
-        //    {
-        //        Username = user.Username,
-        //        StartDateTime = DateTime.Today,
-        //        EndDateTime = aDate.ToString("MM/dd/yyyy hh:mm tt"),
-        //        StartTimerValue = TimeSpan.Zero,
-        //        EndTimerValue = TimerBoxValue,
-        //        Project = SelectedProject1,
-        //        Description = selectedDescription,
-        //        DateCreate = DateTime.Today,
-
-        //    }
-        //);
 
             IsVisible = true;
             IsTimerRunning = false;
