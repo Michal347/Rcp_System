@@ -78,7 +78,12 @@ namespace RCP_Sys.Repository
             }
         }
 
-    
-
+        public UserModel GetId(int Id)
+        {
+            using (var context = new RcpDbContext())
+            {
+                return context.Users.FirstOrDefault(x => x.Id == Id);
+            }
+        }
     }
 }

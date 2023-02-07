@@ -29,7 +29,7 @@
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Vertical">
             <StackPanel Height="70" Orientation="Horizontal">
-                <fa:IconImage Icon="Remove" Style="{StaticResource MenuIcon}" Height="36" Width="52"/>
+                <fa:IconImage Icon="Remove"  Height="36" Width="52"/>
                 <Label FontSize="30"
                        FontWeight="ExtraBlack"
                        Foreground="Black"

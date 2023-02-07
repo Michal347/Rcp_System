@@ -13,6 +13,7 @@ namespace RCP_Sys.Models
         void Save();
         void Remove(int id);
         List<UserModel> GetUsers();
+        UserModel GetId(int Id);
 
     }
 }

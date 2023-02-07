@@ -1,24 +1,13 @@
 ﻿using RCP_Sys.Db;
 using System;
 using RCP_Sys.Models;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Threading;
-using System.Windows;
-using System.Windows.Threading;
 using RCP_Sys.Repository;
-using System.Data.Entity.Migrations;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Cryptography;
 using System.Collections.ObjectModel;
-using System.Data.Entity;
-using Microsoft.EntityFrameworkCore;
-using System.Globalization;
 using RCP_Sys.Models.Interface;
 
 namespace RCP_Sys.ViewModels
