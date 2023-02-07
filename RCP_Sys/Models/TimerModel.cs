@@ -9,10 +9,9 @@ namespace RCP_Sys.Models
 {
     public class TimerModel
     {
-        [Key]
         public int TimerId { get; set; }
         public string Username { get; set; }
-        public DateTime StartDateTime { get; set; }
+        public string StartDateTime { get; set; }
         public string EndDateTime { get; set; }
         public DateTime DateCreate { get; set; }
         public TimeSpan StartTimerValue { get; set; }

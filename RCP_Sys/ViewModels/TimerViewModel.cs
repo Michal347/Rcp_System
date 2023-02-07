@@ -78,7 +78,7 @@ namespace RCP_Sys.ViewModels
             new TimerModel()
             {
                 Username = user.Username,
-                StartDateTime = DateTime.Today,
+                StartDateTime = aDate.ToString("MM/dd/yyyy hh:mm tt"),
                 StartTimerValue = TimerBoxValue,
                 Project = SelectedProject1,
                 Description = selectedDescription,
@@ -86,6 +86,7 @@ namespace RCP_Sys.ViewModels
 
             }
         );
+            RefreshDataGridTimer(obj);
             _cancellationTokenSource = new CancellationTokenSource();
             IsTimerRunning = true;
             Task.Factory.StartNew(TimerLoop, _cancellationTokenSource.Token, _cancellationTokenSource.Token, TaskCreationOptions.LongRunning, TaskScheduler.Current);
