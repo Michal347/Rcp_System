@@ -7,8 +7,8 @@
              xmlns:local="clr-namespace:RCP_Sys.Views"
              mc:Ignorable="d" 
              Background="White"
-             d:DesignHeight="600" d:DesignWidth="1000">
-    <Grid>
+             d:DesignHeight="660" d:DesignWidth="1010">
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>

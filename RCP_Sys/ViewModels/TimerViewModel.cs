@@ -83,7 +83,7 @@ namespace RCP_Sys.ViewModels
                 StartTimerValue = TimerBoxValue,
                 Project = SelectedProject1,
                 Description = selectedDescription,
-                EndDateTime = "     --------",
+                EndDateTime = "           --------",
                 DateCreate = DateTime.Today,
 
             }
@@ -148,7 +148,7 @@ namespace RCP_Sys.ViewModels
             }
 
             StartTimerLoop();
-            IsVisible = false;
+            IsVisible = true;
         }
 
         private void RefreshProject(object obj)

@@ -18,30 +18,80 @@ namespace RCP_Sys.ViewModels
 
         public ICommand RefreshTimes { get; private set; }
 
-
         public UserHistoryViewModel()
         {
+
             DataListView();
-            TimeCollectionUser = CollectionViewSource.GetDefaultView(TimeViewCollectionUser);
-            TimeCollectionUser.Filter = TimeFilter;
+           
+                TimeCollectionUser = CollectionViewSource.GetDefaultView(TimeViewCollectionUser);
+
+            IsFilterProjectVisi = true;
+            IsFilterNameVisi = false;
+            IsFilterDateVisi = true;
+
+
+            if (IsCheckedProject == true)
+            {
+                IsFilterProjectVisi = false;
+                IsFilterDateVisi = true;
+                IsFilterNameVisi = true;
+                TimeCollectionUser.Filter = TimeFilter;
+
+            }
+            if (IsCheckedName == true)
+            {
+                IsFilterProjectVisi = true;
+                IsFilterDateVisi = true;
+                IsFilterNameVisi = false;
+                TimeCollectionUser.Filter = FilterName;
+
+            }
+            if (IsCheckedDate == true)
+            {
+                IsFilterProjectVisi = true;
+                IsFilterDateVisi = false;
+                IsFilterNameVisi = true;
+                TimeCollectionUser.Filter = FilterDate;
+
+            }
+
+        }
+
+
+        private bool FilterName(object obj)
+        {
+            if (obj is TimerModel timermodel)
+            {
+                return timermodel.Username.Contains(FilterUsername);
             
+            }
+            return false;
+        }
+
+        private bool FilterDate(object obj)
+        {
+            if (obj is TimerModel timermodel)
+            {
+                return timermodel.EndDateTime.Contains(FilterDates);
+
+                
+            }
+            return false;
         }
 
         private bool TimeFilter(object obj)
         {
             if (obj is TimerModel timermodel)
             {
-                return  timermodel.EndDateTime.Contains(Filter) ||
-                        timermodel.Project.Contains(Filter)||
-                        timermodel.Username.Contains(Filter);
+                 return timermodel.Project.Contains(Filter);    
+                        
             }
 
             return false;
 
-        }
+        }   
 
-       
-        public void DataListView()
+            public void DataListView()
         {
 
             using (var context = new RcpDbContext())
@@ -53,7 +103,6 @@ namespace RCP_Sys.ViewModels
                             select a;
 
                 TimeViewCollectionUser = new ObservableCollection<TimerModel>(Timer);
-
             }
         }
         public ICollectionView TimeCollectionUser { get; set; }
@@ -78,10 +127,27 @@ namespace RCP_Sys.ViewModels
             {
 
                 _Filter = value;
-                OnPropertyChanged("Filter");
+                OnPropertyChanged(nameof(Filter));
                 TimeCollectionUser.Refresh();
             }
         }
+            private string _FilterDates = string.Empty;
+
+        public string FilterDates
+        {
+            get
+            {
+                return _FilterDates;
+            }
+            set
+            {
+
+                _FilterDates = value;
+                OnPropertyChanged(nameof(FilterDates));
+                TimeCollectionUser.Refresh();
+            }
+        }
+
 
         private string _FilterUsername = string.Empty;
 
@@ -95,10 +161,90 @@ namespace RCP_Sys.ViewModels
             {
 
                 _FilterUsername = value;
-                OnPropertyChanged("FilterUsername");
+                OnPropertyChanged(nameof(FilterUsername));
                 TimeCollectionUser.Refresh();
             }
         }
+
+            private bool _isCheckedName;
+        public bool IsCheckedName
+        {
+            get
+            {
+                return _isCheckedName;
+            }
+            set
+            {
+                {
+                    _isCheckedName = value;
+                    OnPropertyChanged(nameof(IsCheckedName));
+
+                }
+            }
+        }
+
+
+            private bool _isCheckedProject;
+        public bool IsCheckedProject
+        {
+            get
+            {
+                return _isCheckedProject;
+            }
+            set
+            {
+                {
+                    _isCheckedProject = value;
+                    OnPropertyChanged(nameof(IsCheckedProject));
+
+                }
+            }
+        }
+
+            private bool _isCheckedDate;
+        public bool IsCheckedDate
+        {
+            get
+            {
+                return _isCheckedDate;
+            }
+            set
+            {
+                {
+                    _isCheckedDate = value;
+                    OnPropertyChanged(nameof(IsCheckedDate));
+
+                }
+            }
+        }
+
+
+         private bool _isFilterProjectVisi;
+
+        public bool IsFilterProjectVisi
+        {
+            get { return _isFilterProjectVisi; }
+            set { _isFilterProjectVisi = value; OnPropertyChanged(nameof(IsFilterProjectVisi)); }
+        }
+
+
+            private bool _isFilterDateVisi;
+
+        public bool IsFilterDateVisi
+        {
+            get { return _isFilterDateVisi; }
+            set { _isFilterDateVisi = value; OnPropertyChanged(nameof(IsFilterDateVisi)); }
+        }
+
+
+         private bool _isFilterNameVisi;
+            
+        public bool IsFilterNameVisi
+        {
+            get { return _isFilterNameVisi; }
+            set { _isFilterNameVisi = value; OnPropertyChanged(nameof(IsFilterNameVisi)); }
+        }
+
 
     }
 }

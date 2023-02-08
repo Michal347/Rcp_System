@@ -14,35 +14,21 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Background="White" Margin="10" Orientation="Horizontal">
-            <!--<StackPanel Margin="500 0 0 0" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <TextBlock Text="Username:"
-                       FontSize="20"
-                       VerticalAlignment="Center"
-                       Margin="0 0 0 0">
-                </TextBlock>
-                --><!--<TextBox 
-                        x:Name="WhatWorkTextbox"
-                        Text="{Binding FilterUsername, UpdateSourceTrigger=PropertyChanged}"
-                        Style="{StaticResource TimesheetBox1}"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Right"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        FontSize="16"
-                        Margin="0 0 0 0"
-                        Width="200"
-                        Height="40">
-                </TextBox>--><!--
-            </StackPanel>-->
-            <StackPanel Margin="700 0 0 0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Margin="400 0 0 0" Width="200" Height="80" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <RadioButton IsChecked="{Binding IsCheckedName}" FontSize="16" Margin="10 5 0 0" IsThreeState="False" Content="Name"></RadioButton>
+                <RadioButton IsChecked="{Binding IsCheckedDate}" FontSize="16" Margin="10 5 0 0" IsThreeState="False" Content="Date"></RadioButton>
+                <RadioButton IsChecked="{Binding IsCheckedProject}" FontSize="16" Margin="10 5 0 0" IsThreeState="False" Content="Project"></RadioButton>
+
+            </StackPanel>
+            <StackPanel Margin="20 0 0 0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Text="Filtr By:"
                        FontSize="20"
                        VerticalAlignment="Center"
                        Margin="0 0 0 0">
                 </TextBlock>
                 <TextBox 
-                        x:Name="WhatUsername"
-                        Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"
+                        x:Name="Name"
+                        Text="{Binding FilterUsername, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource TimesheetBox}"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right"
@@ -51,6 +37,35 @@
                         FontSize="16"
                         Margin="0 0 0 0"
                         Width="200"
+                        Visibility="{Binding IsFilterNameVisi, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
+                        Height="40">
+                </TextBox>
+                <TextBox 
+                        x:Name="Date"
+                        Text="{Binding FilterDates, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource TimesheetBox}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontSize="16"
+                        Margin="0 0 0 0"
+                        Width="50"
+                        Visibility="{Binding IsFilterDateVisi, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
+                        Height="40">
+                </TextBox>
+                <TextBox 
+                        x:Name="Project"
+                        Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource TimesheetBox}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontSize="16"
+                        Margin="0 0 0 0"
+                        Width="100"
+                        Visibility="{Binding IsFilterProjectVisi, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
                         Height="40">
                 </TextBox>
             </StackPanel>
