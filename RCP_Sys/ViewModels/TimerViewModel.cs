@@ -65,15 +65,14 @@ namespace RCP_Sys.ViewModels
                 TimerBoxValue = TimeSpan.Zero;
             }
 
-            
 
+            DataGridTimer();
             LoadProjects();
             DaytimeSum();
         }
 
         private void DaytimeSum()
         {
-
             DayTime = new TimeSpan(TimerCollection.Sum(p => p.EndTimerValue.Ticks));
         }
 
@@ -144,6 +143,7 @@ namespace RCP_Sys.ViewModels
             TimerBoxValue = TimeSpan.Zero;
             _cancellationTokenSource.Cancel();
             RefreshDataGridTimer(obj);
+            DaytimeSum();
         }
 
         private void StartTimer(object obj)

@@ -230,6 +230,7 @@
                                      Command="{Binding Path=GetGender}" 
                                      Content="Female" 
                                      Name="rbFemal"
+                                     IsChecked="false"
                                      CommandParameter="{Binding ElementName=rbFemal, Path=Content}"></RadioButton>
                         
                     </StackPanel>

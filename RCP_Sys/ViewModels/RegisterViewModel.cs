@@ -172,7 +172,7 @@ namespace RCP_Sys.ViewModels
                 OnPropertyChanged("Surname");      
             }
         }
-         private string _gender;
+         private string _gender="Male";
 
         public string Gender
         {
