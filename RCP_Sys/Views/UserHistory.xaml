@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RCP_Sys.Views"
+             xmlns:converters="clr-namespace:RCP_Sys.Resources.Converters"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              Height="670" Width="1030">
+    <UserControl.Resources>
+        <converters:AddConverter x:Key="AddConverter"/>
+    </UserControl.Resources>
     <Grid Background="White" Margin="10 30 10 10">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -14,18 +18,22 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Background="White" Margin="10" Orientation="Horizontal">
-            <StackPanel Margin="400 0 0 0" Width="200" Height="80" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center">
-                <RadioButton IsChecked="{Binding IsCheckedName}" FontSize="16" Margin="10 5 0 0" IsThreeState="False" Content="Name"></RadioButton>
-                <RadioButton IsChecked="{Binding IsCheckedDate}" FontSize="16" Margin="10 5 0 0" IsThreeState="False" Content="Date"></RadioButton>
-                <RadioButton IsChecked="{Binding IsCheckedProject}" FontSize="16" Margin="10 5 0 0" IsThreeState="False" Content="Project"></RadioButton>
-
-            </StackPanel>
-            <StackPanel Margin="20 0 0 0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Margin="400 0 0 0" Orientation="Vertical">
                 <TextBlock Text="Filtr By:"
                        FontSize="20"
                        VerticalAlignment="Center"
-                       Margin="0 0 0 0">
+                       HorizontalAlignment="Center"
+                       Margin="0 0 0 10"
+                           FontWeight="bold">
                 </TextBlock>
+                <StackPanel  Margin="30 0 0 0" Width="300" Height="80" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <RadioButton Name="UserCheck" IsChecked="{Binding IsCheckedName}" FontSize="18" Margin="10 5 0 0" IsThreeState="False" Content="Name"></RadioButton>
+                <RadioButton Name="DateCheck" IsChecked="{Binding IsCheckedDate}" FontSize="18" Margin="10 5 0 0" IsThreeState="False" Content="Date"></RadioButton>
+                <RadioButton Name="ProjectCheck" IsChecked="{Binding IsCheckedProject}" FontSize="18" Margin="10 5 0 0" IsThreeState="False" Content="Project"></RadioButton>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Margin="20 0 0 0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+               
                 <TextBox 
                         x:Name="Name"
                         Text="{Binding FilterUsername, UpdateSourceTrigger=PropertyChanged}"
@@ -37,7 +45,7 @@
                         FontSize="16"
                         Margin="0 0 0 0"
                         Width="200"
-                        Visibility="{Binding IsFilterNameVisi, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
+                        Visibility="{Binding ElementName=UserCheck, Path=IsChecked, Converter={StaticResource AddConverter}}"
                         Height="40">
                 </TextBox>
                 <TextBox 
@@ -50,8 +58,8 @@
                         VerticalContentAlignment="Center"
                         FontSize="16"
                         Margin="0 0 0 0"
-                        Width="50"
-                        Visibility="{Binding IsFilterDateVisi, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
+                        Width="200"
+                        Visibility="{Binding ElementName=DateCheck, Path=IsChecked, Converter={StaticResource AddConverter}}"
                         Height="40">
                 </TextBox>
                 <TextBox 
@@ -64,8 +72,8 @@
                         VerticalContentAlignment="Center"
                         FontSize="16"
                         Margin="0 0 0 0"
-                        Width="100"
-                        Visibility="{Binding IsFilterProjectVisi, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
+                        Width="200"
+                        Visibility="{Binding ElementName=ProjectCheck, Path=IsChecked, Converter={StaticResource AddConverter}}"
                         Height="40">
                 </TextBox>
             </StackPanel>

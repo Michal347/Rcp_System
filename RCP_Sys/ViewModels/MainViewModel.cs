@@ -141,7 +141,7 @@ namespace RCP_Sys.ViewModels
 
         private void UserHistory(object obj)
         {
-            CurrentChildView = _userHistoryViewModel;
+            CurrentChildView = new UserHistoryViewModel();
             CurrentUserData();
             new MainViewModel();
             caption = "User History";

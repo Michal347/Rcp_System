@@ -1,6 +1,7 @@
 ﻿using RCP_Sys.Db;
 using RCP_Sys.Models;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,66 +16,82 @@ namespace RCP_Sys.ViewModels
 {
     public class UserHistoryViewModel: BaseViewModel
     {
-
+      
         public ICommand RefreshTimes { get; private set; }
 
         public UserHistoryViewModel()
         {
+            
+            DataListView();       
+            TimeCollectionUser = CollectionViewSource.GetDefaultView(TimeViewCollectionUser);
+            GroupFilter gf = new GroupFilter();
+            gf.AddFilter(TimeFilter);
+            gf.AddFilter(FilterName);
+            gf.AddFilter(FilterDate);
+            TimeCollectionUser.Filter = gf.Filter;
+            IsCheckedDate = false;
+            IsCheckedName = true;
+            IsCheckedProject = false;
 
-            DataListView();
-           
-                TimeCollectionUser = CollectionViewSource.GetDefaultView(TimeViewCollectionUser);
-
-            IsFilterProjectVisi = true;
-            IsFilterNameVisi = false;
-            IsFilterDateVisi = true;
-
-
-            if (IsCheckedProject == true)
-            {
-                IsFilterProjectVisi = false;
-                IsFilterDateVisi = true;
-                IsFilterNameVisi = true;
-                TimeCollectionUser.Filter = TimeFilter;
-
-            }
-            if (IsCheckedName == true)
-            {
-                IsFilterProjectVisi = true;
-                IsFilterDateVisi = true;
-                IsFilterNameVisi = false;
-                TimeCollectionUser.Filter = FilterName;
-
-            }
-            if (IsCheckedDate == true)
-            {
-                IsFilterProjectVisi = true;
-                IsFilterDateVisi = false;
-                IsFilterNameVisi = true;
-                TimeCollectionUser.Filter = FilterDate;
-
-            }
 
         }
 
+        public class GroupFilter
+        {
+            private List<Predicate<object>> _filters;
+
+            public Predicate<object> Filter { get; private set; }
+
+            public GroupFilter()
+            {
+                _filters = new List<Predicate<object>>();
+                Filter = InternalFilter;
+            }
+
+            private bool InternalFilter(object o)
+            {
+                foreach (var filter in _filters)
+                {
+                    if (!filter(o))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            public void AddFilter(Predicate<object> filter)
+            {
+                _filters.Add(filter);
+            }
+
+            public void RemoveFilter(Predicate<object> filter)
+            {
+                if (_filters.Contains(filter))
+                {
+                    _filters.Remove(filter);
+                    
+                }
+            }
+        }
 
         private bool FilterName(object obj)
         {
             if (obj is TimerModel timermodel)
             {
                 return timermodel.Username.Contains(FilterUsername);
-            
             }
             return false;
+
         }
 
         private bool FilterDate(object obj)
         {
+
             if (obj is TimerModel timermodel)
             {
-                return timermodel.EndDateTime.Contains(FilterDates);
-
-                
+                return timermodel.EndDateTime.Contains(FilterDates);          
             }
             return false;
         }
@@ -83,7 +100,8 @@ namespace RCP_Sys.ViewModels
         {
             if (obj is TimerModel timermodel)
             {
-                 return timermodel.Project.Contains(Filter);    
+              
+                return timermodel.Project.Contains(Filter);    
                         
             }
 

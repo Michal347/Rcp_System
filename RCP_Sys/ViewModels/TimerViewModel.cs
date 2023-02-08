@@ -13,6 +13,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Xml;
 using System.Windows.Media;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace RCP_Sys.ViewModels
 {
@@ -67,6 +68,13 @@ namespace RCP_Sys.ViewModels
             
 
             LoadProjects();
+            DaytimeSum();
+        }
+
+        private void DaytimeSum()
+        {
+
+            DayTime = new TimeSpan(TimerCollection.Sum(p => p.EndTimerValue.Ticks));
         }
 
 
@@ -85,9 +93,8 @@ namespace RCP_Sys.ViewModels
                 Description = selectedDescription,
                 EndDateTime = "           --------",
                 DateCreate = DateTime.Today,
-
             }
-        ); ;
+        ) ;
             DataGridTimer();
             _cancellationTokenSource = new CancellationTokenSource();
             IsTimerRunning = true;
@@ -173,6 +180,7 @@ namespace RCP_Sys.ViewModels
             }
         }
 
+    
         public void DataGridTimer()
         {
 
@@ -251,6 +259,12 @@ namespace RCP_Sys.ViewModels
             }
 
         }
+            private TimeSpan _DayTime;
+        public TimeSpan DayTime
+        {
+            get { return _DayTime; }
+            set { _DayTime = value; OnPropertyChanged(nameof(DayTime)); }
+        }
         #endregion
 
         #region Collection
@@ -270,9 +284,16 @@ namespace RCP_Sys.ViewModels
             get { return _TimerCollection; }
             set { _TimerCollection = value; OnPropertyChanged("TimerCollection"); }
         }
+        private ObservableCollection<TimerModel> _DayTimerCollection;
+
+        public ObservableCollection<TimerModel> DayTimerCollection
+        {
+            get { return _DayTimerCollection; }
+            set { _DayTimerCollection = value; OnPropertyChanged("DayTimerCollection"); }
+        }
 
 
-            private List<TimerModel> mysampleGrid;
+        private List<TimerModel> mysampleGrid;
 
         public List<TimerModel> MysampleGrid
         {

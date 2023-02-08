@@ -4,12 +4,12 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
+using System.Windows;
 
 namespace RCP_Sys.Resources.Converters
 {
-    public class InvertedBooleanToVisibilityConverter : IValueConverter
+    public class AddConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -18,7 +18,7 @@ namespace RCP_Sys.Resources.Converters
             {
                 bValue = (bool)value;
             }
-            return (bValue) ? Visibility.Collapsed : Visibility.Visible;
+            return (bValue) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
