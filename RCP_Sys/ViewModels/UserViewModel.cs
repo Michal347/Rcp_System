@@ -13,6 +13,7 @@ using System.Windows.Input;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Xml.Linq;
 using RCP_Sys.Repository;
+using System.Xml.Serialization;
 
 namespace RCP_Sys.ViewModels
 {
@@ -34,7 +35,13 @@ namespace RCP_Sys.ViewModels
             GetUser = new UserService();
             UserListView();
             LoadUsers();
+            UserSum();
          }
+
+        private void UserSum()
+        {
+            AllMembersCount = GetUser.GetUsers().Count;
+        }
 
         private void DeleteUser(object obj)
         {
@@ -46,6 +53,7 @@ namespace RCP_Sys.ViewModels
                                 context.Users.Remove(emp);
                                 UserCollection.Remove(emp);
                                 context.SaveChanges();
+                                UserSum();
                             }
                         }                
             }  
@@ -150,6 +158,21 @@ namespace RCP_Sys.ViewModels
                 _selectedComboItem = value;
                 OnPropertyChanged(nameof(SelectedComboItem));
                 ClearPropertyErrors(this, "SelectedComboItem");
+            }
+        }
+
+            private int _AllMembersCount;
+        public int AllMembersCount
+        {
+            get
+            {
+                return _AllMembersCount;
+            }
+            set
+            {
+                _AllMembersCount = value;
+                OnPropertyChanged(nameof(AllMembersCount));
+                
             }
         }
 

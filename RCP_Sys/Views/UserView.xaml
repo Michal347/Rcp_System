@@ -17,19 +17,21 @@
             <Grid  x:Name="GridTimesheet" Grid.Row="0">
                 <DataGrid Height="400" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="4" x:Name="TimerDataGrid" ItemsSource="{Binding UserCollection}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Id}" Header="#" Width="60" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="##" CanUserResize="False" Width="70">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource gridRemoveButtom}" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}">
+                                        <fa:IconImage Icon="Remove" Style="{StaticResource RemoveIcon}"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Binding="{Binding Username}" Header="Username" Width="*" CanUserResize="False" IsReadOnly="True"/>
                         <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="*" CanUserResize="False" IsReadOnly="True"/>
                         <DataGridTextColumn Binding="{Binding Surname}" Header="Surname" Width="*" CanUserResize="False" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding IsUserAdmin}" Header="Type" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding IsUserAdmin}" Header="Admin" Width="*" CanUserResize="False" IsReadOnly="True"/>
                         <DataGridTextColumn Binding="{Binding Email}" Header="Email" Width="*" CanUserResize="False" IsReadOnly="True"/>
-                        <DataGridTemplateColumn CanUserResize="False" Width="100">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                    <Button Content="Remove" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"/>
-                                </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                       
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
@@ -55,6 +57,7 @@
                               SelectedValue="{Binding SelectedComboItem}"
                               DisplayMemberPath="Username">
                 </ComboBox>
+                    <Label Content="{Binding AllMembersCount}"></Label>
                 <TextBlock 
                     Text="{Binding ErrorMessage}"
                                Foreground="#D7596D"
