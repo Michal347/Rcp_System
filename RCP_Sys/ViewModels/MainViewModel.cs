@@ -130,6 +130,8 @@ namespace RCP_Sys.ViewModels
             new MainViewModel();
             caption = "Timer";
             icon = IconChar.Clock;
+            _timerViewModel.LoadProjects();
+            _timerViewModel.DataGridTimer();
         }
 
         private void Home(object obj)

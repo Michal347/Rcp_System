@@ -24,7 +24,6 @@ namespace RCP_Sys.ViewModels
 
         public ICommand StartTimerCommand { get; set; }
         public ICommand StopTimerCommand { get; set; }
-        public ICommand Refresh { get; set; }
         public ICommand RefreshDataGrid { get; set; }
         private IUserService getUsername;
         private ITimerService TimeCreate;
@@ -39,7 +38,6 @@ namespace RCP_Sys.ViewModels
         {
             StartTimerCommand = new RelayCommand(StartTimer);
             StopTimerCommand = new RelayCommand(StopTimer);
-            Refresh = new RelayCommand(RefreshProject);
             RefreshDataGrid = new RelayCommand(RefreshDataGridTimer);
             getUsername = new UserService();
             TimeCreate = new TimerService();
@@ -68,7 +66,7 @@ namespace RCP_Sys.ViewModels
 
             DataGridTimer();
             LoadProjects();
-            DaytimeSum();
+            DaytimeSum();     
         }
 
         private void DaytimeSum()
@@ -158,11 +156,6 @@ namespace RCP_Sys.ViewModels
             IsVisible = true;
         }
 
-        private void RefreshProject(object obj)
-        {
-            LoadProjects();
-        }
-
         private void RefreshDataGridTimer(object obj)
         {
             DataGridTimer();
@@ -203,7 +196,7 @@ namespace RCP_Sys.ViewModels
 
         #region Event Fields
 
-        private bool _isTimerRunning;
+            private bool _isTimerRunning;
 
         public bool IsTimerRunning
         {
@@ -212,7 +205,7 @@ namespace RCP_Sys.ViewModels
         }
 
 
-        private string selectedProject;
+            private string selectedProject;
 
         public string SelectedProject1
         {
@@ -228,7 +221,7 @@ namespace RCP_Sys.ViewModels
             }
         }
 
-        private TimeSpan _timerBoxValue;
+            private TimeSpan _timerBoxValue;
 
         public TimeSpan TimerBoxValue
         {
@@ -237,7 +230,7 @@ namespace RCP_Sys.ViewModels
         }
 
 
-        private string SelectedDescription;
+            private string SelectedDescription;
 
         public string selectedDescription
         {
@@ -248,7 +241,7 @@ namespace RCP_Sys.ViewModels
             set { SelectedDescription = value; OnPropertyChanged(nameof(selectedDescription)); }
         }
 
-        private bool _IsVisible = true;
+            private bool _IsVisible = true;
         public bool IsVisible
         {
             get => _IsVisible;
@@ -269,7 +262,7 @@ namespace RCP_Sys.ViewModels
 
         #region Collection
 
-        private ObservableCollection<ProjectModel> _projectCollection;
+            private ObservableCollection<ProjectModel> _projectCollection;
 
         public ObservableCollection<ProjectModel> ProjectCollection
         {
@@ -277,21 +270,15 @@ namespace RCP_Sys.ViewModels
             set { _projectCollection = value; OnPropertyChanged("ProjectCollection"); }
         }
 
-        private ObservableCollection<TimerModel> _TimerCollection;
+            private ObservableCollection<TimerModel> _TimerCollection;
 
         public ObservableCollection<TimerModel> TimerCollection
         {
             get { return _TimerCollection; }
             set { _TimerCollection = value; OnPropertyChanged("TimerCollection"); }
         }
-        private ObservableCollection<TimerModel> _DayTimerCollection;
 
-        public ObservableCollection<TimerModel> DayTimerCollection
-        {
-            get { return _DayTimerCollection; }
-            set { _DayTimerCollection = value; OnPropertyChanged("DayTimerCollection"); }
-        }
-
+            public List<ProjectModel> ModifiedItems { get; set; }
 
         private List<TimerModel> mysampleGrid;
 

@@ -39,7 +39,7 @@
                     <ComboBox Style="{DynamicResource ComboBoxStyleTimer}" 
                                Margin="20 5 5 5"
                               Width="124"   
-                              Height="30"
+                              Height="30"         
                               ItemsSource="{Binding ProjectCollection}"
                               IsEnabled="{Binding IsVisible}"
                               VerticalAlignment="Center"
@@ -61,30 +61,6 @@
                             </ControlTemplate>
                         </Validation.ErrorTemplate>
                     </ComboBox>
-                    <Button     Style="{StaticResource RefreshButton}" 
-                                x:Name="BtnRefresh"                          
-                                BorderThickness="0"
-                                Content="Refresh"
-                                Foreground="White"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                FontSize="16"
-                                FontFamily="Montserrat"
-                                Cursor="Hand"                           
-                                Margin="20 15 5 5"
-                                Command="{Binding Refresh}"
-                                IsEnabled="{Binding IsVisible}">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Width="100" Height="30"
-                                            CornerRadius="0"
-                                            Background="{TemplateBinding Background}">
-                                    <ContentPresenter VerticalAlignment="Center"
-                                                          HorizontalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
                 </StackPanel>
                 <Label
                         VerticalAlignment="Center"
@@ -151,30 +127,37 @@
         </Border>
         <Border Grid.Row="1"  
                     Margin="10" 
-                    CornerRadius="0" 
-                    Background="White"
+                    CornerRadius="0"      
                     BorderBrush="LightGray"
                     BorderThickness="3">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                    <GradientStop Color="#eef2f3 " Offset="0.4"/>
+                    <GradientStop Color="#8e9eab" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
             <StackPanel Grid.Row="1"
-                        Margin="0 0 0 10" Background="white">
+                        Margin="0 0 0 0" Background="Transparent">
                 <StackPanel Grid.Row="1"
-                                Height="70"
-                                Background="#e2e2e2"
-                                Orientation="Horizontal">
-                    <Label VerticalAlignment="Center" Margin="20 0 0 0" FontSize="30" FontWeight="Bold" Foreground="Gray">Today:</Label>
-                    <Label Content="{Binding DayTime}" VerticalAlignment="Center" Margin="20 0 0 0" FontSize="30" FontWeight="Bold" Foreground="Gray"></Label>
-                    <TextBlock
+                                Height="70"    
+                                Orientation="Horizontal"
+                                Background="Transparent">
+                    <Label VerticalAlignment="Center" Margin="20 0 0 0" FontSize="30" FontWeight="Bold" Foreground="black">Total:</Label>
+                        <Label Content="{Binding DayTime}" VerticalAlignment="Center" Margin="20 10 0 0" FontSize="24" FontWeight="Bold" Foreground="black"></Label>
+                        <TextBlock
                             Height="50"
                             Width="354"   
                             VerticalAlignment="Center"
                             Foreground="Black"
-                            Margin="500 10 0 0"
-                            FontSize="26"
+                            Margin="450 20 0 0"
+                            FontSize="24"
+                            FontWeight="bold"
                             TextAlignment="Center"
                             Text="{Binding Source={x:Static sys:DateTime.Now},
                             StringFormat='{}{0: ddd, dd MMM yyyy }'}"/>
+                   
                 </StackPanel>
-                <StackPanel Height="370">
+                <StackPanel Height="438" Background="White">
                     <Grid  x:Name="GridTimer" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="8*"/>
