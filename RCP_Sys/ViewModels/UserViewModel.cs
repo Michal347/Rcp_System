@@ -18,18 +18,37 @@ namespace RCP_Sys.ViewModels
 {
     public class UserViewModel : BaseViewModel
     {
+        
         public ICommand UserDelete { get; }
         public ICommand Refresh { get; }
+        public ICommand DeleteCommand { get; }
         public IUserService RemoveUser;
+        public IUserService GetUser;
 
         public UserViewModel()
          {
             UserDelete = new RelayCommand(x => Delete());
             Refresh = new RelayCommand(x => RefreshUser());
+            DeleteCommand = new RelayCommand(DeleteUser);
             RemoveUser = new UserService();
+            GetUser = new UserService();
             UserListView();
             LoadUsers();
          }
+
+        private void DeleteUser(object obj)
+        {
+            using (var context = new RcpDbContext())
+            {
+                var emp = obj as UserModel;
+                            if (emp.IsUserAdmin == false)
+                            {
+                                context.Users.Remove(emp);
+                                UserCollection.Remove(emp);
+                                context.SaveChanges();
+                            }
+                        }                
+            }  
 
         private void Delete()
         {
@@ -37,7 +56,6 @@ namespace RCP_Sys.ViewModels
             using (var context = new RcpDbContext())
             {
                 var user = context.Users.FirstOrDefault(x => x.Id == SelectedComboItem);
-
 
                 if (user != null)
                 {

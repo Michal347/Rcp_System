@@ -21,8 +21,15 @@
                         <DataGridTextColumn Binding="{Binding Username}" Header="Username" Width="*" CanUserResize="False" IsReadOnly="True"/>
                         <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="*" CanUserResize="False" IsReadOnly="True"/>
                         <DataGridTextColumn Binding="{Binding Surname}" Header="Surname" Width="*" CanUserResize="False" IsReadOnly="True" />
-                        <DataGridTextColumn Binding="{Binding DateTimeJoined}" Header="Date Join" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding IsUserAdmin}" Header="Type" Width="*" CanUserResize="False" IsReadOnly="True"/>
                         <DataGridTextColumn Binding="{Binding Email}" Header="Email" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTemplateColumn CanUserResize="False" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                    <Button Content="Remove" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}"/>
+                                </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
