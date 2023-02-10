@@ -14,29 +14,82 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Xml.Linq;
 using RCP_Sys.Repository;
 using System.Xml.Serialization;
+using System.Collections;
+using System.Windows.Data;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace RCP_Sys.ViewModels
 {
     public class UserViewModel : BaseViewModel
     {
         
-        public ICommand UserDelete { get; }
-        public ICommand Refresh { get; }
         public ICommand DeleteCommand { get; }
         public IUserService RemoveUser;
         public IUserService GetUser;
+        public ICollectionView UserIcollection { get; set; }
 
         public UserViewModel()
          {
-            UserDelete = new RelayCommand(x => Delete());
-            Refresh = new RelayCommand(x => RefreshUser());
+            UserIcollection = CollectionViewSource.GetDefaultView(UserCollection);
             DeleteCommand = new RelayCommand(DeleteUser);
             RemoveUser = new UserService();
             GetUser = new UserService();
-            UserListView();
             LoadUsers();
             UserSum();
-         }
+            GroupFilter gf = new GroupFilter();
+            gf.AddFilter(UsernameFilter);
+            UserIcollection.Filter = gf.Filter;
+        }
+
+
+        public class GroupFilter
+        {
+            private List<Predicate<object>> _filters;
+
+            public Predicate<object> Filter { get; private set; }
+
+            public GroupFilter()
+            {
+                _filters = new List<Predicate<object>>();
+                Filter = InternalFilter;
+            }
+
+            private bool InternalFilter(object o)
+            {
+                foreach (var filter in _filters)
+                {
+                    if (!filter(o))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+
+            public void AddFilter(Predicate<object> filter)
+            {
+                _filters.Add(filter);
+            }
+
+            public void RemoveFilter(Predicate<object> filter)
+            {
+                if (_filters.Contains(filter))
+                {
+                    _filters.Remove(filter);
+
+                }
+            }
+        }
+        private bool UsernameFilter(object obj)
+        {
+            if (obj is UserModel user)
+            {
+                return user.Username.Contains(Usernamefiltr);
+            }
+            return false;
+        }
 
         private void UserSum()
         {
@@ -58,31 +111,6 @@ namespace RCP_Sys.ViewModels
                         }                
             }  
 
-        private void Delete()
-        {
-            
-            using (var context = new RcpDbContext())
-            {
-                var user = context.Users.FirstOrDefault(x => x.Id == SelectedComboItem);
-
-                if (user != null)
-                {
-                    if (user.IsUserAdmin == false)
-                    {
-                        RemoveUser.Remove(user.Id);
-                        RefreshUser();
-                    }
-                    else
-                    {
-                        ErrorMessage = "*User cannot be admin";
-
-                    }
-                }
-
-            }
-            new UserViewModel();
-        }
-
         public void LoadUsers()
         {
             using (var context = new RcpDbContext())
@@ -95,23 +123,7 @@ namespace RCP_Sys.ViewModels
             }
         }
 
-
-        private void RefreshUser()
-        {
-            UserListView();
-        }
-
-        public void UserListView()
-        {
-            using (var context = new RcpDbContext())
-            {
-                var User = from a in context.Users
-                            select a;
-
-                UserCollection = new ObservableCollection<UserModel>(User);
-
-            }
-        }
+     
             private ObservableCollection<UserModel> _UserCollection;
 
         public ObservableCollection<UserModel> UserCollection
@@ -175,6 +187,22 @@ namespace RCP_Sys.ViewModels
                 
             }
         }
+
+         private string _Usernamefiltr =string.Empty;
+        public string Usernamefiltr
+        {
+            get
+            {
+                return _Usernamefiltr;
+            }
+            set
+            {
+                _Usernamefiltr = value;
+                OnPropertyChanged(nameof(Usernamefiltr));
+
+            }
+        }
+
 
     }
 }

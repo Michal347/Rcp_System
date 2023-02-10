@@ -133,7 +133,7 @@ namespace RCP_Sys.ViewModels
             set { _TimeViewCollection = value; OnPropertyChanged("TimeViewCollectionUser"); }
         }
 
-         private string _Filter = string.Empty;
+        private string _Filter = string.Empty;
 
         public string Filter
         {
@@ -149,7 +149,7 @@ namespace RCP_Sys.ViewModels
                 TimeCollectionUser.Refresh();
             }
         }
-            private string _FilterDates = string.Empty;
+        private string _FilterDates = string.Empty;
 
         public string FilterDates
         {
