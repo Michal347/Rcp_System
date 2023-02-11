@@ -4,9 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RCP_Sys.Views"
-             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" xmlns:converters="clr-namespace:RCP_Sys.Resources.Converters"
              mc:Ignorable="d" 
              Height="670" Width="1030">
+    <UserControl.Resources>
+        <converters:AddConverter x:Key="AddConverter"/>
+    </UserControl.Resources>
     <Grid Background="White" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
@@ -14,31 +17,50 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Background="White" Margin="10" Orientation="Horizontal">
-            <Label FontSize="30"
-                       FontWeight="ExtraBlack"
-                       Foreground="Black"
-                       VerticalContentAlignment="Center"
-                       Margin="30 0 0 0"> All Time History</Label>
-            <TextBlock Text=" Filtr:"
-                       FontSize="24"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Right"
-                       Margin="300 0 0 0">
-                
-            </TextBlock>
-            <TextBox 
-                        x:Name="WhatWorkTextbox"
-                        Text="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"
+            <StackPanel Margin="20 0 0 0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBox 
+                        x:Name="Date"
+                        Text="{Binding FilterDates, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource TimesheetBox}"
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right"
                         HorizontalContentAlignment="Center"
                         VerticalContentAlignment="Center"
                         FontSize="16"
-                        Margin="20 0 0 0"
-                        Width="300"
-                        Height="50">
-            </TextBox>
+                        Margin="0 0 0 0"
+                        Width="200"
+                        Visibility="{Binding ElementName=DateCheck, Path=IsChecked, Converter={StaticResource AddConverter}}"
+                        Height="40">
+                </TextBox>
+                <TextBox 
+                        x:Name="Project"
+                        Text="{Binding FilterProject, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource TimesheetBox}"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Right"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        FontSize="16"
+                        Margin="0 0 0 0"
+                        Width="200"
+                        Height="40"
+                        Visibility="{Binding ElementName=ProjectCheck, Path=IsChecked, Converter={StaticResource AddConverter}}">
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Margin="400 0 0 0" Orientation="Vertical">
+                <TextBlock Text="Filtr By"
+                       FontSize="20"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Margin="0 0 0 10"
+                           FontWeight="bold">
+                </TextBlock>
+                <StackPanel  Margin="150 0 0 0" Width="300" Height="80" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <RadioButton Name="DateCheck" IsChecked="{Binding IsCheckedDate}" FontSize="18" Margin="10 5 0 0" IsThreeState="False" Content="Date"></RadioButton>
+                    <RadioButton Name="ProjectCheck" IsChecked="{Binding IsCheckedProject}" FontSize="18" Margin="10 5 0 0" IsThreeState="False" Content="Project"></RadioButton>
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1">
             

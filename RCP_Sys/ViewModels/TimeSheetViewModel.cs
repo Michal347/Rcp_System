@@ -1,5 +1,6 @@
 ﻿using RCP_Sys.Db;
 using RCP_Sys.Models;
+using RCP_Sys.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,22 +27,38 @@ namespace RCP_Sys.ViewModels
         {
             DataListView();
             TimeCollection = CollectionViewSource.GetDefaultView(TimeViewCollection);
-            TimeCollection.Filter = TimeFilter;
+            GroupFilter gf = new GroupFilter();
+            gf.AddFilter(ProjectFilter);
+            gf.AddFilter(FilterDate);
+            TimeCollection.Filter = gf.Filter;
+            IsCheckedDate = false;
+            IsCheckedProject = true;
         }
 
-        private bool TimeFilter(object obj)
+     
+
+        private bool FilterDate(object obj)
+        {
+
+            if (obj is TimerModel timermodel)
+            {
+                return timermodel.EndDateTime.Contains(FilterDates);
+            }
+            return false;
+        }
+
+        private bool ProjectFilter(object obj)
         {
             if (obj is TimerModel timermodel)
             {
-                return timermodel.EndDateTime.Contains(Filter) ||
-                    timermodel.Project.Contains(Filter) ||
-                    timermodel.Username.Contains(Filter);
+
+                return timermodel.Project.Contains(FilterProject);
+
             }
 
             return false;
 
         }
-
         public void DataListView()
         {
 
@@ -67,19 +84,72 @@ namespace RCP_Sys.ViewModels
             set { _TimeViewCollection = value; OnPropertyChanged("TimeViewCollection"); }
         }
 
-        private string _Filter = string.Empty;
+        
 
-        public string Filter
+            private bool _isCheckedProject;
+        public bool IsCheckedProject
         {
             get
             {
-                return _Filter;
+                return _isCheckedProject;
+            }
+            set
+            {
+                {
+                    _isCheckedProject = value;
+                    OnPropertyChanged(nameof(IsCheckedProject));
+
+                }
+            }
+        }
+
+            private bool _isCheckedDate;
+        public bool IsCheckedDate
+        {
+            get
+            {
+                return _isCheckedDate;
+            }
+            set
+            {
+                {
+                    _isCheckedDate = value;
+                    OnPropertyChanged(nameof(IsCheckedDate));
+
+                }
+            }
+        }
+
+
+        private string _FilterProject = string.Empty;
+
+        public string FilterProject
+        {
+            get
+            {
+                return _FilterProject;
             }
             set
             {
 
-                _Filter = value;
-                OnPropertyChanged("Filter");
+                _FilterProject = value;
+                OnPropertyChanged(nameof(FilterProject));
+                TimeCollection.Refresh();
+            }
+        }
+        private string _FilterDates = string.Empty;
+
+        public string FilterDates
+        {
+            get
+            {
+                return _FilterDates;
+            }
+            set
+            {
+
+                _FilterDates = value;
+                OnPropertyChanged(nameof(FilterDates));
                 TimeCollection.Refresh();
             }
         }

@@ -270,6 +270,7 @@
     <Compile Include="Services\TimerService.cs" />
     <Compile Include="Resources\Converters\InversedBooleanToVisibilityConverter.cs" />
     <Compile Include="Utilities\EmailValidation.cs" />
+    <Compile Include="Utilities\GroupFilter.cs" />
     <Compile Include="Utilities\PasswordHasher.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />

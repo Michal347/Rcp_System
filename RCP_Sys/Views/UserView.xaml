@@ -21,7 +21,7 @@
         <StackPanel VerticalAlignment="Center" Grid.Row="1" Orientation="Horizontal">
             <TextBlock FontSize="20" Margin="20 10 0 0" Text="{Binding AllMembersCount}" Height="50" Width="20" VerticalAlignment="Center"></TextBlock>
             <TextBlock Text="Registered staff" FontSize="20" Margin="10 10 0 0" Height="50" Width="150" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Text=" Filtr by:"
+            <TextBlock Text=" Filtr by"
                        FontSize="20"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Right"
@@ -42,17 +42,22 @@
                         Height="50">
             </TextBox>
         </StackPanel>
-        <StackPanel Grid.Row="2" Height="550">
+        <StackPanel Grid.Row="2" Height="460">
             <Grid  x:Name="GridTimesheet" Grid.Row="2">
                 <DataGrid Height="400" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="4" x:Name="TimerDataGrid" ItemsSource="{Binding UserIcollection}">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="##" CanUserResize="False" Width="70">
+                        <DataGridTemplateColumn Header="##" CanUserResize="False" Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource gridEditButtom}" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}">
+                                        <fa:IconImage Icon="Edit" Style="{StaticResource RemoveIcon}"/>
+                                    </Button>
                                     <Button Style="{StaticResource gridRemoveButtom}" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}">
                                         <fa:IconImage Icon="Remove" Style="{StaticResource RemoveIcon}"/>
                                     </Button>
-                                </DataTemplate>
+                                     </StackPanel>
+                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn Binding="{Binding Username}" Header="Username" Width="*" CanUserResize="False" IsReadOnly="True"/>
@@ -64,6 +69,24 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
+            <StackPanel Height="40">
+                <TextBlock Text="{Binding ErrorMessage}" HorizontalAlignment="Left" Width="150" Margin="10 10 0 0" FontSize="16" FontWeight="Medium">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <AdornedElementPlaceholder x:Name="textBox"/>
+                                <ItemsControl ItemsSource="{Binding}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontSize="16" FontWeight="Medium"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                   </TextBlock>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

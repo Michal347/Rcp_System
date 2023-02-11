@@ -149,7 +149,7 @@ namespace RCP_Sys.ViewModels
         }
 
 
-        private string _errorMessage;
+            private string _errorMessage;
         public string ErrorMessage
         {
             get
