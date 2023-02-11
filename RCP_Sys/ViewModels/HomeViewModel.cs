@@ -2,6 +2,7 @@
 using RCP_Sys.Db;
 using RCP_Sys.Models;
 using RCP_Sys.Repository;
+using RCP_Sys.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,12 @@ namespace RCP_Sys.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
-        private UserAccountModel _UserInformation;
+        private UserAccountInformation _UserInformation;
         private IUserService getUsername;
         private IUserService getGender;
         public ICommand OpenFile { get; set; }
 
-        public UserAccountModel UserInformation
+        public UserAccountInformation UserInformation
         {
             get
             {
@@ -39,7 +40,7 @@ namespace RCP_Sys.ViewModels
             {
                 getUsername = new UserService();
                 getGender = new UserService();
-                UserInformation = new UserAccountModel();
+                UserInformation = new UserAccountInformation();
                 CurrentUserInformation();
 
 
@@ -75,7 +76,7 @@ namespace RCP_Sys.ViewModels
                     UserInformation.Username = user.Username;
                     UserInformation.Name = user.Name;
                     UserInformation.Surname = user.Surname;
-                    UserInformation.DateJoin = user.DateTimeJoined;
+                    UserInformation.DateJoin = user.DateTimeJoined.ToString("MM/dd/yyyy");
                     UserInformation.Email = user.Email;
                     
                     
@@ -88,7 +89,8 @@ namespace RCP_Sys.ViewModels
                 UserInformation.Username = "Invalid, Information";
                 UserInformation.Name = "Invalid, Information";
                 UserInformation.Surname = "Invalid, Information";
-               
+                UserInformation.Email = "Invalid, Information";
+                UserInformation.DateJoin = "Invalid, Information";
 
             }
         }

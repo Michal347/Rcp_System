@@ -263,7 +263,6 @@
     <Compile Include="DAL\Migrations\RcpDbContextModelSnapshot.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\TimerModel.cs" />
-    <Compile Include="Models\UserAccountModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Resources\Converters\TextBoxConverter.cs" />
     <Compile Include="Services\UserService.cs" />
@@ -272,6 +271,7 @@
     <Compile Include="Utilities\EmailValidation.cs" />
     <Compile Include="Utilities\GroupFilter.cs" />
     <Compile Include="Utilities\PasswordHasher.cs" />
+    <Compile Include="Utilities\UserAccountInformation.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />

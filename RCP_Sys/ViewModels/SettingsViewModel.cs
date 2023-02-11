@@ -24,8 +24,8 @@ namespace RCP_Sys.ViewModels
         public ICommand SaveUsername { get; private set; }
 
 
-        private UserAccountModel _UserInformation;
-        public UserAccountModel UserInformation
+        private UserAccountInformation _UserInformation;
+        public UserAccountInformation UserInformation
         {
             get
             {
@@ -41,7 +41,7 @@ namespace RCP_Sys.ViewModels
 
         public SettingsViewModel()
         {
-            UserInformation = new UserAccountModel();
+            UserInformation = new UserAccountInformation();
             getUsername = new UserService();
            
             CurrentUserLogged();
@@ -192,7 +192,7 @@ namespace RCP_Sys.ViewModels
                     UserInformation.Username = user.Username;
                     UserInformation.Name = user.Name;
                     UserInformation.Surname = user.Surname;
-                    UserInformation.DateJoin = user.DateTimeJoined;
+                    UserInformation.DateJoin = user.DateTimeJoined.ToString("MM/dd/yyyy");
                     UserInformation.Email = user.Email;
 
                 };

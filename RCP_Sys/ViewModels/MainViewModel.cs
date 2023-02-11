@@ -2,6 +2,7 @@
 using RCP_Sys.Db;
 using RCP_Sys.Models;
 using RCP_Sys.Repository;
+using RCP_Sys.Utilities;
 using RCP_Sys.Views;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace RCP_Sys.ViewModels
         #region View Fields
        
       
-        private UserAccountModel userAccount;
+        private UserAccountInformation userAccount;
         private IUserService GetUsername;
         private object _CurrentChildView;
         public TimerViewModel _timerViewModel;
@@ -86,7 +87,7 @@ namespace RCP_Sys.ViewModels
             _userHistoryViewModel = new UserHistoryViewModel();
             _settingsViewModel = new SettingsViewModel();
             GetUsername = new UserService();
-            UserAccount = new UserAccountModel();
+            UserAccount = new UserAccountInformation();
             CurrentUserData();
 
 
@@ -226,7 +227,7 @@ namespace RCP_Sys.ViewModels
 
         }
 
-        public UserAccountModel UserAccount
+        public UserAccountInformation UserAccount
         {
             get
             {
