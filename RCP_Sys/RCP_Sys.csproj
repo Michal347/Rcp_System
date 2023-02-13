@@ -213,6 +213,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DAL\Interface\IDialogService.cs" />
     <Compile Include="DAL\Migrations\20230204095354_AddGender.cs" />
     <Compile Include="DAL\Migrations\20230204095354_AddGender.designer.cs">
       <DependentUpon>20230204095354_AddGender.cs</DependentUpon>
@@ -265,6 +266,7 @@
     <Compile Include="Models\TimerModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Resources\Converters\TextBoxConverter.cs" />
+    <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\TimerService.cs" />
     <Compile Include="Resources\Converters\InversedBooleanToVisibilityConverter.cs" />
@@ -284,11 +286,17 @@
     <Compile Include="ViewModels\TimeSheetViewModel.cs" />
     <Compile Include="ViewModels\UserHistoryViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="Views\EditUserWindow.xaml.cs">
+      <DependentUpon>EditUserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProgramCloseDialog.xaml.cs">
+      <DependentUpon>ProgramCloseDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
@@ -323,6 +331,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\EditUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -343,6 +355,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ProgramCloseDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -419,6 +435,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\businessman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

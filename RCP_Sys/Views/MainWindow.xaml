@@ -101,8 +101,7 @@
                 </StackPanel>
             </Button>
             <Button Style="{StaticResource MenuButton}"
-                        Click="BtnCloseClick">
-
+                        Command="{Binding ExitProgram}">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="PowerOff" Style="{StaticResource MenuIcon}" HorizontalAlignment="Left"/>
                     <TextBlock Style="{StaticResource MenuText}" Text="Exit"/>
@@ -151,7 +150,7 @@
                         <Button x:Name="BtnClose"
                             Style="{StaticResource MenuControlButton}"
                             Margin="10 0 0 0"
-                            Click="BtnCloseClick" 
+                            Command="{Binding ExitProgram}"
                             Cursor="Hand">
                             <fa:IconImage Icon="Xmark" Style="{StaticResource ControlPanelButton}"/>
                         </Button>

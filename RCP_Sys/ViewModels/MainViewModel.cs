@@ -1,7 +1,9 @@
 ﻿using FontAwesome.Sharp;
+using RCP_Sys.DAL.Interface;
 using RCP_Sys.Db;
 using RCP_Sys.Models;
 using RCP_Sys.Repository;
+using RCP_Sys.Services;
 using RCP_Sys.Utilities;
 using RCP_Sys.Views;
 using System;
@@ -32,6 +34,7 @@ namespace RCP_Sys.ViewModels
         public ICommand ShowUserView { get; }
         public ICommand ShowUserHistory { get; }
         public ICommand ShowSettingView { get; }
+        public ICommand ExitProgram { get; }
 
         #endregion
 
@@ -39,6 +42,7 @@ namespace RCP_Sys.ViewModels
        
       
         private UserAccountInformation userAccount;
+        public IDialogService DialogAction;
         private IUserService GetUsername;
         private object _CurrentChildView;
         public TimerViewModel _timerViewModel;
@@ -87,6 +91,7 @@ namespace RCP_Sys.ViewModels
             _userHistoryViewModel = new UserHistoryViewModel();
             _settingsViewModel = new SettingsViewModel();
             GetUsername = new UserService();
+            DialogAction = new DialogService();
             UserAccount = new UserAccountInformation();
             CurrentUserData();
 
@@ -98,6 +103,7 @@ namespace RCP_Sys.ViewModels
             ShowUserView = new RelayCommand(UserV);
             ShowUserHistory= new RelayCommand(UserHistory);
             ShowSettingView = new RelayCommand(Setting);
+            ExitProgram = new RelayCommand(Exit);
 
 
 
@@ -106,6 +112,18 @@ namespace RCP_Sys.ViewModels
             Home(null);
 
 
+        }
+
+        private void Exit(object obj)
+        {
+            if(_timerViewModel.IsTimerRunning== false)
+            {
+                Application.Current.Shutdown();
+            }
+            else
+            {
+                DialogAction.ShowDialog();
+            }
         }
 
         #region ICommand handlers

@@ -25,6 +25,7 @@ namespace RCP_Sys.ViewModels
             
             DataListView();       
             TimeCollectionUser = CollectionViewSource.GetDefaultView(TimeViewCollectionUser);
+
             GroupFilter gf = new GroupFilter();
             gf.AddFilter(TimeFilter);
             gf.AddFilter(FilterName);

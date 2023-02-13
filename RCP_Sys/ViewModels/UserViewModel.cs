@@ -19,6 +19,8 @@ using System.Windows.Data;
 using System.ComponentModel;
 using System.Reflection;
 using RCP_Sys.Utilities;
+using RCP_Sys.DAL.Interface;
+using RCP_Sys.Services;
 
 namespace RCP_Sys.ViewModels
 {
@@ -28,6 +30,7 @@ namespace RCP_Sys.ViewModels
         public ICommand DeleteCommand { get; }
         public ICommand EditCommand { get; }
         public IUserService RemoveUser;
+        public IDialogService ChangeUser;
         public IUserService GetUser;
         public ICollectionView UserIcollection { get; set; }
         public UserViewModel()
@@ -38,15 +41,17 @@ namespace RCP_Sys.ViewModels
             EditCommand = new RelayCommand(EditUser);
             RemoveUser = new UserService();
             GetUser = new UserService();
+            ChangeUser= new DialogService();
             UserSum();
             GroupFilter gf = new GroupFilter();
             gf.AddFilter(UsernameFilter);
             UserIcollection.Filter = gf.Filter;
+            UserIcollection.SortDescriptions.Add(new SortDescription("Username", ListSortDirection.Ascending));
         }
 
         private void EditUser(object obj)
         {
-            throw new NotImplementedException();
+            ChangeUser.ShowDialog();
         }
 
         private bool UsernameFilter(object obj)
@@ -91,7 +96,7 @@ namespace RCP_Sys.ViewModels
             using (var context = new RcpDbContext())
             {
                 var q = from a in context.Users
-                        where a.Username != null
+                        where a.Username != null 
                         select a;
                 UserCollection = new ObservableCollection<UserModel>(q);
 
