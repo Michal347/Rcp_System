@@ -129,7 +129,7 @@ namespace RCP_Sys.ViewModels
         #region ICommand handlers
         private void UserV(object obj)
         {
-            CurrentChildView = new UserViewModel();
+            CurrentChildView = _userViewModel;
             CurrentUserData();
             caption = "User";
             icon = IconChar.UserCheck;

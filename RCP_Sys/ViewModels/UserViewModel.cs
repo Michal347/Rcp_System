@@ -23,6 +23,8 @@ using RCP_Sys.DAL.Interface;
 using RCP_Sys.Services;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using RCP_Sys.Views;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using System.Collections.Specialized;
 
 namespace RCP_Sys.ViewModels
 {
@@ -35,15 +37,20 @@ namespace RCP_Sys.ViewModels
         public IUserService RemoveUser;
         public IDialogService ChangeUser;
         public IUserService GetUser;
-        public ICollectionView UserIcollection { get; set; }
+        private ICollectionView _UserIcollection;
+        public ICollectionView UserIcollection
+        {
+            get { return _UserIcollection; }
+            set { _UserIcollection = value; OnPropertyChanged("UserIcollection"); }
+        }
+
         public UserViewModel()
          {
-            LoadUsers();
+            RefreshDatauser();
             UserIcollection = CollectionViewSource.GetDefaultView(UserCollection);
             DeleteCommand = new RelayCommand(DeleteUser);
             EditCommand = new RelayCommand(EditUser);
             UpdateCommand = new RelayCommand(x => UpdateData());
-
             RemoveUser = new UserService();
             GetUser = new UserService();
             ChangeUser= new DialogService();
@@ -52,7 +59,11 @@ namespace RCP_Sys.ViewModels
             gf.AddFilter(UsernameFilter);
             UserIcollection.Filter = gf.Filter;
             UserIcollection.SortDescriptions.Add(new SortDescription("Username", ListSortDirection.Ascending));
+
         }
+
+
+     
         private void UpdateData()
         {
             using (var context = new RcpDbContext())
@@ -66,9 +77,19 @@ namespace RCP_Sys.ViewModels
                     found.Gender = Gender;
                     context.Users.Update(found);
                     context.SaveChanges();
-                    UserIcollection.Refresh();
+                    RefreshDatauser();
                 }
             }
+        }
+
+        private void RefreshDatauser()
+        {
+            LoadUsers();
+            UserIcollection = CollectionViewSource.GetDefaultView(UserCollection);
+            GroupFilter gf = new GroupFilter();
+            gf.AddFilter(UsernameFilter);
+            UserIcollection.Filter = gf.Filter;
+            UserIcollection.SortDescriptions.Add(new SortDescription("Username", ListSortDirection.Ascending));
         }
 
         private void EditUser(object obj)
@@ -231,8 +252,9 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _Usernamefiltr = value;
+                    UserIcollection.Refresh();
                 OnPropertyChanged(nameof(Usernamefiltr));
-                UserIcollection.Refresh();
+               
             }
         }
 

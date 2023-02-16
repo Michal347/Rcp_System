@@ -278,7 +278,6 @@ namespace RCP_Sys.ViewModels
             set { _TimerCollection = value; OnPropertyChanged("TimerCollection"); }
         }
 
-            public List<ProjectModel> ModifiedItems { get; set; }
 
         private List<TimerModel> mysampleGrid;
 
