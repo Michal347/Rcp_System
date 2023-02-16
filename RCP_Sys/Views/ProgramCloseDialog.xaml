@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:RCP_Sys.Views"
         mc:Ignorable="d"
          Height="200" Width="400"
+         WindowStyle="None"
+        ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel Margin="0" Orientation="Vertical">

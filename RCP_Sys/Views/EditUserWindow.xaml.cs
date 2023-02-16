@@ -23,5 +23,10 @@ namespace RCP_Sys.Views
         {
             InitializeComponent();
         }
+
+        private void closeButton(object sender, RoutedEventArgs e)
+        {
+            Close();    
+        }
     }
 }
