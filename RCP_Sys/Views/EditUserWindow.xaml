@@ -3,35 +3,34 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RCP_Sys.Views"
+        xmlns:local="clr-namespace:RCP_Sys.Views" xmlns:converters="clr-namespace:RCP_Sys.Resources.Converters"
         mc:Ignorable="d"
          WindowStyle="None"
         ResizeMode="NoResize"
         Title="EditUserWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <converters:BoolRadioConverter x:Key="BoolRadioConverter"/>
+        <converters:BoolRadioConverter x:Key="InverseBoolRadioConverter" Inverse="True" />
+    </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-        </Grid.RowDefinitions>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
-                <GradientStop Color="#41518f" Offset="0.7"/>
-                <GradientStop Color="#210f55" Offset="1"/>
+                <GradientStop Color="White" Offset="0.5"/>
+                <GradientStop Color="LightGray" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <TextBlock Text="Username:"
-                                       Foreground="Black"
-                                       FontSize="20"
+        <Border BorderThickness="4" BorderBrush="LightGray">
+        </Border>
+        <StackPanel Margin="100 40 40 40" Orientation="Vertical">
+            <StackPanel Margin="0 20 0 0" Orientation="Horizontal">
+                    <TextBlock Text="Username:"
+                                       Foreground="#808080"
+                                       FontSize="16"
                                        FontWeight="Medium"
                                        FontFamily="Montserrat"                             
                                        Margin="40,0,0,0" Height="26"  Width="200"/>
-            <TextBox x:Name="TxtName"
+                    <TextBox x:Name="TxtName"
                                      Text="{Binding Username}"
                                      FontSize="13"
                                      FontWeight="Medium"
@@ -44,31 +43,31 @@
                                      Height="28"
                                      VerticalContentAlignment="Center"
                                      Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682" Width="214">
-                <Validation.ErrorTemplate>
-                    <ControlTemplate>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
 
-                        <StackPanel Orientation="Vertical">
-                            <AdornedElementPlaceholder x:Name="textBox"/>
-                            <ItemsControl ItemsSource="{Binding}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </ControlTemplate>
-                </Validation.ErrorTemplate>
-            </TextBox>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Text="Surname:"
-                                       Foreground="Black"
-                                       FontSize="20"
+                                <StackPanel Orientation="Vertical">
+                                    <AdornedElementPlaceholder x:Name="textBox"/>
+                                    <ItemsControl ItemsSource="{Binding}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                </StackPanel>
+            <StackPanel Margin="0 20 0 0"   Orientation="Horizontal">
+                    <TextBlock Text="Surname:"
+                                       Foreground="#808080"
+                                       FontSize="16"
                                        FontWeight="Medium"
                                        FontFamily="Montserrat"                             
                                        Margin="40,0,0,0" Height="26"  Width="200"/>
-            <TextBox x:Name="txtSurname"
+                    <TextBox x:Name="txtSurname"
                                      Text="{Binding surname}"
                                      FontSize="13"
                                      FontWeight="Medium"
@@ -80,31 +79,54 @@
                                      Height="28"
                                      VerticalContentAlignment="Center"
                                      Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682" Width="214">
-                <Validation.ErrorTemplate>
-                    <ControlTemplate>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
 
-                        <StackPanel Orientation="Vertical">
-                            <AdornedElementPlaceholder x:Name="textBox"/>
-                            <ItemsControl ItemsSource="{Binding}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </ControlTemplate>
-                </Validation.ErrorTemplate>
-            </TextBox>
-        </StackPanel>
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <TextBlock Text="Name:"
-                                       Foreground="Black"
-                                       FontSize="20"
+                                <StackPanel Orientation="Vertical">
+                                    <AdornedElementPlaceholder x:Name="textBox"/>
+                                    <ItemsControl ItemsSource="{Binding}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                </StackPanel>
+            <StackPanel Margin="0 20 0 0"  Orientation="Horizontal">
+                <TextBlock Text="Gender:"
+                                       Foreground="#808080"
+                                       FontSize="16"
                                        FontWeight="Medium"
                                        FontFamily="Montserrat"                             
                                        Margin="40,0,0,0" Height="26"  Width="200"/>
-            <TextBox x:Name="txtName"
+                <RadioButton FontFamily="Montserrat" 
+                                     Width="150" 
+                                     Command="{Binding Path=GetGender}" 
+                                     Content="Male" 
+                                     Name="rbMale"
+                                     Margin="50 0 0 0"
+                                     IsChecked="True"
+                                     CommandParameter="{Binding ElementName=rbMale, Path=Content}"></RadioButton>
+                <RadioButton FontFamily="Montserrat" 
+                                     Width="150" 
+                                     Command="{Binding Path=GetGender}" 
+                                     Content="Female" 
+                                     Name="rbFemal"
+                                     IsChecked="False"
+                                     CommandParameter="{Binding ElementName=rbFemal, Path=Content}"></RadioButton>
+            </StackPanel>
+            <StackPanel Margin="0 20 0 0"  Orientation="Horizontal">
+                    <TextBlock Text="Name:"
+                                       Foreground="#808080"
+                                       FontSize="16"
+                                       FontWeight="Medium"
+                                       FontFamily="Montserrat"                             
+                                       Margin="40,0,0,0" Height="26"  Width="200"/>
+                    <TextBox x:Name="txtName"
                                      Text="{Binding Name}"
                                      FontSize="13"
                                      FontWeight="Medium"
@@ -116,31 +138,31 @@
                                      Height="28"
                                      VerticalContentAlignment="Center"
                                      Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682" Width="214">
-                <Validation.ErrorTemplate>
-                    <ControlTemplate>
+                        <Validation.ErrorTemplate>
+                            <ControlTemplate>
 
-                        <StackPanel Orientation="Vertical">
-                            <AdornedElementPlaceholder x:Name="textBox"/>
-                            <ItemsControl ItemsSource="{Binding}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </ControlTemplate>
-                </Validation.ErrorTemplate>
-            </TextBox>
-        </StackPanel>
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
-            <TextBlock Text="Email:"
-                                       Foreground="Black"
-                                       FontSize="20"
+                                <StackPanel Orientation="Vertical">
+                                    <AdornedElementPlaceholder x:Name="textBox"/>
+                                    <ItemsControl ItemsSource="{Binding}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                </StackPanel>
+            <StackPanel  Margin="0 20 0 0"  Orientation="Horizontal">
+                    <TextBlock Text="Email:"
+                                       Foreground="#808080"
+                                       FontSize="16"
                                        FontWeight="Medium"
                                        FontFamily="Montserrat"                             
                                        Margin="40,0,0,0" Height="26"  Width="200"/>
-            <TextBox x:Name="txtEmail"
+                    <TextBox x:Name="txtEmail"
                                      Text="{Binding Email}"
                                      FontSize="13"
                                      FontWeight="Medium"
@@ -152,25 +174,47 @@
                                      Height="28"
                                      VerticalContentAlignment="Center"
                                      Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682" Width="214">
-                <Validation.ErrorTemplate>
-                    <ControlTemplate>
-
-                        <StackPanel Orientation="Vertical">
-                            <AdornedElementPlaceholder x:Name="textBox"/>
-                            <ItemsControl ItemsSource="{Binding}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </ControlTemplate>
-                </Validation.ErrorTemplate>
-            </TextBox>
-        </StackPanel>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="4">
-            <Button         
+                        <Validation.ErrorTemplate>
+                        <ControlTemplate>
+                            <StackPanel Orientation="Vertical">
+                                    <AdornedElementPlaceholder x:Name="textBox"/>
+                                    <ItemsControl ItemsSource="{Binding}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                </StackPanel>
+            <StackPanel  Margin="0 20 0 0"  Orientation="Horizontal">
+                <TextBlock Text="Administrator:"
+                                       Foreground="#808080"
+                                       FontSize="16"
+                                       FontWeight="Medium"
+                                       FontFamily="Montserrat"                             
+                                       Margin="40,0,0,0" Height="26"  Width="200"/>
+                <RadioButton FontFamily="Montserrat" 
+                                     Width="150" 
+                                     Content="False" 
+                                     Name="rbFalse"
+                                     Margin="50 0 0 0"
+                                      IsChecked="{Binding HybridSeed,
+                                        Converter={StaticResource InverseBoolRadioConverter}}"
+                                     CommandParameter="{Binding ElementName=rbFalse, Path=Content}"></RadioButton>
+                <RadioButton FontFamily="Montserrat" 
+                                     Width="150" 
+                                     Content="True" 
+                                     Name="rbRight"
+                                     IsChecked="{Binding HybridSeed,
+                                     Converter={StaticResource BoolRadioConverter}}"
+                                     CommandParameter="{Binding ElementName=rbRight, Path=Content}"></RadioButton>
+            </StackPanel>
+            <StackPanel Margin="0 40 0 0" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="4">
+                    <Button         
                                     Style="{StaticResource SaveButton}"
                                     x:Name="btnsave3" 
                                     Command="{Binding UpdateCommand}"
@@ -183,17 +227,17 @@
                                     FontFamily="Montserrat"
                                     Cursor="Hand"
                                     RenderTransformOrigin="0.532,-0.627">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Width="80" Height="30"        
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="80" Height="30"        
                                                 Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
+                                    <ContentPresenter VerticalAlignment="Center"
                                                               HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button         
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button         
                                     Style="{StaticResource SaveButton}"
                                     x:Name="btnexit" 
                                     Command="{Binding UpdateCommand}"
@@ -207,16 +251,17 @@
                                     FontFamily="Montserrat"
                                     Cursor="Hand"
                                     RenderTransformOrigin="0.532,-0.627">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Width="80" Height="30"        
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Width="80" Height="30"        
                                                 Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
+                                    <ContentPresenter VerticalAlignment="Center"
                                                               HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

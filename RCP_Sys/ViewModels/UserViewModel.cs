@@ -34,6 +34,7 @@ namespace RCP_Sys.ViewModels
         public ICommand DeleteCommand { get; }
         public ICommand EditCommand { get; }
         public ICommand UpdateCommand { get; }
+        public ICommand GetGender { get; }
         public IUserService RemoveUser;
         public IDialogService ChangeUser;
         public IUserService GetUser;
@@ -50,7 +51,8 @@ namespace RCP_Sys.ViewModels
             UserIcollection = CollectionViewSource.GetDefaultView(UserCollection);
             DeleteCommand = new RelayCommand(DeleteUser);
             EditCommand = new RelayCommand(EditUser);
-            UpdateCommand = new RelayCommand(x => UpdateData());
+            UpdateCommand = new RelayCommand(x => UpdateData(), CanExecuteUpdate);
+            GetGender = new RelayCommand(executemethod, canexecutemethod);
             RemoveUser = new UserService();
             GetUser = new UserService();
             ChangeUser= new DialogService();
@@ -62,22 +64,62 @@ namespace RCP_Sys.ViewModels
 
         }
 
+        private bool CanExecuteUpdate(object obj)
+        {
+            bool valiData;
 
-     
+            if (string.IsNullOrWhiteSpace(Name) || Name.Length < 1 || string.IsNullOrWhiteSpace(surname) || surname.Length < 1)
+
+                valiData = false;
+            else
+                valiData = true;
+            return valiData;
+        }
+
+        private bool canexecutemethod(object parameter)
+        {
+            if (parameter != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void executemethod(object parameter)
+        {
+            Gender = (string)parameter;
+        }
+
         private void UpdateData()
         {
             using (var context = new RcpDbContext())
             {
+                ClearPropertyErrors(this, "Email");
+                var validEmail = EmailValidation.IsValidEmail(Email);
                 var found = context.Users.FirstOrDefault(x => x.Username == Username);
                 if (found != null)
                 {
-                    found.Name = Name;
-                    found.Surname = surname;
-                    found.Email = Email;
-                    found.Gender = Gender;
-                    context.Users.Update(found);
-                    context.SaveChanges();
-                    RefreshDatauser();
+                    if (validEmail == true)
+                    {
+                        found.Name = Name;
+                        found.Surname = surname;
+                        found.Email = Email;
+                        found.Gender = Gender;
+                        found.IsUserAdmin = HybridSeed;
+                        context.Users.Update(found);
+                        context.SaveChanges();
+                        RefreshDatauser();
+                        ClearPropertyErrors(this, "Email");
+                    }
+
+                    else
+                    {
+                        OnErrorCreated("Email", "*Invalid email");
+                        return;
+                    }
                 }
             }
         }
@@ -94,8 +136,10 @@ namespace RCP_Sys.ViewModels
 
         private void EditUser(object obj)
         {
+            ClearPropertyErrors(this, "ErrorMessage");
             using (var context = new RcpDbContext())
             {
+
                 var user = GetUser.GetUsers();
                 var emp = obj as UserModel;
                 if (emp != null)
@@ -107,22 +151,24 @@ namespace RCP_Sys.ViewModels
                             DataContext = this,
                         };
                         dialog.Show();
-
                         surname = emp.Surname;
                         Username = emp.Username;
                         Gender = emp.Gender;
                         Email = emp.Email;
                         Name = emp.Name;
+                        HybridSeed = emp.IsUserAdmin;
                         ClearPropertyErrors(this, "ErrorMessage");
                     }
                     else
                     {
                         OnErrorCreated("ErrorMessage", "*User can't be Admin");
+                        return;
                     }
                 }
                 else
                 {
                     OnErrorCreated("ErrorMessage", "Error");
+                    return;
                 }
             }
         }
@@ -143,6 +189,7 @@ namespace RCP_Sys.ViewModels
 
         private void DeleteUser(object obj)
         {
+            ClearPropertyErrors(this, "ErrorMessage");
             using (var context = new RcpDbContext())
             {
                 var emp = obj as UserModel;
@@ -207,8 +254,8 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
                 ClearPropertyErrors(this, "ErrorMessage");
+                OnPropertyChanged(nameof(ErrorMessage));
             }
         }
 
@@ -252,7 +299,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _Usernamefiltr = value;
-                    UserIcollection.Refresh();
+                UserIcollection.Refresh();
                 OnPropertyChanged(nameof(Usernamefiltr));
                
             }
@@ -317,21 +364,6 @@ namespace RCP_Sys.ViewModels
             }
         }
 
-        private string _Gender;
-        public string Gender
-        {
-            get
-            {
-                return _Gender;
-            }
-            set
-            {
-                _Gender = value;
-                OnPropertyChanged("Gender");
-
-            }
-        }
-
         private string _Email;
         public string Email
         {
@@ -343,10 +375,34 @@ namespace RCP_Sys.ViewModels
             {
                 _Email = value;
                 OnPropertyChanged("Email");
+                ClearPropertyErrors(this, nameof(Email));
 
             }
         }
 
+            private bool hybridSeed;
+
+        public bool HybridSeed
+        {
+            get { return hybridSeed; }
+            set
+            {
+                hybridSeed = value;
+                OnPropertyChanged(nameof(HybridSeed));
+            }
+        }
+
+        private string _gender = "Male";
+
+        public string Gender
+        {
+            get { return _gender; }
+            set
+            {
+                _gender = value;
+                OnPropertyChanged("Gender");
+            }
+        }
 
     }
 }
