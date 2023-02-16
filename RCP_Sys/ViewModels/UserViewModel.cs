@@ -21,6 +21,8 @@ using System.Reflection;
 using RCP_Sys.Utilities;
 using RCP_Sys.DAL.Interface;
 using RCP_Sys.Services;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using RCP_Sys.Views;
 
 namespace RCP_Sys.ViewModels
 {
@@ -29,6 +31,7 @@ namespace RCP_Sys.ViewModels
         
         public ICommand DeleteCommand { get; }
         public ICommand EditCommand { get; }
+        public ICommand UpdateCommand { get; }
         public IUserService RemoveUser;
         public IDialogService ChangeUser;
         public IUserService GetUser;
@@ -39,6 +42,8 @@ namespace RCP_Sys.ViewModels
             UserIcollection = CollectionViewSource.GetDefaultView(UserCollection);
             DeleteCommand = new RelayCommand(DeleteUser);
             EditCommand = new RelayCommand(EditUser);
+            UpdateCommand = new RelayCommand(x => UpdateData());
+
             RemoveUser = new UserService();
             GetUser = new UserService();
             ChangeUser= new DialogService();
@@ -48,10 +53,57 @@ namespace RCP_Sys.ViewModels
             UserIcollection.Filter = gf.Filter;
             UserIcollection.SortDescriptions.Add(new SortDescription("Username", ListSortDirection.Ascending));
         }
+        private void UpdateData()
+        {
+            using (var context = new RcpDbContext())
+            {
+                var found = context.Users.FirstOrDefault(x => x.Username == Username);
+                if (found != null)
+                {
+                    found.Name = Name;
+                    found.Surname = surname;
+                    found.Email = Email;
+                    found.Gender = Gender;
+                    context.Users.Update(found);
+                    context.SaveChanges();
+                    UserIcollection.Refresh();
+                }
+            }
+        }
 
         private void EditUser(object obj)
         {
-            ChangeUser.ShowDialog();
+            using (var context = new RcpDbContext())
+            {
+                var user = GetUser.GetUsers();
+                var emp = obj as UserModel;
+                if (emp != null)
+                {
+                    if (emp.IsUserAdmin == false)
+                    {
+                        var dialog = new EditUserWindow()
+                        {
+                            DataContext = this,
+                        };
+                        dialog.Show();
+
+                        surname = emp.Surname;
+                        Username = emp.Username;
+                        Gender = emp.Gender;
+                        Email = emp.Email;
+                        Name = emp.Name;
+                        ClearPropertyErrors(this, "ErrorMessage");
+                    }
+                    else
+                    {
+                        OnErrorCreated("ErrorMessage", "*User can't be Admin");
+                    }
+                }
+                else
+                {
+                    OnErrorCreated("ErrorMessage", "Error");
+                }
+            }
         }
 
         private bool UsernameFilter(object obj)
@@ -183,6 +235,96 @@ namespace RCP_Sys.ViewModels
                 UserIcollection.Refresh();
             }
         }
+
+        private object selectedItem;
+        public object SelectedItem
+        {
+            get
+            {
+                return selectedItem;
+            }
+            set
+            {
+                selectedItem = value;
+                OnPropertyChanged("SelectedItem");
+            }
+        }
+
+        private string _Surname;
+        public string surname
+        {
+            get
+            {
+                return _Surname;
+            }
+            set
+            {
+                _Surname = value;
+                OnPropertyChanged("surname");
+
+            }
+        }
+
+        private string _Name;
+        public string Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                _Name = value;
+                OnPropertyChanged("Name");
+
+            }
+        }
+
+        private string _Username;
+        public string Username
+        {
+            get
+            {
+                return _Username;
+            }
+            set
+            {
+                _Username = value;
+                OnPropertyChanged("Username");
+
+            }
+        }
+
+        private string _Gender;
+        public string Gender
+        {
+            get
+            {
+                return _Gender;
+            }
+            set
+            {
+                _Gender = value;
+                OnPropertyChanged("Gender");
+
+            }
+        }
+
+        private string _Email;
+        public string Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                _Email = value;
+                OnPropertyChanged("Email");
+
+            }
+        }
+
 
     }
 }
