@@ -1,0 +1,177 @@
+﻿<Window x:Class="RCP_Sys.Views.EditProjectDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RCP_Sys.Views"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Title="EditProjectDialog" Height="450" Width="300">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                <GradientStop Color="White" Offset="0.5"/>
+                <GradientStop Color="LightGray" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Border BorderThickness="4" BorderBrush="LightGray">
+        </Border>
+        <StackPanel Margin="0 10 0 0" Orientation="Vertical">
+            <StackPanel Orientation="Vertical">
+                <TextBox x:Name="TxtId"
+                                     Text="{Binding ID}"
+                                     FontSize="13"
+                                     FontWeight="Medium"
+                                     FontFamily="Montserrat"                            
+                                     Foreground="Black"
+                                     CaretBrush="Black"
+                                     IsEnabled="False"
+                                     Visibility="Hidden"
+                                     BorderBrush="Gray"
+                                     Margin="0 0 0 0"
+                                     Height="10"
+                                     VerticalContentAlignment="Center"
+                                     RenderTransformOrigin="0.52,0.682" Width="200">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+
+                            <StackPanel Orientation="Vertical">
+                                <AdornedElementPlaceholder x:Name="textBox"/>
+                                <ItemsControl ItemsSource="{Binding}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Margin="0 10 0 0"  HorizontalAlignment="Center" Orientation="Vertical">
+                <TextBlock Text="Project Name:"
+                                       Foreground="#808080"
+                                       FontSize="16"
+                                       FontWeight="Medium"
+                                       FontFamily="Montserrat"                             
+                                       Margin="0" Height="26"  Width="200"/>
+                <TextBox x:Name="TxtProjectName"
+                                     Text="{Binding EditProjectName}"
+                                     FontSize="13"
+                                     FontWeight="Medium"
+                                     FontFamily="Montserrat"                            
+                                     Foreground="Black"
+                                     CaretBrush="Black"                               
+                                     IsEnabled="True"
+                                     BorderBrush="Gray"
+                                     Margin="0 0 0 0"
+                                     Height="28"
+                                     VerticalContentAlignment="Center"
+                                     RenderTransformOrigin="0.52,0.682" Width="200">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+
+                            <StackPanel Orientation="Vertical">
+                                <AdornedElementPlaceholder x:Name="textBox"/>
+                                <ItemsControl ItemsSource="{Binding}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Margin="0 20 0 0" HorizontalAlignment="Center"   Orientation="Vertical">
+                <TextBlock Text="Description:"
+                                       Foreground="#808080"
+                                       FontSize="16"
+                                       FontWeight="Medium"
+                                       FontFamily="Montserrat"                             
+                                       Margin="0,0,0,0" Height="26"  Width="200"/>
+                <TextBox x:Name="txtSurname"
+                                     Text="{Binding EditDescription}"
+                                     FontSize="13"
+                                     FontWeight="Medium"
+                                     FontFamily="Montserrat"                            
+                                     Foreground="Black"
+                                     CaretBrush="Black"
+                                     BorderBrush="Gray"
+                                     Margin="0 0 0 0"
+                                     Height="200"
+                                     Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682" Width="214">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+
+                            <StackPanel Orientation="Vertical">
+                                <AdornedElementPlaceholder x:Name="textBox"/>
+                                <ItemsControl ItemsSource="{Binding}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Margin="0 20 0 0" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="4">
+                <Button         
+                                    Style="{StaticResource SaveButton}"
+                                    x:Name="btnsave3" 
+                                    Command="{Binding UpdateCommand}"
+                                    BorderThickness="0"
+                                    Content="Save"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    FontSize="16"
+                                    Margin="0 10 0 0"
+                                    FontFamily="Montserrat"
+                                    Cursor="Hand"
+                                    RenderTransformOrigin="0.532,-0.627">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="80" Height="30"        
+                                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button         
+                                    Style="{StaticResource SaveButton}"
+                                    x:Name="btnexit" 
+                                    Command="{Binding UpdateCommand}"
+                                    BorderThickness="0"
+                                    Content="Exit"
+                                    Foreground="White"
+                                    FontWeight="Bold"
+                                    FontSize="16"
+                                    Click="closeButton"
+                                    Margin="30 10 0 0"
+                                    FontFamily="Montserrat"
+                                    Cursor="Hand"
+                                    RenderTransformOrigin="0.532,-0.627">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="80" Height="30"        
+                                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

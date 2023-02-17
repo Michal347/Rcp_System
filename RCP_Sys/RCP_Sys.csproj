@@ -287,6 +287,9 @@
     <Compile Include="ViewModels\TimeSheetViewModel.cs" />
     <Compile Include="ViewModels\UserHistoryViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="Views\EditProjectDialog.xaml.cs">
+      <DependentUpon>EditProjectDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditUserWindow.xaml.cs">
       <DependentUpon>EditUserWindow.xaml</DependentUpon>
     </Compile>
@@ -329,6 +332,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\ViewViewModelBinding.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditProjectDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

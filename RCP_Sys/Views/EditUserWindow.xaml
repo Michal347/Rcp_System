@@ -23,6 +23,38 @@
         <Border BorderThickness="4" BorderBrush="LightGray">
         </Border>
         <StackPanel Margin="100 40 40 40" Orientation="Vertical">
+            <StackPanel Orientation="Vertical">
+                <TextBox x:Name="TxtId"
+                                     Text="{Binding ID}"
+                                     FontSize="13"
+                                     FontWeight="Medium"
+                                     FontFamily="Montserrat"                            
+                                     Foreground="Black"
+                                     CaretBrush="Black"
+                                     IsEnabled="False"
+                                     Visibility="Hidden"
+                                     BorderBrush="Gray"
+                                     Margin="0 0 0 0"
+                                     Height="5"
+                                     VerticalContentAlignment="Center"
+                                     RenderTransformOrigin="0.52,0.682" Width="200">
+                    <Validation.ErrorTemplate>
+                        <ControlTemplate>
+
+                            <StackPanel Orientation="Vertical">
+                                <AdornedElementPlaceholder x:Name="textBox"/>
+                                <ItemsControl ItemsSource="{Binding}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Validation.ErrorTemplate>
+                </TextBox>
+            </StackPanel>
             <StackPanel Margin="0 20 0 0" Orientation="Horizontal">
                     <TextBlock Text="Username:"
                                        Foreground="#808080"
@@ -37,7 +69,7 @@
                                      FontFamily="Montserrat"                            
                                      Foreground="Black"
                                      CaretBrush="Black"
-                                     IsEnabled="False"
+                                     IsEnabled="True"
                                      BorderBrush="Gray"
                                      Margin="50 0 0 0"
                                      Height="28"
@@ -213,7 +245,7 @@
                                      Converter={StaticResource BoolRadioConverter}}"
                                      CommandParameter="{Binding ElementName=rbRight, Path=Content}"></RadioButton>
             </StackPanel>
-            <StackPanel Margin="0 40 0 0" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="4">
+            <StackPanel Margin="0 40 40 0" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="4">
                     <Button         
                                     Style="{StaticResource SaveButton}"
                                     x:Name="btnsave3" 
@@ -239,8 +271,7 @@
                     </Button>
                     <Button         
                                     Style="{StaticResource SaveButton}"
-                                    x:Name="btnexit" 
-                                    Command="{Binding UpdateCommand}"
+                                    x:Name="btnexit"  
                                     BorderThickness="0"
                                     Content="Exit"
                                     Foreground="White"

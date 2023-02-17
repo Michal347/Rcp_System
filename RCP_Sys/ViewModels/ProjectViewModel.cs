@@ -1,27 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Entity.Migrations;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Policy;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
-using System.Windows.Navigation;
-using System.Xml.Linq;
-using System.Xml.XPath;
-using Microsoft.Win32;
 using RCP_Sys.Db;
 using RCP_Sys.Models;
-using RCP_Sys.Repository;
-using RCP_Sys.Utilities;
+using RCP_Sys.Views;
 
 namespace RCP_Sys.ViewModels
 {
@@ -32,7 +16,9 @@ namespace RCP_Sys.ViewModels
         #region Icommand
 
         public ICommand AddProject { get; private set; }
-
+        public ICommand DeleteCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+        public ICommand UpdateCommand { get; set; }
 
         #endregion
 
@@ -42,15 +28,22 @@ namespace RCP_Sys.ViewModels
         {
 
             AddProject = new RelayCommand(x => AddProj());
+            DeleteCommand = new RelayCommand(Delete);
+            EditCommand = new RelayCommand(Edit);
+            UpdateCommand = new RelayCommand(Update);
             Refresh();
 
         }
+
+       
+
 
         #endregion
 
         #region ICommand handlers
         private void AddProj()
         {
+            ClearPropertyErrors(this, "ProjectName");       
             {
                 using (var context = new RcpDbContext())
                 {
@@ -91,6 +84,85 @@ namespace RCP_Sys.ViewModels
 
         }
 
+        private void Delete(object obj)
+        {
+            using (var context = new RcpDbContext())
+            {
+                var emp = obj as ProjectModel;
+                if (emp != null)
+                {
+                    context.Projects.Remove(emp);
+                    MysampleGrid.Remove(emp);
+                    context.SaveChanges();
+                    Refresh();
+                }
+
+            }
+        }
+
+        private void Edit(object obj)
+        {
+            using (var context = new RcpDbContext())
+            {
+
+
+                var emp = obj as ProjectModel;
+                if (emp != null)
+                {
+                    var dialog = new EditProjectDialog()
+                    {
+                        DataContext = this,
+                    };
+                    dialog.Show();
+
+                    EditProjectName = emp.Name;
+                    ID = emp.Id;
+                    EditDescription = emp.Description;
+
+                }
+            }
+
+        }
+
+        private void Update(object obj)
+        {
+            ClearPropertyErrors(this, "EditProjectName");
+            using (var context = new RcpDbContext())
+            {
+                var Name = context.Projects.FirstOrDefault(x => x.Name == EditProjectName); ;
+                var found = context.Projects.FirstOrDefault(x => x.Id == ID);
+
+                if (Name != null)
+                {
+
+                    if (found.Name == EditProjectName)
+                    {
+                        found.Name = EditProjectName;
+                        found.Description = EditDescription;
+                        found.Id = ID;
+                        context.Projects.Update(found);
+                        context.SaveChanges();
+                        Refresh();
+                    }
+                    else
+                    {
+                        OnErrorCreated("EditProjectName", "Project already exist");
+                    }
+
+                }
+                else
+                {
+                    found.Name = EditProjectName;
+                    found.Description = EditDescription;
+                    found.Id = ID;
+                    context.Projects.Update(found);
+                    context.SaveChanges();
+                    Refresh();
+                    ClearPropertyErrors(this, "EditProjectName");
+                }
+            }
+        }
+
         private void Refresh()
         {
             using (var context = new RcpDbContext())
@@ -105,6 +177,26 @@ namespace RCP_Sys.ViewModels
 
         #region fields
 
+        private int _ID;
+        public int ID
+        {
+            get { return _ID; }
+            set { _ID = value; OnPropertyChanged(nameof(ID)); }
+        }
+
+        private string _EditprojectName;
+
+        public string EditProjectName
+        {
+            get { return _EditprojectName; }
+            set
+            {
+                _EditprojectName = value;
+                OnPropertyChanged("EditProjectName");
+                ClearPropertyErrors(this, "EditProjectName");
+
+            }
+        }
         private string _projectName;
 
         public string ProjectName
@@ -129,6 +221,20 @@ namespace RCP_Sys.ViewModels
                 _descripiton = value;
                 OnPropertyChanged("Description");
                 ClearPropertyErrors(this, "Description");
+
+            }
+        }
+
+        private string _Editdescripiton;
+
+        public string EditDescription
+        {
+            get { return _Editdescripiton; }
+            set
+            {
+                _Editdescripiton = value;
+                OnPropertyChanged("EditDescription");
+                ClearPropertyErrors(this, "EditDescription");
 
             }
         }

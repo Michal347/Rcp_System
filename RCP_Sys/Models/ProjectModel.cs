@@ -10,8 +10,6 @@ namespace RCP_Sys.Models
 {
     public class ProjectModel
     {
-        internal Action<object, PropertyChangedEventArgs> PropertyChanged;
-
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }

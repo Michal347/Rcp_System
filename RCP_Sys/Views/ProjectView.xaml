@@ -10,7 +10,7 @@
 
     <Grid Background="White" Margin="10">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="350"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Border Grid.Column="0" BorderBrush="LightGray" BorderThickness="3"></Border>
@@ -21,7 +21,6 @@
                 <DataGrid
                           BorderThickness="2"
                           BorderBrush="Gray"
-                          
                           ItemsSource="{Binding Path=MysampleGrid,Mode=TwoWay,NotifyOnSourceUpdated=True,NotifyOnTargetUpdated=True}"
                           AutoGenerateColumns="False"
                           IsReadOnly="True"
@@ -29,6 +28,20 @@
                           Style="{DynamicResource DataGridStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" 
                           SelectedItem="{Binding SelectedDataGridItem}" Margin="10,10,10,-634">
                     <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="##" CanUserResize="False" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource gridEditButtom}" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}">
+                                            <fa:IconImage Icon="Edit" Style="{StaticResource RemoveIcon}"/>
+                                        </Button>
+                                        <Button Style="{StaticResource gridRemoveButtom}" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}">
+                                            <fa:IconImage Icon="Remove" Style="{StaticResource RemoveIcon}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn Header="Project Name" 
                                             Width="*"
                                             Binding="{Binding Name}"

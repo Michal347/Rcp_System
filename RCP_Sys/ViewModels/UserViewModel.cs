@@ -95,35 +95,59 @@ namespace RCP_Sys.ViewModels
 
         private void UpdateData()
         {
+            ClearPropertyErrors(this, "Username");
             using (var context = new RcpDbContext())
             {
                 ClearPropertyErrors(this, "Email");
                 var validEmail = EmailValidation.IsValidEmail(Email);
-                var found = context.Users.FirstOrDefault(x => x.Username == Username);
-                if (found != null)
+                var found = context.Users.FirstOrDefault(x => x.Id == ID);
+                var User = context.Users.FirstOrDefault(x => x.Username == Username);
+                if (User != null)
                 {
-                    if (validEmail == true)
+                    if (found.Username == Username)
                     {
-                        found.Name = Name;
-                        found.Surname = surname;
-                        found.Email = Email;
-                        found.Gender = Gender;
-                        found.IsUserAdmin = HybridSeed;
-                        context.Users.Update(found);
-                        context.SaveChanges();
-                        RefreshDatauser();
-                        ClearPropertyErrors(this, "Email");
+                        if (validEmail == true)
+                        {
+                            found.Name = Name;
+                            found.Surname = surname;
+                            found.Email = Email;
+                            found.Gender = Gender;
+                            found.IsUserAdmin = HybridSeed;
+                            context.Users.Update(found);
+                            context.SaveChanges();
+                            RefreshDatauser();
+                            ClearPropertyErrors(this, "Email");
+                        }
+                        else
+                        {
+                            OnErrorCreated("Email", "*Invalid Email");
+                            return;
+                        }
                     }
 
                     else
                     {
-                        OnErrorCreated("Email", "*Invalid email");
+                        OnErrorCreated("Username", "*Username already exist");
                         return;
+
                     }
-                }
+
+                }               
+                    found.Username = Username;
+                    found.Name = Name;
+                    found.Surname = surname;
+                    found.Email = Email;
+                    found.Gender = Gender;
+                    found.IsUserAdmin = HybridSeed;
+                    context.Users.Update(found);
+                    context.SaveChanges();
+                    RefreshDatauser();
+                    ClearPropertyErrors(this, "Email");
+                    ClearPropertyErrors(this, "Username");
+
+                
             }
         }
-
         private void RefreshDatauser()
         {
             LoadUsers();
@@ -144,7 +168,7 @@ namespace RCP_Sys.ViewModels
                 var emp = obj as UserModel;
                 if (emp != null)
                 {
-                    if (emp.IsUserAdmin == false)
+                    if (emp.Username != "Admin")
                     {
                         var dialog = new EditUserWindow()
                         {
@@ -156,6 +180,7 @@ namespace RCP_Sys.ViewModels
                         Gender = emp.Gender;
                         Email = emp.Email;
                         Name = emp.Name;
+                        ID = emp.Id;
                         HybridSeed = emp.IsUserAdmin;
                         ClearPropertyErrors(this, "ErrorMessage");
                     }
@@ -349,6 +374,19 @@ namespace RCP_Sys.ViewModels
             }
         }
 
+        private int _ID;
+        public int ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                _ID = value;
+                OnPropertyChanged(nameof(ID));
+            }
+        }
         private string _Username;
         public string Username
         {
