@@ -6,34 +6,74 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:RCP_Sys.Views"
              mc:Ignorable="d" 
-             Background="White"
-             d:DesignHeight="660" d:DesignWidth="1010">
+             Background="Transparent"
+             Height="670" Width="1030"
+             Margin="10">
     <Grid Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Background="White" Margin="10" Orientation="Horizontal">
-            <fa:IconImage Icon="Info" Style="{StaticResource MenuIcon}" Height="36" Width="52"/>
-            <Label FontSize="30"
-                       FontWeight="ExtraBlack"
-                       Foreground="Black"
-                       VerticalContentAlignment="Center"
-                       Margin="20 0 0 0">Change Information</Label>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                <GradientStop Color="White" Offset="0.3"/>
+                <GradientStop Color="LightGray" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"></ColumnDefinition>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" >
+            <StackPanel Margin="0 50 0 0" Height="150">
+                <Border Height="150" Width="200" CornerRadius="80">
+                    <Image Source="{Binding ImageSource,UpdateSourceTrigger=PropertyChanged}"/>
+                </Border>
             </StackPanel>
-            <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <TextBlock Text="Username:"
-                                       Foreground="Black"
+            <Canvas>
+                <Ellipse Width="72" Height="64" Fill="#808080" Opacity="0.1" Canvas.Left="139" Canvas.Top="226" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.525,0.85"/>
+                <Polyline Points="10,110 60,10 110,110" Fill="#808080" Opacity="0.1" Canvas.Left="115" Canvas.Top="81" Height="126" Width="120" RenderTransformOrigin="0.487,0.541" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Polyline Points="10,110 60,10 110,110" Fill="#808080" Opacity="0.1" Canvas.Left="225" Canvas.Top="197" Height="126" Width="120" RenderTransformOrigin="0.487,0.541" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Polyline.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Polyline.RenderTransform>
+                </Polyline>
+                <Polyline Points="10,110 60,10 110,110" Fill="#808080" Opacity="0.1" Canvas.Top="202" Height="126" Width="120" RenderTransformOrigin="0.487,0.541" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="1">
+                    <Polyline.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="270"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Polyline.RenderTransform>
+                </Polyline>
+                <Polyline Points="110,110 60,10 10,110" Fill="#808080" Opacity="0.1" Canvas.Left="118" Canvas.Top="314" Height="124" Width="120" RenderTransformOrigin="0.487,0.541" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Polyline.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Polyline.RenderTransform>
+                </Polyline>
+            </Canvas>
+
+        </StackPanel>
+        <StackPanel Grid.Column="1"  Margin="0,100,0,0" Orientation="Vertical" Grid.RowSpan="2">
+
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Username:"
+                                       Foreground="#808080"
                                        FontSize="20"
                                        FontWeight="Medium"
                                        FontFamily="Montserrat"                             
-                                       Margin="40,0,0,0" Height="26" Width="200" RenderTransformOrigin="0.516,-0.39"/>
-            <StackPanel Orientation="Vertical"  VerticalAlignment="Center" Height="100">
-                <TextBox x:Name="txtUser"
+                                       Margin="40,0,0,0" Height="26" Width="100" RenderTransformOrigin="0.516,-0.39"/>
+                <StackPanel Orientation="Vertical"  VerticalAlignment="Center" Height="100">
+                    <TextBox x:Name="txtUser"
                                      Text="{Binding  UserInformation.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
                                      FontSize="13" 
                                      IsEnabled="{Binding IsVisibleUsername}"
@@ -46,72 +86,80 @@
                                      Height="28"
                                      VerticalContentAlignment="Center"
                                      RenderTransformOrigin="0.52,0.682" Width="214">
-                                
-            </TextBox>
-            <TextBlock 
+
+                    </TextBox>
+                    <TextBlock 
                                 Text="{Binding ErrorMessageUsername}"
                                Foreground="#D7596D"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
                                Margin="50,15,0,0"/>
+                </StackPanel>
+                <Button  
+                    Style="{StaticResource EditSettingBut}"         
+                    Command="{Binding ModifyText}"
+                    Visibility="{Binding IsVisibleUsername, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Foreground="Gray"  Icon="Ellipsis" Width="20"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="40" Height="30" CornerRadius="10"  BorderBrush="LightGray" BorderThickness="2"       
+                                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button  
+                     Style="{StaticResource EditSettingBut}"             
+                     Command="{Binding UpdateUsername}"
+                     Background="#00D100"
+                     Visibility="{Binding IsVisibleUsername, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Foreground="White" Icon="Check" Width="20"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="35" Height="25" CornerRadius="10" 
+                                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button  
+                     Style="{StaticResource EditSettingBut}"  
+                     Command="{Binding SaveUsername}"
+                     Margin="10 0 0 0"
+                     Background="#FF0000"
+                     Visibility="{Binding IsVisibleUsername, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Foreground="White" Icon="close" Width="20"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="35" Height="25" CornerRadius="10"
+                                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </StackPanel>
-            <Button         
-                                    Style="{StaticResource SettingButton}"
-                                    x:Name="btnmodify4" 
-                                    Command="{Binding ModifyText}"
-                                    BorderThickness="0"
-                                    Content="modify"
-                                    IsEnabled="{Binding IsVisibleModifyUsername}"
-                                    Foreground="Black"
-                                    FontWeight="Bold"
-                                    FontSize="16"
-                                    Margin="150 0 0 0"
-                                    FontFamily="Montserrat"
-                                    Cursor="Hand"
-                                    RenderTransformOrigin="0.532,-0.627">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Width="80" Height="30"        
-                                                Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
-                                                              HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button         
-                                    Style="{StaticResource SaveButton}"
-                                    x:Name="btnsave4" 
-                                    Command="{Binding SaveUsername}"
-                                    BorderThickness="0"
-                                    Content="Save"
-                                    Foreground="Black"
-                                    FontWeight="Bold"
-                                    FontSize="16"
-                                    Margin="20 0 0 0"
-                                    FontFamily="Montserrat"
-                                    Cursor="Hand"
-                                    RenderTransformOrigin="0.532,-0.627">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Width="80" Height="30"        
-                                                Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
-                                                              HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBlock Text="Name:"
-                                       Foreground="Black"
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Name:"
+                                        Foreground="#808080"
                                        FontSize="20"
                                        FontWeight="Medium"
                                        FontFamily="Montserrat"                             
-                                       Margin="40,0,0,0" Height="26"  Width="200"/>
-            <TextBox x:Name="TxtName"
+                                       Margin="40,0,0,0" Height="26"  Width="100"/>
+                <StackPanel Orientation="Vertical"  VerticalAlignment="Center" Height="100">
+                    <TextBox x:Name="TxtName"
                                      Text="{Binding  UserInformation.Name}"
                                      FontSize="13"
                                      FontWeight="Medium"
@@ -120,84 +168,89 @@
                                      CaretBrush="Black"
                                      IsEnabled="{Binding IsVisibleName}"
                                      BorderBrush="Gray"
-                                     Margin="50 0 0 0"
+                                     Margin="50 30 0 0"
                                      Height="28"
                                      VerticalContentAlignment="Center"
                                      Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682" Width="214">
-                <Validation.ErrorTemplate>
-                    <ControlTemplate>
-
-                        <StackPanel Orientation="Vertical">
-                            <AdornedElementPlaceholder x:Name="textBox"/>
-                            <ItemsControl ItemsSource="{Binding}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </ControlTemplate>
-                </Validation.ErrorTemplate>
-            </TextBox>
-
-            <Button         
-                                    Style="{StaticResource SettingButton}"
-                                    x:Name="btnmodify" 
-                                    Command="{Binding ModifyName}"
-                                    BorderThickness="0"
-                                    Content="modify"
-                                    IsEnabled="{Binding IsVisibleModifyName}"
-                                    Foreground="Black"
-                                    FontWeight="Bold"
-                                    FontSize="16"
-                                    Margin="150 0 0 0"
-                                    FontFamily="Montserrat"
-                                    Cursor="Hand"
-                                    RenderTransformOrigin="0.532,-0.627">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Width="80" Height="30"        
+                    </TextBox>
+                    <TextBlock 
+                                Text="{Binding ErrorMessageName}"
+                               Foreground="#D7596D"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                             
+                               Margin="50,15,0,0"/>
+                </StackPanel>
+                <Button  Style="{StaticResource EditSettingBut}"
+                     Width="50"
+                     Height="50"
+                     Margin="40 0 0 0"
+                     Cursor="Hand"
+                     BorderBrush="LightGray"
+                     BorderThickness="2"
+                     Command="{Binding ModifyName}"
+                     Visibility="{Binding IsVisibleName, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Foreground="Gray" Icon="Ellipsis" Width="20"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="40" Height="30" CornerRadius="10"  BorderBrush="LightGray" BorderThickness="2"       
                                                 Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
+                                <ContentPresenter VerticalAlignment="Center"
                                                               HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button         
-                                    Style="{StaticResource SaveButton}"
-                                    x:Name="btnsave" 
-                                    Command="{Binding SaveName}"
-                                    BorderThickness="0"
-                                    Content="Save"
-                                    Foreground="Black"
-                                    FontWeight="Bold"
-                                    FontSize="16"
-                                    Margin="20 0 0 0"
-                                    FontFamily="Montserrat"
-                                    Cursor="Hand"
-                                    RenderTransformOrigin="0.532,-0.627">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Width="80" Height="30"        
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button  
+                     Style="{StaticResource EditSettingBut}"             
+                     Command="{Binding UpdateName}"
+                     Background="#00D100"
+                     Visibility="{Binding IsVisibleName, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Foreground="White" Icon="Check" Width="20"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="35" Height="25" CornerRadius="10"         
                                                 Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
+                                <ContentPresenter VerticalAlignment="Center"
                                                               HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </StackPanel>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button  
+                     Style="{StaticResource EditSettingBut}"
+                     Margin="10 0 0 0"
+                     Background="#FF0000"
+                     Command="{Binding SaveName}"
+                     Visibility="{Binding IsVisibleName, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Foreground="White" Icon="Close" Width="20"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="35" Height="25" CornerRadius="10"  
+                                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <TextBlock Text="Surname:"
-                                       Foreground="Black"
+            <StackPanel  Orientation="Horizontal">
+                <TextBlock Text="Surname:"
+                                        Foreground="#808080"
                                        FontSize="20"
                                        FontWeight="Medium"
                                        FontFamily="Montserrat"                             
-                                       Margin="40,0,0,0" Height="26"  Width="200"/>
-            <TextBox x:Name="txtSurname"
+                                       Margin="40,0,0,0" Height="26"  Width="100"/>
+                <StackPanel Orientation="Vertical"  VerticalAlignment="Center" Height="100">
+                    <TextBox x:Name="txtSurname"
                                      Text="{Binding  UserInformation.Surname}"
                                      FontSize="13"
                                      FontWeight="Medium"
@@ -206,83 +259,83 @@
                                      CaretBrush="Black"
                                      IsEnabled="{Binding IsVisibleSurname}"
                                      BorderBrush="Gray"
-                                     Margin="50 0 0 0"
+                                     Margin="50 30 0 0"
                                      Height="28"
                                      VerticalContentAlignment="Center"
-                                     Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682" Width="214">
-                <Validation.ErrorTemplate>
-                    <ControlTemplate>
+                                     Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682" Width="214"/>
+                    <TextBlock 
+                                Text="{Binding ErrorMessageSurname}"
+                               Foreground="#D7596D"
+                               FontSize="12"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"                             
+                               Margin="50,15,0,0"/>
+                </StackPanel>
 
-                        <StackPanel Orientation="Vertical">
-                            <AdornedElementPlaceholder x:Name="textBox"/>
-                            <ItemsControl ItemsSource="{Binding}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding ErrorContent}" Foreground="#D75962" FontWeight="Medium"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </StackPanel>
-                    </ControlTemplate>
-                </Validation.ErrorTemplate>
-            </TextBox>
-            <Button         
-                                    Style="{StaticResource SettingButton}"
-                                    x:Name="btnmodify2" 
-                                    Command="{Binding ModifySurname}"
-                                    BorderThickness="0"
-                                    Content="modify"
-                                    IsEnabled="{Binding IsVisibleModifySurname}"
-                                    Foreground="Black"
-                                    FontWeight="Bold"
-                                    FontSize="16"
-                                    Margin="150 0 0 0"
-                                    FontFamily="Montserrat"
-                                    Cursor="Hand"
-                                    RenderTransformOrigin="0.532,-0.627">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Width="80" Height="30"        
+                <Button  
+                     Style="{StaticResource EditSettingBut}"
+                     Command="{Binding ModifySurname}"
+                     Visibility="{Binding IsVisibleSurname, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Foreground="Gray"  Icon="Ellipsis" Width="20"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="40" Height="30" CornerRadius="10"  BorderBrush="LightGray" BorderThickness="2"       
                                                 Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
+                                <ContentPresenter VerticalAlignment="Center"
                                                               HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button         
-                                    Style="{StaticResource SaveButton}"
-                                    x:Name="btnsave2" 
-                                    Command="{Binding SaveSurname}"
-                                    BorderThickness="0"
-                                    Content="Save"
-                                    Foreground="Black"
-                                    FontWeight="Bold"
-                                    FontSize="16"
-                                    Margin="20 0 0 0"
-                                    FontFamily="Montserrat"
-                                    Cursor="Hand"
-                                    RenderTransformOrigin="0.532,-0.627">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Width="80" Height="30"        
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button  
+                     Style="{StaticResource EditSettingBut}"             
+                     Command="{Binding UpdateSurname}"
+                     Background="#00D100"
+                     Visibility="{Binding IsVisibleSurname, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Foreground="White" Icon="Check" Width="20"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="35" Height="25" CornerRadius="10" 
                                                 Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
+                                <ContentPresenter VerticalAlignment="Center"
                                                               HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </StackPanel>
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
-            <TextBlock Text="Email:"
-                                       Foreground="Black"
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button  
+                     Style="{StaticResource EditSettingBut}"  
+                     Command="{Binding SaveSurname}"
+                     Margin="10 0 0 0"
+                     Background="#FF0000"
+                     Visibility="{Binding IsVisibleSurname, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Foreground="White" Icon="Close" Width="20"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="35" Height="25" CornerRadius="10"  
+                                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <TextBlock Text="Email:"
+                                        Foreground="#808080"
                                        FontSize="20"
                                        FontWeight="Medium"
                                        FontFamily="Montserrat"                             
-                                       Margin="40,0,0,0" Height="26"  Width="200"/>
-            <StackPanel Orientation="Vertical"  VerticalAlignment="Center" Height="100">
-                <TextBox x:Name="txtEmail"
+                                       Margin="40,0,0,0" Height="26"  Width="100"/>
+                <StackPanel Orientation="Vertical"  VerticalAlignment="Center" Height="100">
+                    <TextBox x:Name="txtEmail"
                                      Text="{Binding  UserInformation.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
                                      FontSize="13" 
                                      IsEnabled="{Binding IsVisibleEmail}"
@@ -296,89 +349,76 @@
                                      VerticalContentAlignment="Center"
                                      RenderTransformOrigin="0.52,0.682" Width="214">
 
-                </TextBox>
-                <TextBlock 
+                    </TextBox>
+                    <TextBlock 
                                 Text="{Binding ErrorMessageEmail}"
                                Foreground="#D7596D"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"                             
                                Margin="50,15,0,0"/>
+                </StackPanel>
+                <Button  
+                    Style="{StaticResource EditSettingBut}"                 
+                    Command="{Binding ModifyEmail}"
+                    Visibility="{Binding IsVisibleEmail, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Foreground="Gray"  Icon="Ellipsis" Width="20"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="40" Height="30" CornerRadius="10"  BorderBrush="LightGray" BorderThickness="2"       
+                                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button  
+                     Style="{StaticResource EditSettingBut}"             
+                     Command="{Binding UpdateEmail}"
+                     Background="#00D100"
+                     Visibility="{Binding IsVisibleEmail, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Foreground="White" Icon="Check" Width="20"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="35" Height="25" CornerRadius="10" 
+                                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button  
+                     Style="{StaticResource EditSettingBut}"  
+                     Command="{Binding SaveEmail}"
+                     Margin="10 0 0 0"
+                     Background="#FF0000"
+                     Visibility="{Binding IsVisibleEmail, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Foreground="White" Icon="close" Width="20"/>
+                    </StackPanel>
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="35" Height="25" CornerRadius="10" 
+                                                Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </StackPanel>
-            <Button         
-                                    Style="{StaticResource SettingButton}"
-                                    x:Name="btnmodify3" 
-                                    Command="{Binding ModifyEmail}"
-                                    BorderThickness="0"
-                                    Content="modify"
-                                    IsEnabled="{Binding IsVisibleModifyEmail}"   
-                                    Foreground="Black"
-                                    FontWeight="Bold"
-                                    FontSize="16"
-                                    Margin="150 0 0 0"
-                                    FontFamily="Montserrat"
-                                    Cursor="Hand"
-                                    RenderTransformOrigin="0.532,-0.627">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Width="80" Height="30"        
-                                                Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
-                                                              HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button         
-                                    Style="{StaticResource SaveButton}"
-                                    x:Name="btnsave3" 
-                                    Command="{Binding SaveEmail}"
-                                    BorderThickness="0"
-                                    Content="Save"
-                                    Foreground="Black"
-                                    FontWeight="Bold"
-                                    FontSize="16"
-                                    Margin="20 0 0 0"
-                                    FontFamily="Montserrat"
-                                    Cursor="Hand"
-                                    RenderTransformOrigin="0.532,-0.627">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Width="80" Height="30"        
-                                                Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
-                                                              HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </StackPanel>
-        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button     Style="{StaticResource RefreshButton}" 
-                                x:Name="BtnRefresh"                          
-                                BorderThickness="0"
-                                Content="Save Change"
-                                Foreground="White"
-                                VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                FontSize="12"
-                                FontFamily="Montserrat"
-                                Cursor="Hand"                           
-                                Margin="20 15 5 5"
-                                Command="{Binding Update}"
-                                IsEnabled="{Binding IsVisibleSaveChange}">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border Width="150" Height="40"
-                                            CornerRadius="10"
-                                            Background="{TemplateBinding Background}">
-                            <ContentPresenter VerticalAlignment="Center"
-                                                          HorizontalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox x:Name="txtId"
+                                     Text="{Binding  UserInformation.Id, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
+                                     Visibility="Hidden"
+                                     Height="1"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

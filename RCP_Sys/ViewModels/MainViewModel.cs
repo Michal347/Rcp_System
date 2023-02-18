@@ -55,7 +55,8 @@ namespace RCP_Sys.ViewModels
         #endregion
         public MainViewModel()
         {         
-            
+
+       
             GetUsername = new UserService();
             var user = GetUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
             if (user != null)
@@ -155,9 +156,11 @@ namespace RCP_Sys.ViewModels
 
         private void Home(object obj)
         {
-            CurrentChildView = new HomeViewModel();
+            CurrentChildView = _homeViewModel;
             caption = "Home";
             icon = IconChar.Home;
+            CurrentUserData();
+            _homeViewModel.CurrentUserInformation();
         }
 
         private void UserHistory(object obj)
@@ -184,7 +187,7 @@ namespace RCP_Sys.ViewModels
             icon = IconChar.Cog;
         }
 
-        private void CurrentUserData()
+        public void CurrentUserData()
         {
             var user = GetUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
             if (user != null)

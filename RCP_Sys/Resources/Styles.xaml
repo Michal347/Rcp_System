@@ -645,6 +645,21 @@
         </Style.Triggers>
     </Style>
 
+    
+    <!--Edit Setting Button-->
+    <Style TargetType="Button" x:Key="EditSettingBut">
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Margin" Value="40 0 0 0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="white"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#28AEED"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
 
     <!--Less Button Style-->
 

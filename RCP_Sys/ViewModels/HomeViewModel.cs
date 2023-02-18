@@ -67,7 +67,7 @@ namespace RCP_Sys.ViewModels
                 }
             }
         }
-        private void CurrentUserInformation()
+        public void CurrentUserInformation()
         {
             var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
             if (user != null)

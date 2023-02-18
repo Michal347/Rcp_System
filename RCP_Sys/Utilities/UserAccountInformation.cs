@@ -10,6 +10,8 @@ namespace RCP_Sys.Utilities
     public class UserAccountInformation
     {
         [Key]
+
+        public int Id { get; set; }
         public string Username { get; set; }
 
         public string Name { get; set; }

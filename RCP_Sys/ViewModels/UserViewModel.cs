@@ -1,30 +1,15 @@
-﻿using Microsoft.Win32;
-using RCP_Sys.Db;
+﻿using RCP_Sys.Db;
 using RCP_Sys.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using System.Xml.Linq;
 using RCP_Sys.Repository;
-using System.Xml.Serialization;
-using System.Collections;
 using System.Windows.Data;
 using System.ComponentModel;
-using System.Reflection;
 using RCP_Sys.Utilities;
 using RCP_Sys.DAL.Interface;
 using RCP_Sys.Services;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using RCP_Sys.Views;
-using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
-using System.Collections.Specialized;
 
 namespace RCP_Sys.ViewModels
 {
