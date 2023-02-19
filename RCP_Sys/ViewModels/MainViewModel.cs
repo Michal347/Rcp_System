@@ -158,11 +158,10 @@ namespace RCP_Sys.ViewModels
 
         private void Home(object obj)
         {
-            CurrentChildView = _homeViewModel;
+            CurrentChildView = new HomeViewModel();
             caption = "Home";
             icon = IconChar.Home;
             CurrentUserData();
-            _homeViewModel.CurrentUserInformation();
         }
 
         private void UserHistory(object obj)

@@ -10,6 +10,8 @@ using RCP_Sys.Utilities;
 using RCP_Sys.DAL.Interface;
 using RCP_Sys.Services;
 using RCP_Sys.Views;
+using System.Threading;
+using System.Globalization;
 
 namespace RCP_Sys.ViewModels
 {
@@ -53,7 +55,8 @@ namespace RCP_Sys.ViewModels
         {
             bool valiData;
 
-            if (string.IsNullOrWhiteSpace(Name) || Name.Length < 1 || string.IsNullOrWhiteSpace(surname) || surname.Length < 1)
+            if ( 
+                string.IsNullOrWhiteSpace(Username) || Username.Length < 1)
 
                 valiData = false;
             else
@@ -87,21 +90,28 @@ namespace RCP_Sys.ViewModels
                 var validEmail = EmailValidation.IsValidEmail(Email);
                 var found = context.Users.FirstOrDefault(x => x.Id == ID);
                 var User = context.Users.FirstOrDefault(x => x.Username == Username);
+                var q = (from s in context.Picture
+                         where s.Username == found.Username
+                         select s).FirstOrDefault();
+
                 if (User != null)
                 {
                     if (found.Username == Username)
                     {
                         if (validEmail == true)
                         {
-                            found.Name = Name;
-                            found.Surname = surname;
-                            found.Email = Email;
-                            found.Gender = Gender;
-                            found.IsUserAdmin = HybridSeed;
-                            context.Users.Update(found);
-                            context.SaveChanges();
-                            RefreshDatauser();
-                            ClearPropertyErrors(this, "Email");
+                                
+                                found.Name = Name;
+                                found.Surname = surname;
+                                found.Email = Email;
+                                found.Gender = Gender;
+                                found.IsUserAdmin = HybridSeed;
+                                context.Users.Update(found);
+                                context.SaveChanges();
+                                RefreshDatauser();
+                                ClearPropertyErrors(this, "Email");
+                            
+        
                         }
                         else
                         {
@@ -117,7 +127,8 @@ namespace RCP_Sys.ViewModels
 
                     }
 
-                }               
+                }   
+                    q.Username= Username;
                     found.Username = Username;
                     found.Name = Name;
                     found.Surname = surname;
@@ -132,6 +143,7 @@ namespace RCP_Sys.ViewModels
 
                 
             }
+
         }
         private void RefreshDatauser()
         {

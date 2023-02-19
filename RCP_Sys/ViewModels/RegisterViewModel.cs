@@ -73,8 +73,6 @@ namespace RCP_Sys.ViewModels
             else
                 valiData = true;
             return valiData;
-
-
         }
 
         private bool canexecutemethod(object parameter)

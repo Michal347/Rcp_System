@@ -1,15 +1,19 @@
-﻿using RCP_Sys.Db;
+﻿using Microsoft.Win32;
+using RCP_Sys.Db;
 using RCP_Sys.Models;
 using RCP_Sys.Repository;
 using RCP_Sys.Utilities;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace RCP_Sys.ViewModels
 {
@@ -24,6 +28,9 @@ namespace RCP_Sys.ViewModels
         public ICommand UpdateSurname { get; private set; }
         public ICommand UpdateEmail { get; private set; }
         public ICommand UpdateUsername { get; private set; }
+        public ICommand ChangeImageCommand { get; set; }
+        public ICommand ChangeCloseCommand { get; set; }
+        public ICommand ChangeAcceptCommand { get; set; }
 
         public ICommand SaveName { get; private set; }
         public ICommand SaveSurname { get; private set; }
@@ -56,11 +63,14 @@ namespace RCP_Sys.ViewModels
             UpdateName = new RelayCommand(x => UpdateDataName());
             UpdateSurname = new RelayCommand(x => UpdateDataSurname());
             UpdateEmail = new RelayCommand(x => UpdateDataEmail());
-            UpdateUsername = new RelayCommand(x => UpdateDataUsername());
+            UpdateUsername = new RelayCommand(x => UpdateDataUsername(), canExecute);
             ModifyText = new RelayCommand(x => ModifyUsername());
             ModifyEmail = new RelayCommand(x => ModEmail());
             ModifyName = new RelayCommand(x => ModName());
             ModifySurname = new RelayCommand(x => ModSurname());
+            ChangeImageCommand = new RelayCommand(x => ChangeImage());
+            ChangeCloseCommand = new RelayCommand(x=>ChangeCloseComm());
+            ChangeAcceptCommand = new RelayCommand(x => ChangeAcceptComm());
 
             SaveName = new RelayCommand(x => SvName());
             SaveEmail = new RelayCommand(x => SvEmail());
@@ -72,8 +82,19 @@ namespace RCP_Sys.ViewModels
             IsVisibleSurname = false;
             IsVisibleEmail = false;
             IsVisibleName = false;
-
+            IsVisibleChangeImage= false;
            
+        }
+
+        private bool canExecute(object obj)
+        {
+            bool valiData;
+
+            if (string.IsNullOrWhiteSpace(UserInformation.Username) || UserInformation.Username.Length < 1)
+                valiData = false;
+            else
+                valiData = true;
+            return valiData;
         }
 
         private void SvSurname()
@@ -218,32 +239,42 @@ namespace RCP_Sys.ViewModels
 
         private void UpdateDataUsername()
         {
-            ErrorMessageUsername = "";
             using (var context = new RcpDbContext())
             {
-                var user = context.Users.FirstOrDefault(x => x.Id == UserInformation.Id);
-
-                if (string.IsNullOrWhiteSpace(UserInformation.Username))
-                {
-                    ErrorMessageUsername = "*Cannot be empty";
-                    return;
-                }
-
-                else if (user != null && UserInformation.Username != Thread.CurrentPrincipal.Identity.Name)
+                var q = (from s in context.Picture
+                         where s.Username == Thread.CurrentPrincipal.Identity.Name
+                         select s).FirstOrDefault();
+                var found = context.Users.FirstOrDefault(x => x.Id == UserInformation.Id);
+                var User = context.Users.FirstOrDefault(x => x.Username == UserInformation.Username);
+                if (User != null)
                 {
                     ErrorMessageUsername = "*Username already exist";
-                    return;
                 }
-                    user.Username = UserInformation.Username;
-                    context.Users.Update(user);
-                    context.SaveChanges();
-                ErrorMessageUsername = "";
-                Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserInformation.Username), null);
-
+                else
+                {
+                    if (found.Username == UserInformation.Username)
+                    {
+                        q.Username = UserInformation.Username;
+                        context.Users.Update(found);
+                        context.SaveChanges();
+                        ErrorMessageUsername = "";
+                        IsVisibleUsername = false;
+                        Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserInformation.Username), null);
+                    }
+                    else
+                    {
+                        q.Username= UserInformation.Username;
+                        found.Username = UserInformation.Username;
+                        context.Users.Update(found);
+                        context.SaveChanges();
+                        ErrorMessageUsername = "";
+                        Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserInformation.Username), null);
+                        IsVisibleUsername = false;
+                    }
                 }
-                IsVisibleUsername = false;
-
             }
+           
+        }
 
 
         public void LoadImage()
@@ -297,6 +328,55 @@ namespace RCP_Sys.ViewModels
                 }
             }
 
+        }
+
+        private void ChangeImage()
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                IsVisibleChangeImage = true;
+                FileName = op.FileName;
+            }
+        }
+
+
+        private void ChangeCloseComm()
+        {
+            FileName = string.Empty;
+            IsVisibleChangeImage = false;
+        }
+
+
+
+        private void ChangeAcceptComm()
+        {
+            using (var context = new RcpDbContext())
+            {
+                var q = (from s in context.Picture
+                         where s.Username == Thread.CurrentPrincipal.Identity.Name
+                         select s).FirstOrDefault();
+
+                if (q != null)
+                {
+
+                    if (FileName != null)
+                    {
+                       
+                        q.ImagePath= FileName;
+                        q.ImageToByte = File.ReadAllBytes(FileName);
+                        context.Update(q);    
+                        context.SaveChanges();
+                    }
+                }
+            }
+            LoadImage();
+            IsVisibleChangeImage=false;
+            FileName = string.Empty;
         }
 
 
@@ -468,6 +548,34 @@ namespace RCP_Sys.ViewModels
         {
             get { return this._ImageSource; }
             set { this._ImageSource = value; this.OnPropertyChanged("ImageSource"); }
+        }
+
+        private bool _IsVisibleChangeImage = true;
+        public bool IsVisibleChangeImage
+        {
+            get => _IsVisibleChangeImage;
+            set
+            {
+                _IsVisibleChangeImage = value;
+                OnPropertyChanged(nameof(IsVisibleChangeImage));
+            }
+
+        }
+
+        private string _FileName;
+        public string FileName
+        {
+            get
+            {
+                return _FileName;
+
+            }
+
+            set
+            {
+                _FileName= value;
+                OnPropertyChanged(nameof(FileName));
+            }
         }
     }
 }
