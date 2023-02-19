@@ -226,6 +226,14 @@
     <Compile Include="DAL\Migrations\20230207203828_ChangeTimerModel_key.designer.cs">
       <DependentUpon>20230207203828_ChangeTimerModel_key.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Migrations\20230219074643_ProfilePictureAdd.cs" />
+    <Compile Include="DAL\Migrations\20230219074643_ProfilePictureAdd.designer.cs">
+      <DependentUpon>20230219074643_ProfilePictureAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Migrations\20230219100318_AddUsernameProfile.cs" />
+    <Compile Include="DAL\Migrations\20230219100318_AddUsernameProfile.designer.cs">
+      <DependentUpon>20230219100318_AddUsernameProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\RcpDbContext.cs" />
     <Compile Include="DAL\Interface\IUserService.cs" />
     <Compile Include="DAL\Interface\ITimerService.cs" />
@@ -262,6 +270,7 @@
       <DependentUpon>20230110121939_SeedData.cs</DependentUpon>
     </Compile>
     <Compile Include="DAL\Migrations\RcpDbContextModelSnapshot.cs" />
+    <Compile Include="Models\ProfilePictureModel.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\TimerModel.cs" />
     <Compile Include="Models\UserModel.cs" />

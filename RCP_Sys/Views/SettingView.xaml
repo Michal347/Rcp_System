@@ -21,46 +21,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" >
-            <StackPanel Margin="0 50 0 0" Height="150">
-                <Border Height="150" Width="200" CornerRadius="80">
+            <StackPanel Margin="0 170 0 0" Height="250">
+                <Border Height="250" Width="350" CornerRadius="80">
                     <Image Source="{Binding ImageSource,UpdateSourceTrigger=PropertyChanged}"/>
                 </Border>
             </StackPanel>
-            <Canvas>
-                <Ellipse Width="72" Height="64" Fill="#808080" Opacity="0.1" Canvas.Left="139" Canvas.Top="226" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.525,0.85"/>
-                <Polyline Points="10,110 60,10 110,110" Fill="#808080" Opacity="0.1" Canvas.Left="115" Canvas.Top="81" Height="126" Width="120" RenderTransformOrigin="0.487,0.541" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                <Polyline Points="10,110 60,10 110,110" Fill="#808080" Opacity="0.1" Canvas.Left="225" Canvas.Top="197" Height="126" Width="120" RenderTransformOrigin="0.487,0.541" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Polyline.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Polyline.RenderTransform>
-                </Polyline>
-                <Polyline Points="10,110 60,10 110,110" Fill="#808080" Opacity="0.1" Canvas.Top="202" Height="126" Width="120" RenderTransformOrigin="0.487,0.541" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="1">
-                    <Polyline.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="270"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Polyline.RenderTransform>
-                </Polyline>
-                <Polyline Points="110,110 60,10 10,110" Fill="#808080" Opacity="0.1" Canvas.Left="118" Canvas.Top="314" Height="124" Width="120" RenderTransformOrigin="0.487,0.541" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Polyline.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="180"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Polyline.RenderTransform>
-                </Polyline>
-            </Canvas>
-
+            
         </StackPanel>
         <StackPanel Grid.Column="1"  Margin="0,100,0,0" Orientation="Vertical" Grid.RowSpan="2">
 

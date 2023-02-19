@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Win32;
 using RCP_Sys.Db;
 using RCP_Sys.Models;
 using RCP_Sys.Repository;
@@ -6,14 +8,18 @@ using RCP_Sys.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
 using System.Security.Principal;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Xml;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace RCP_Sys.ViewModels
 {
@@ -23,6 +29,7 @@ namespace RCP_Sys.ViewModels
         public ICommand GoBack { get; private set; }
         public ICommand Register { get; private set; }
         public ICommand GetGender { get; set; }
+        public ICommand OpenFileCommand { get; set; }
         public IUserService UserAdd;
         
         #endregion
@@ -35,8 +42,22 @@ namespace RCP_Sys.ViewModels
             GoBack = new RelayCommand(x => GoBackHandler());
             Register = new RelayCommand(x => RegisterUser(), CanExecuteRegister);
             GetGender = new RelayCommand(executemethod, canexecutemethod);
+            OpenFileCommand = new RelayCommand(OpenFileDialog);
             UserAdd = new UserService();
             
+        }
+
+        private void OpenFileDialog(object obj)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                FileName = op.FileName;
+            }
         }
 
         #endregion
@@ -103,23 +124,51 @@ namespace RCP_Sys.ViewModels
                 }
 
                 UserAdd.Create(
-                    output= new UserModel() 
-                    { 
-                        Username = Login, 
-                        Name = Name, 
-                        Password = hash, 
-                        Surname = Surname, 
-                        DateTimeJoined = DateTime.Today, 
-                        Email = Email, 
+                    output = new UserModel()
+                    {
+                        Username = Login,
+                        Name = Name,
+                        Password = hash,
+                        Surname = Surname,
+                        DateTimeJoined = DateTime.Today,
+                        Email = Email,
                         IsUserAdmin = false,
-                        Gender= Gender });
+                        Gender = Gender
+                    });
                 context.SaveChanges();
 
-            }
-            
-            RegisterSucceded.Invoke(this, output);
-            
+                if (FileName != null)
+                {
+                    context.Picture.Add(new ProfilePictureModel()
+                    {
 
+                        ImagePath = FileName,
+                        ImageToByte = File.ReadAllBytes(FileName),
+                        Username = Login,
+
+
+                    });
+                    context.SaveChanges();
+                }
+
+                else
+                {
+                    context.Picture.Add(new ProfilePictureModel()
+                    {
+
+                        ImagePath = null,
+                        ImageToByte = null,
+                        Username = Login,
+
+
+                    });
+                    context.SaveChanges();
+                }
+
+                RegisterSucceded.Invoke(this, output);
+
+
+            }
         }
         #endregion
             #region Event rising fields
@@ -200,6 +249,22 @@ namespace RCP_Sys.ViewModels
 
             private int _isSuccess;
         public int IsSuccess { get { return _isSuccess; } set { _isSuccess = value; } }
+
+
+
+        private string _fileName;
+
+
+        public string FileName
+        {
+            get { return _fileName; }
+            set
+            {
+                _fileName = value;
+                OnPropertyChanged("FileName");
+            }
+        }
+
         #endregion
 
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RCP_Sys.Db;
 
 namespace RCP_Sys.Migrations
 {
     [DbContext(typeof(RcpDbContext))]
-    partial class RcpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230219074643_ProfilePictureAdd")]
+    partial class ProfilePictureAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +33,6 @@ namespace RCP_Sys.Migrations
 
                     b.Property<byte[]>("ImageToByte")
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -133,12 +132,12 @@ namespace RCP_Sys.Migrations
                         new
                         {
                             Id = 1,
-                            DateTimeJoined = new DateTime(2023, 2, 19, 11, 3, 18, 454, DateTimeKind.Local).AddTicks(8698),
+                            DateTimeJoined = new DateTime(2023, 2, 19, 8, 46, 42, 754, DateTimeKind.Local).AddTicks(4536),
                             Email = "admin@gmail.com",
                             Gender = "male",
                             IsUserAdmin = true,
                             Name = "Admin",
-                            Password = "OMPE/gJQgF3lg6EzWTzITQvGC/UUL7lL40bCWeDZLYN14tyB",
+                            Password = "ZtI55h/TSOcC9hGq8GthK3QhzuTDJdmF/XqNkgg2wH0AlXBw",
                             Surname = "Admin",
                             Username = "Admin"
                         });

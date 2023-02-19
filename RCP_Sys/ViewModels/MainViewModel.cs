@@ -8,7 +8,9 @@ using RCP_Sys.Utilities;
 using RCP_Sys.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Threading;
@@ -39,8 +41,8 @@ namespace RCP_Sys.ViewModels
         #endregion
 
         #region View Fields
-       
-      
+
+
         private UserAccountInformation userAccount;
         public IDialogService DialogAction;
         private IUserService GetUsername;
@@ -54,9 +56,9 @@ namespace RCP_Sys.ViewModels
         public SettingsViewModel _settingsViewModel;
         #endregion
         public MainViewModel()
-        {         
+        {
+            
 
-       
             GetUsername = new UserService();
             var user = GetUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
             if (user != null)
@@ -102,7 +104,7 @@ namespace RCP_Sys.ViewModels
             ShowProjectView = new RelayCommand(Project);
             ShowTimesheetView = new RelayCommand(Timesheet);
             ShowUserView = new RelayCommand(UserV);
-            ShowUserHistory= new RelayCommand(UserHistory);
+            ShowUserHistory = new RelayCommand(UserHistory);
             ShowSettingView = new RelayCommand(Setting);
             ExitProgram = new RelayCommand(Exit);
 
@@ -117,7 +119,7 @@ namespace RCP_Sys.ViewModels
 
         private void Exit(object obj)
         {
-            if(_timerViewModel.IsTimerRunning== false)
+            if (_timerViewModel.IsTimerRunning == false)
             {
                 Application.Current.Shutdown();
             }
@@ -195,14 +197,14 @@ namespace RCP_Sys.ViewModels
                 {
                     UserAccount.Username = user.Username;
                     UserAccount.DisplayName = $"{user.Name} {user.Surname}";
-                    
+
                 };
 
             }
             else
             {
                 userAccount.DisplayName = "Invalid, not logged in";
-                
+
             }
         }
 
@@ -210,7 +212,7 @@ namespace RCP_Sys.ViewModels
 
         #region Event rising fields
 
-           
+
         private IconChar _icon;
         public IconChar icon
         {
@@ -219,7 +221,7 @@ namespace RCP_Sys.ViewModels
 
 
         }
-            private string _caption;
+        private string _caption;
         public string caption
         {
             get { return _caption; }
@@ -257,29 +259,29 @@ namespace RCP_Sys.ViewModels
 
             set
             {
-               
+
                 userAccount = value;
                 OnPropertyChanged(nameof(UserAccount));
             }
         }
-        public object CurrentChildView 
-        { 
+        public object CurrentChildView
+        {
             get
             {
                 return _CurrentChildView;
-                
+
             }
-            
+
             set
             {
                 _CurrentChildView = value;
-                
-              OnPropertyChanged(nameof(CurrentChildView));  
-            }
-             
-        }
 
+                OnPropertyChanged(nameof(CurrentChildView));
+            }
+
+        }
+      
         #endregion
-        
+
     }
 }

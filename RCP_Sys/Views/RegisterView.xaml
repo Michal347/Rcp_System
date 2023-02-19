@@ -234,6 +234,15 @@
                                      CommandParameter="{Binding ElementName=rbFemal, Path=Content}"></RadioButton>
                         
                     </StackPanel>
+                    <StackPanel   Width="300" Height="30" Margin="0 20 0 0" Orientation="Horizontal">
+
+                        <TextBox Text="{Binding FileName}" Width="100">
+                            
+                        </TextBox>
+                        <Button Command="{Binding OpenFileCommand}" Width="100" Content="browse"></Button>
+                       
+
+                    </StackPanel>
                     <TextBlock Text="Email"
                                        Foreground="Gray"
                                        FontSize="12"

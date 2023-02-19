@@ -3,10 +3,12 @@ using RCP_Sys.Models;
 using RCP_Sys.Repository;
 using RCP_Sys.Utilities;
 using System;
+using System.IO;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace RCP_Sys.ViewModels
@@ -49,6 +51,7 @@ namespace RCP_Sys.ViewModels
             UserInformation = new UserAccountInformation();
             getUsername = new UserService();
 
+            LoadImage();
             CurrentUserLogged();
             UpdateName = new RelayCommand(x => UpdateDataName());
             UpdateSurname = new RelayCommand(x => UpdateDataSurname());
@@ -70,28 +73,7 @@ namespace RCP_Sys.ViewModels
             IsVisibleEmail = false;
             IsVisibleName = false;
 
-            var gender = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
-            if (gender != null)
-            {
-                var value = "Female";
-                Boolean result = gender.Gender.Contains(value);
-                if (result == true)
-                {
-                    string imagePath = "\\Images\\woman.png";
-                    this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
-                }
-                if (result == false)
-                {
-                    string imagePath = "\\Images\\man.png";
-                    this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
-                }
-
-                if (result == false && gender.IsUserAdmin == true)
-                {
-                    string imagePath = "\\Images\\businessman.png";
-                    this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
-                }
-            }
+           
         }
 
         private void SvSurname()
@@ -264,9 +246,60 @@ namespace RCP_Sys.ViewModels
             }
 
 
+        public void LoadImage()
+        {
+
+            using (var context = new RcpDbContext())
+            {
+
+                var q = (from s in context.Picture
+                         where s.Username == Thread.CurrentPrincipal.Identity.Name
+                         select s.ImageToByte).FirstOrDefault();
+
+                if (q != null)
+                {
+                    Stream StreamObj = new MemoryStream(q);
+
+                    BitmapImage BitObj = new BitmapImage();
+
+                    BitObj.BeginInit();
+
+                    BitObj.StreamSource = StreamObj;
+
+                    BitObj.EndInit();
+
+                    this.ImageSource = BitObj;
+                }
+                else
+                {
+                    var gender = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
+                    if (gender != null)
+                    {
+                        var value = "Female";
+                        Boolean result = gender.Gender.Contains(value);
+                        if (result == true)
+                        {
+                            string imagePath = "\\Images\\woman.png";
+                            this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                        }
+                        if (result == false)
+                        {
+                            string imagePath = "\\Images\\man.png";
+                            this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                        }
+
+                        if (result == false && gender.IsUserAdmin == true)
+                        {
+                            string imagePath = "\\Images\\businessman.png";
+                            this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                        }
+                    }
+                }
+            }
+
+        }
 
 
-        
 
         private void CurrentUserLogged()
         {
@@ -430,8 +463,8 @@ namespace RCP_Sys.ViewModels
 
         }
 
-        private BitmapImage _ImageSource;
-        public BitmapImage ImageSource
+        private ImageSource _ImageSource;
+        public ImageSource ImageSource
         {
             get { return this._ImageSource; }
             set { this._ImageSource = value; this.OnPropertyChanged("ImageSource"); }

@@ -5,6 +5,7 @@ using RCP_Sys.Repository;
 using RCP_Sys.Utilities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -36,36 +37,66 @@ namespace RCP_Sys.ViewModels
             }
         }
 
-            public HomeViewModel()
+        public HomeViewModel()
+        {
+            getUsername = new UserService();
+            getGender = new UserService();
+            UserInformation = new UserAccountInformation();
+            CurrentUserInformation();      
+            LoadImage();
+        }
+
+        public void LoadImage()
+        {
+
+            using (var context = new RcpDbContext())
             {
-                getUsername = new UserService();
-                getGender = new UserService();
-                UserInformation = new UserAccountInformation();
-                CurrentUserInformation();
+                
+                var q = (from s in context.Picture
+                         where s.Username == Thread.CurrentPrincipal.Identity.Name
+                         select s.ImageToByte).FirstOrDefault();
 
-
-            var gender = getGender.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
-            if (gender != null)
-            {
-                var value = "Female";
-                Boolean result = gender.Gender.Contains(value);
-                if (result == true)
+                if (q != null)
                 {
-                    string imagePath = "\\Images\\woman.png";
-                    this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                    Stream StreamObj = new MemoryStream(q);
+
+                    BitmapImage BitObj = new BitmapImage();
+
+                    BitObj.BeginInit();
+
+                    BitObj.StreamSource = StreamObj;
+
+                    BitObj.EndInit();
+
+                    this.ImageSource = BitObj;
                 }
-                if(result == false)
+                else
                 {
-                    string imagePath = "\\Images\\man.png";
-                    this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
-                }
+                    var gender = getGender.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
+                    if (gender != null)
+                    {
+                        var value = "Female";
+                        Boolean result = gender.Gender.Contains(value);
+                        if (result == true)
+                        {
+                            string imagePath = "\\Images\\woman.png";
+                            this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                        }
+                        if (result == false)
+                        {
+                            string imagePath = "\\Images\\man.png";
+                            this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                        }
 
-               if(result == false && gender.IsUserAdmin == true)
-                {
-                    string imagePath = "\\Images\\businessman.png";
-                    this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                        if (result == false && gender.IsUserAdmin == true)
+                        {
+                            string imagePath = "\\Images\\businessman.png";
+                            this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                        }
+                    }
                 }
             }
+
         }
         public void CurrentUserInformation()
         {

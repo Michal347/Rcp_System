@@ -29,6 +29,7 @@ namespace RCP_Sys.Db
         public DbSet<UserModel> Users { get; set; }
         public DbSet<ProjectModel> Projects { get; set; }
         public DbSet<TimerModel> Times { get; set; }
+        public DbSet<ProfilePictureModel> Picture { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
