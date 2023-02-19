@@ -21,11 +21,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical" >
-            <StackPanel Margin="0 170 0 0" Height="250">
-                <Border Height="250" Width="350" CornerRadius="80">
-                    <Image Source="{Binding ImageSource,UpdateSourceTrigger=PropertyChanged}"/>
-                </Border>
-            </StackPanel>
+            <Border Margin="0 170 0 0" Height="250" Width="250" CornerRadius="140">
+                <Border.Background>
+                    <ImageBrush ImageSource="{Binding ImageSource,UpdateSourceTrigger=PropertyChanged}"/>
+                </Border.Background>
+            </Border>
             <TextBox 
                 Margin="20 10 0 0" 
                 Text="{Binding FileName}" 
