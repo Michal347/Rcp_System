@@ -26,11 +26,11 @@ namespace RCP_Sys
             
         }
 
-        //private void Window_MouseDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (e.LeftButton == MouseButtonState.Pressed)
-        //        DragMove();
-        //}
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
+        }
 
         private void BtnCloseClick(object sender, RoutedEventArgs e)
         {

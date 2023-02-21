@@ -234,14 +234,18 @@
                                      CommandParameter="{Binding ElementName=rbFemal, Path=Content}"></RadioButton>
                         
                     </StackPanel>
+                    <TextBlock Text="Select profile picture (optional):"
+                                       Foreground="Gray"
+                                       FontSize="12"
+                                       FontWeight="Medium"
+                                       FontFamily="Montserrat"                             
+                                       Margin="0,20,0,0" Height="14"/>
+
                     <StackPanel   Width="300" Height="30" Margin="0 20 0 0" Orientation="Horizontal">
-
-                        <TextBox Text="{Binding FileName}" Width="100">
-                            
+                        <Button Margin="0 0 0 0" Command="{Binding OpenFileCommand}" Width="100" Content="Select File"></Button>
+                        <TextBox VerticalContentAlignment="Center" IsEnabled="False" Text="{Binding FileName}" Width="150">
                         </TextBox>
-                        <Button Command="{Binding OpenFileCommand}" Width="100" Content="browse"></Button>
-                       
-
+                        
                     </StackPanel>
                     <TextBlock Text="Email"
                                        Foreground="Gray"

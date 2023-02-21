@@ -5,6 +5,7 @@ using RCP_Sys.Repository;
 using RCP_Sys.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 
 namespace RCP_Sys.ViewModels
@@ -44,6 +46,22 @@ namespace RCP_Sys.ViewModels
             UserInformation = new UserAccountInformation();
             CurrentUserInformation();      
             LoadImage();
+            TimesMonth();
+            TimesYear();
+            YearTimeSum();
+            HometimeSum();
+            var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
+            if (user != null)
+            {
+                if (user.IsUserAdmin == false)
+                {
+                    Position = "Status: User";
+                }
+                else
+                {
+                    Position = "Status: Administrator";
+                }
+            }
         }
 
         public void LoadImage()
@@ -51,7 +69,7 @@ namespace RCP_Sys.ViewModels
 
             using (var context = new RcpDbContext())
             {
-                
+
                 var q = (from s in context.Picture
                          where s.Username == Thread.CurrentPrincipal.Identity.Name
                          select s.ImageToByte).FirstOrDefault();
@@ -79,57 +97,153 @@ namespace RCP_Sys.ViewModels
                         Boolean result = gender.Gender.Contains(value);
                         if (result == true)
                         {
-                            string imagePath = "\\Images\\woman.png";
+                            string imagePath = "../Images/woman.png";
                             this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                         }
                         if (result == false)
                         {
-                            string imagePath = "\\Images\\man.png";
+                            string imagePath = "../Images/man.png";
                             this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                         }
 
                         if (result == false && gender.IsUserAdmin == true)
                         {
-                            string imagePath = "\\Images\\businessman.png";
+                            string imagePath = "../Images/businessman.png";
                             this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
                         }
                     }
                 }
             }
-
         }
-        public void CurrentUserInformation()
-        {
-            var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
-            if (user != null)
-            {
+
+
+
+                public void CurrentUserInformation()
                 {
-                    UserInformation.Username = user.Username;
-                    UserInformation.Name = user.Name;
-                    UserInformation.Surname = user.Surname;
-                    UserInformation.DateJoin = user.DateTimeJoined.ToString("MM/dd/yyyy");
-                    UserInformation.Email = user.Email;
-                    
-                    
-                };
-                
+                    var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
+                    if (user != null)
+                    {
+                        {
+                            UserInformation.Username = user.Username;
+                            UserInformation.Name = user.Name;
+                            UserInformation.Surname = user.Surname;
+                            UserInformation.DateJoin = user.DateTimeJoined.ToString("MM/dd/yyyy");
+                            UserInformation.Email = user.Email;
 
-            }
-            else
-            {
-                UserInformation.Username = "Invalid, Information";
-                UserInformation.Name = "Invalid, Information";
-                UserInformation.Surname = "Invalid, Information";
-                UserInformation.Email = "Invalid, Information";
-                UserInformation.DateJoin = "Invalid, Information";
 
-            }
-        }
+                        };
+
+
+                    }
+                    else
+                    {
+                        UserInformation.Username = "Invalid, Information";
+                        UserInformation.Name = "Invalid, Information";
+                        UserInformation.Surname = "Invalid, Information";
+                        UserInformation.Email = "Invalid, Information";
+                        UserInformation.DateJoin = "Invalid, Information";
+
+                    }
+                }
+            
             private BitmapImage _ImageSource;
         public BitmapImage ImageSource
         {
             get { return this._ImageSource; }
             set { this._ImageSource = value; this.OnPropertyChanged("ImageSource"); }
+        }
+
+
+        private string _Position;
+        public string Position
+        {
+            get
+            {
+                return _Position;
+
+            }
+
+            set
+            {
+                _Position = value;
+                OnPropertyChanged(nameof(Position));
+            }
+        }
+        public void HometimeSum()
+        {    
+                SumMonth = new TimeSpan((long)TimerUserCollection.Sum(p => p.EndTimerValue.Ticks));
+   
+        }
+
+        public void YearTimeSum()
+        {
+            SumYear = new TimeSpan((long)YearTimeCollection.Sum(p => p.EndTimerValue.Ticks));
+
+        }
+
+        public void TimesMonth()
+        {
+            var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
+            using (var context = new RcpDbContext())
+            {
+
+
+                var Timer = from a in context.Times
+                             where a.Username == Thread.CurrentPrincipal.Identity.Name
+                             && a.DateCreate.Month == DateTime.Today.Month && a.DateCreate.Year == DateTime.Today.Year
+                            select a;
+
+                TimerUserCollection = new ObservableCollection<TimerModel>(Timer);
+
+            }
+        }
+
+
+        public void TimesYear()
+        {
+            var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
+            using (var context = new RcpDbContext())
+            {
+
+
+                var Timer = from a in context.Times
+                            where a.Username == Thread.CurrentPrincipal.Identity.Name
+                            && a.DateCreate.Year == DateTime.Today.Year
+                            select a;
+
+                YearTimeCollection = new ObservableCollection<TimerModel>(Timer);
+
+            }
+        }
+
+        private TimeSpan _SumMonth;
+        public TimeSpan SumMonth
+        {
+            get { return _SumMonth; }
+            set { _SumMonth = value; OnPropertyChanged(nameof(SumMonth)); }
+        }
+
+        private TimeSpan _SumYear;
+        public TimeSpan SumYear
+        {
+            get { return _SumYear; }
+            set { _SumYear = value; OnPropertyChanged(nameof(SumYear)); }
+        }
+
+        private ObservableCollection<TimerModel> _TimerUserCollection;
+
+        public ObservableCollection<TimerModel> TimerUserCollection
+        {
+            get { return _TimerUserCollection; }
+            set { _TimerUserCollection = value; OnPropertyChanged("TimerUserCollection"); }
+        }
+
+        private ObservableCollection<TimerModel> _YearTimeCollection;
+
+        public ObservableCollection<TimerModel> YearTimeCollection
+        {
+            get { return _YearTimeCollection; }
+            set { _YearTimeCollection = value; OnPropertyChanged("YearTimeCollection"); }
         }
 
     }

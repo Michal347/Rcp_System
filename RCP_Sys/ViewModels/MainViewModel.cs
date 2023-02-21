@@ -136,6 +136,7 @@ namespace RCP_Sys.ViewModels
             CurrentUserData();
             caption = "User";
             icon = IconChar.UserCheck;
+
         }
 
         private void Timesheet(object obj)
@@ -144,6 +145,7 @@ namespace RCP_Sys.ViewModels
             CurrentUserData();
             caption = "Timesheet";
             icon = IconChar.Calendar;
+
         }
         private void Timer(object obj)
         {
@@ -154,6 +156,7 @@ namespace RCP_Sys.ViewModels
             icon = IconChar.Clock;
             _timerViewModel.LoadProjects();
             _timerViewModel.DataGridTimer();
+
         }
 
         private void Home(object obj)
@@ -171,6 +174,7 @@ namespace RCP_Sys.ViewModels
             new MainViewModel();
             caption = "User History";
             icon = IconChar.History;
+
         }
 
         private void Project(object obj)
@@ -179,6 +183,7 @@ namespace RCP_Sys.ViewModels
             CurrentUserData();
             caption = "Project";
             icon = IconChar.ProjectDiagram;
+
         }
 
         private void Setting(object obj)
@@ -186,6 +191,7 @@ namespace RCP_Sys.ViewModels
             CurrentChildView = new SettingsViewModel();
             caption = "Setting";
             icon = IconChar.Cog;
+
         }
 
         public void CurrentUserData()

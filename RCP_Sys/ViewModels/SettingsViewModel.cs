@@ -31,7 +31,6 @@ namespace RCP_Sys.ViewModels
         public ICommand ChangeImageCommand { get; set; }
         public ICommand ChangeCloseCommand { get; set; }
         public ICommand ChangeAcceptCommand { get; set; }
-
         public ICommand SaveName { get; private set; }
         public ICommand SaveSurname { get; private set; }
         public ICommand SaveEmail { get; private set; }
@@ -83,7 +82,21 @@ namespace RCP_Sys.ViewModels
             IsVisibleEmail = false;
             IsVisibleName = false;
             IsVisibleChangeImage= false;
-           
+
+            var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
+            if (user != null)
+            {
+                if (user.IsUserAdmin == false)
+                {
+                    Position = "Status: User";
+                }
+                else
+                {
+                    Position = "Status: Administrator";
+                }
+            }
+
+
         }
 
         private bool canExecute(object obj)
@@ -170,12 +183,11 @@ namespace RCP_Sys.ViewModels
                     context.Users.Update(user);
                     context.SaveChanges();
                     Thread.CurrentPrincipal = new GenericPrincipal(new GenericIdentity(UserInformation.Username), null);
-
+                    
                 }
             }
 
             IsVisibleName = false;
-
 
         }
 
@@ -575,6 +587,22 @@ namespace RCP_Sys.ViewModels
             {
                 _FileName= value;
                 OnPropertyChanged(nameof(FileName));
+            }
+        }
+
+            private string _Position;
+        public string Position
+        {
+            get
+            {
+                return _Position;
+
+            }
+
+            set
+            {
+                _Position = value;
+                OnPropertyChanged(nameof(Position));
             }
         }
     }

@@ -59,6 +59,7 @@
                                        FontFamily="Montserrat"                             
                                        Margin="0" Height="26"  Width="200"/>
                 <TextBox x:Name="TxtProjectName"
+                         Style="{StaticResource SettingTextboxStyle}"
                                      Text="{Binding EditProjectName}"
                                      FontSize="13"
                                      FontWeight="Medium"
@@ -96,6 +97,7 @@
                                        FontFamily="Montserrat"                             
                                        Margin="0,0,0,0" Height="26"  Width="200"/>
                 <TextBox x:Name="txtSurname"
+                         Style="{StaticResource SettingTextboxStyle}"
                                      Text="{Binding EditDescription}"
                                      FontSize="13"
                                      FontWeight="Medium"

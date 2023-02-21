@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              Background="Transparent"
              Height="670" Width="1030"
-             Margin="10">
+             >
     <Grid Margin="10">
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
@@ -21,48 +21,63 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical" >
-            <Border Margin="0 170 0 0" Height="250" Width="250" CornerRadius="140">
+            
+            <Border Margin="0 80 0 0" Height="250" Width="250" CornerRadius="140">
                 <Border.Background>
                     <ImageBrush ImageSource="{Binding ImageSource,UpdateSourceTrigger=PropertyChanged}"/>
                 </Border.Background>
             </Border>
-            <TextBox 
-                Margin="20 10 0 0" 
+            <TextBlock Text="{Binding UserInformation.Name}"
+                                        Foreground="Black"
+                                       FontSize="20"
+                                       FontWeight="Medium"
+                                       FontFamily="Montserrat"                             
+                                       Margin="35,10,0,0" Height="26"  Width="100"/>
+            <TextBlock Text="{Binding Position}"
+                                       Foreground="#808080"
+                                       FontSize="16"
+                                       FontWeight="Medium"
+                                       FontFamily="Montserrat"                             
+                                       Margin="10,0,0,0" Height="26"  Width="100"/>
+           
+            <StackPanel Margin="0 30 0 0" Height="200" Orientation="Vertical" Width="300">
+                <TextBlock Opacity="0.7" VerticalAlignment="Center" Text="Change profile picture" FontWeight="Bold" FontSize="24" Margin="30 30 0 0"></TextBlock>
+                <TextBox
+                Margin="0 20 0 0" 
                 Text="{Binding FileName}" 
                 Width="100"
                 IsEnabled="False"
                 Visibility="{Binding IsVisibleChangeImage, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            <StackPanel Orientation="Vertical" Width="120">
                 <Button     Style="{StaticResource StartButton}" 
                                 x:Name="btnStart"                          
                                 BorderThickness="0"
-                                Content="Change"
+                                Content="Select file"
                                 Foreground="White"
                                 VerticalAlignment="Center"
-                                HorizontalAlignment="Right"
+                                HorizontalAlignment="Center"
                                 FontSize="16"
                                 FontFamily="Montserrat"
                                 Cursor="Hand"                           
-                                Margin="10,20,0,0"
+                                Margin="0,20,0,0"
                                 Visibility="{Binding IsVisibleChangeImage, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
                                 Command="{Binding ChangeImageCommand}">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border Width="100" Height="30"
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="100" Height="30"
                                             CornerRadius="0"
                                             Background="{TemplateBinding Background}">
-                                <ContentPresenter VerticalAlignment="Center"
+                                    <ContentPresenter VerticalAlignment="Center"
                                                           HorizontalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <StackPanel Orientation="Horizontal">
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <StackPanel Orientation="Horizontal">
                     <Button  
                      Style="{StaticResource EditSettingBut}"             
                      Command="{Binding ChangeAcceptCommand}"
                      Background="#00D100"
-                        Margin="20 0 0 0"
+                        Margin="95 0 0 0"
                      Visibility="{Binding IsVisibleChangeImage, Converter={StaticResource BooleanToVisibilityConverter}}">
                         <StackPanel Orientation="Horizontal">
                             <fa:IconImage Foreground="White" Icon="Check" Width="20"/>
@@ -99,10 +114,19 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Column="1"  Margin="0,100,0,0" Orientation="Vertical" Grid.RowSpan="2">
 
+        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2 0 0 0">
+            <StackPanel Grid.Column="1"  Margin="0,20,0,0" Orientation="Vertical" Grid.RowSpan="2">
+                <StackPanel Height="70" Orientation="Horizontal" Margin="0 20 0 0">
+                    <Label FontSize="30"
+                       FontWeight="Bold"
+                       Foreground="Black"
+                       VerticalContentAlignment="Center"
+                       Margin="20 0 0 0">Change information</Label>
+                </StackPanel>
+                <Separator  Height='0,8' Margin="30 20 30 30" Background="Black" Opacity="0.7"/>
 
-            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="0 50 0 0" Height="70" Orientation="Horizontal">
                 <TextBlock Text="Username:"
                                        Foreground="#808080"
                                        FontSize="20"
@@ -111,6 +135,7 @@
                                        Margin="40,0,0,0" Height="26" Width="100" RenderTransformOrigin="0.516,-0.39"/>
                 <StackPanel Orientation="Vertical"  VerticalAlignment="Center" Height="100">
                     <TextBox x:Name="txtUser"
+                             Style="{StaticResource SettingTextboxStyle}"
                                      Text="{Binding  UserInformation.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
                                      FontSize="13" 
                                      IsEnabled="{Binding IsVisibleUsername}"
@@ -119,7 +144,7 @@
                                      Foreground="Black"
                                      CaretBrush="Black"
                                      BorderBrush="Gray"
-                                    Margin="50 30 0 0"
+                                     Margin="50 30 0 0"
                                      Height="28"
                                      VerticalContentAlignment="Center"
                                      RenderTransformOrigin="0.52,0.682" Width="214">
@@ -188,7 +213,7 @@
                     </Button.Template>
                 </Button>
             </StackPanel>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Height="70" Orientation="Horizontal">
                 <TextBlock Text="Name:"
                                         Foreground="#808080"
                                        FontSize="20"
@@ -197,6 +222,7 @@
                                        Margin="40,0,0,0" Height="26"  Width="100"/>
                 <StackPanel Orientation="Vertical"  VerticalAlignment="Center" Height="100">
                     <TextBox x:Name="TxtName"
+                                    Style="{StaticResource SettingTextboxStyle}"
                                      Text="{Binding  UserInformation.Name}"
                                      FontSize="13"
                                      FontWeight="Medium"
@@ -279,7 +305,7 @@
                 </Button>
             </StackPanel>
 
-            <StackPanel  Orientation="Horizontal">
+                <StackPanel Height="70"  Orientation="Horizontal">
                 <TextBlock Text="Surname:"
                                         Foreground="#808080"
                                        FontSize="20"
@@ -288,6 +314,7 @@
                                        Margin="40,0,0,0" Height="26"  Width="100"/>
                 <StackPanel Orientation="Vertical"  VerticalAlignment="Center" Height="100">
                     <TextBox x:Name="txtSurname"
+                                    Style="{StaticResource SettingTextboxStyle}"
                                      Text="{Binding  UserInformation.Surname}"
                                      FontSize="13"
                                      FontWeight="Medium"
@@ -364,7 +391,7 @@
                     </Button.Template>
                 </Button>
             </StackPanel>
-            <StackPanel  Orientation="Horizontal">
+                <StackPanel Height="70"  Orientation="Horizontal">
                 <TextBlock Text="Email:"
                                         Foreground="#808080"
                                        FontSize="20"
@@ -373,6 +400,7 @@
                                        Margin="40,0,0,0" Height="26"  Width="100"/>
                 <StackPanel Orientation="Vertical"  VerticalAlignment="Center" Height="100">
                     <TextBox x:Name="txtEmail"
+                                    Style="{StaticResource SettingTextboxStyle}"
                                      Text="{Binding  UserInformation.Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
                                      FontSize="13" 
                                      IsEnabled="{Binding IsVisibleEmail}"
@@ -457,5 +485,6 @@
                                      Height="1"/>
             </StackPanel>
         </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

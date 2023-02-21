@@ -7,12 +7,12 @@
              xmlns:vm="clr-namespace:RCP_Sys.ViewModels"
              mc:Ignorable="d"
              xml:lang="en-JP"
-             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" xmlns:uc="clr-namespace:RCP_Sys.Resources"
              d:DesignHeight="670" d:DesignWidth="1030"
              Background="Transparent">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="730"/>
+            <ColumnDefinition Width="700"/>
             
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -20,13 +20,18 @@
 
 
         <Border Grid.Column="1"
-                Background="White"
-                CornerRadius="30 0 0 0"
+                CornerRadius="10"
                 Width="300"
-                Margin="0 20 0 0"
+                Margin="0 10 10 10"
+                Background="Transparent"
                 HorizontalAlignment="Right"
-                BorderBrush="Gray"
-                BorderThickness="2">
+>
+            <!--<Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                    <GradientStop Color="White" Offset="0.7"/>
+                    <GradientStop Color="LightGray" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>-->
             <StackPanel Grid.Column="1" Width="270"
                     Margin="0 30 0 0"
                     HorizontalAlignment="Center"
@@ -36,16 +41,28 @@
                         <ImageBrush ImageSource="{Binding ImageSource,UpdateSourceTrigger=PropertyChanged}"/>
                     </Border.Background>
                 </Border>
-        <StackPanel Orientation="Horizontal" Margin="0 30 0 0">
+                <TextBlock Text="{Binding UserInformation.Name}"
+                                        Foreground="#BDBBFF"
+                                       FontSize="20"
+                                       FontWeight="Medium"
+                                       FontFamily="Montserrat"                             
+                                       Margin="35,10,0,0" Height="26"  Width="100"/>
+                <TextBlock Text="{Binding Position}"
+                                       Foreground="#808080"
+                                       FontSize="16"
+                                       FontWeight="Medium"
+                                       FontFamily="Montserrat"                             
+                                       Margin="10,0,0,0" Height="26"  Width="100"/>
+                <StackPanel Orientation="Horizontal" Margin="0 30 0 0">
                             <TextBlock Text="Username:"
-                               Foreground="#747474"
+                               Foreground="#BDBBFF"
                                FontSize="16"
                                FontWeight="Bold"
                                FontFamily="Montserrat"                             
                                HorizontalAlignment="Left"
                                Margin="20,20 0 0"/>
                             <TextBlock Text="{Binding UserInformation.Username}"
-                               Foreground="#747474"
+                               Foreground="#BDBBFF"
                                FontSize="16"
                                FontWeight="Bold"
                                FontFamily="Montserrat"                             
@@ -56,14 +73,14 @@
                 <Separator Height="1" Margin="10 11 10 0" Background="Black"/>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Name:"
-                               Foreground="#747474"
+                               Foreground="#BDBBFF"
                                FontSize="16"
                                FontWeight="Bold"
                                FontFamily="Montserrat"                             
                                HorizontalAlignment="Left"
                                Margin="20,20 0 0"/>
                             <TextBlock Text="{Binding UserInformation.Name}"
-                               Foreground="#747474"
+                               Foreground="#BDBBFF"
                                FontSize="16"
                                FontWeight="Bold"
                                FontFamily="Montserrat"                             
@@ -71,17 +88,17 @@
                                Margin="20,20 0 0"/>
                     
                 </StackPanel>
-                <Separator Height="1" Margin="10 11 10 0" Background="Black"/>
+                <Separator Height="1" Margin="11 10 10 0" Background="Black"/>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Surname:"
-                               Foreground="#747474"
+                               Foreground="#BDBBFF"
                                FontSize="16"
                                FontWeight="Bold"
                                FontFamily="Montserrat"                             
                                HorizontalAlignment="Left"
                                Margin="20,20 0 0"/>
                             <TextBlock Text="{Binding UserInformation.Surname}"
-                               Foreground="#747474"
+                               Foreground="#BDBBFF"
                                FontSize="16"
                                FontWeight="Bold"
                                FontFamily="Montserrat"                             
@@ -92,14 +109,14 @@
                 <Separator Height="1" Margin="10 11 10 0" Background="Black"/>
                 <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Email:"
-                               Foreground="#747474"
+                               Foreground="#BDBBFF"
                                FontSize="16"
                                FontWeight="Bold"
                                FontFamily="Montserrat"                             
                                HorizontalAlignment="Left"
                                Margin="20,20 0 0"/>
                             <TextBlock Text="{Binding UserInformation.Email}"
-                               Foreground="#747474"
+                               Foreground="#BDBBFF"
                                FontSize="16"
                                FontWeight="Bold"
                                FontFamily="Montserrat"                             
@@ -107,17 +124,17 @@
                                Margin="20,20 0 0"/>
                     
                 </StackPanel>
-                <Separator Height="1" Margin="10 11 10 0" Background="Black"/>
+                <Separator Height="1" Margin="10 12 10 0" Background="Black"/>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Join Date:"
-                               Foreground="#747474"
+                               Foreground="#BDBBFF"
                                FontSize="16"
                                FontWeight="Bold"
                                FontFamily="Montserrat"                             
                                HorizontalAlignment="Left"
                                Margin="20,20 0 0"/>
                             <TextBlock Text="{Binding UserInformation.DateJoin}"
-                               Foreground="#747474"
+                               Foreground="#BDBBFF"
                                FontSize="16"
                                FontWeight="Bold"
                                FontFamily="Montserrat"                             
@@ -127,10 +144,23 @@
                         </StackPanel>
                     </StackPanel>
                 </Border>
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
-            <Viewbox Margin="0" Height="672">
-                <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle}" CalendarItemStyle="{DynamicResource CalendarCalendarItemStyle}" Style="{DynamicResource CalendarStyles}" Margin="30"/>
+        <Border Margin="10" CornerRadius="10" Background="Transparent">
+            <StackPanel  Margin="0 0 0 0" Grid.Column="0" Grid.Row="0" Orientation="Vertical">
+                <StackPanel Margin="40 10 10 10" Height="150" Orientation="Horizontal">
+                    <StackPanel Width="316">
+                        <uc:InfoControl Title="Month time" Number="{Binding SumMonth}" Icon="Calendar" Background1="#827bff" Background2="#d9b5ff"
+                                        EllipseBackground1="#b298fd" EllipseBackground2="#e4bbff"></uc:InfoControl>
+                    </StackPanel>
+                    <StackPanel Width="316">
+                        <uc:InfoControl Title="Year time" Number="{Binding SumYear}" Icon="Eye" Background1="#fd8a87" Background2="#f3ab92"
+                                        EllipseBackground1="#fbd5a8" EllipseBackground2="#fdb89b"></uc:InfoControl>
+                    </StackPanel>
+
+                </StackPanel>
+                <Viewbox Margin="0 50 0 0" Height="400">
+                <Calendar CalendarButtonStyle="{DynamicResource CalendarCalendarButtonStyle}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle}" CalendarItemStyle="{DynamicResource CalendarCalendarItemStyle}" Style="{DynamicResource CalendarStyles}"/>
             </Viewbox>
         </StackPanel>
-            </Grid>
+        </Border>
+    </Grid>
 </UserControl>

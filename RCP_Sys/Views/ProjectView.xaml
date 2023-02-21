@@ -63,7 +63,7 @@
                        VerticalContentAlignment="Center"
                        Margin="20 0 0 0">Add Project</Label>
             </StackPanel>
-            <Separator Height='0,8' Margin="30 20 30 30" Background="Black" Opacity="0.7"/>
+            <Separator  Height='0,8' Margin="30 20 30 30" Background="Black" Opacity="0.7"/>
             <StackPanel Margin="100 0 100 0">
 
                 <TextBlock   Text="Project Name"
