@@ -48,6 +48,7 @@ namespace RCP_Sys.ViewModels
             LoadImage();
             TimesMonth();
             TimesYear();
+            WorkDay();
             YearTimeSum();
             HometimeSum();
             var user = getUsername.GetUserModels(Thread.CurrentPrincipal.Identity.Name);
@@ -172,13 +173,30 @@ namespace RCP_Sys.ViewModels
         public void HometimeSum()
         {    
                 SumMonth = new TimeSpan((long)TimerUserCollection.Sum(p => p.EndTimerValue.Ticks));
-   
+                HourFormat = string.Format("{0}", SumMonth.Days * 24 + SumMonth.Hours);
+        }
+
+        public void WorkDay()
+        {
+            var date = DateTime.Today;
+            using (var context = new RcpDbContext())
+            {
+
+
+                var Timer = (from a in context.Users
+                            where a.Username == Thread.CurrentPrincipal.Identity.Name
+                            select a.DateTimeJoined).FirstOrDefault();
+
+                DaysAtwork = date.Day - Timer.Day;
+            }
+
+            
         }
 
         public void YearTimeSum()
         {
             SumYear = new TimeSpan((long)YearTimeCollection.Sum(p => p.EndTimerValue.Ticks));
-
+            HourFormatY = string.Format("{0}", SumYear.Days * 24 + SumYear.Hours);
         }
 
         public void TimesMonth()
@@ -230,6 +248,7 @@ namespace RCP_Sys.ViewModels
             set { _SumYear = value; OnPropertyChanged(nameof(SumYear)); }
         }
 
+
         private ObservableCollection<TimerModel> _TimerUserCollection;
 
         public ObservableCollection<TimerModel> TimerUserCollection
@@ -246,6 +265,45 @@ namespace RCP_Sys.ViewModels
             set { _YearTimeCollection = value; OnPropertyChanged("YearTimeCollection"); }
         }
 
+        private int _DaysAtWork;
+        public int DaysAtwork
+        {
+            get
+            {
+                return _DaysAtWork;
+            }
+            set
+            {
+                _DaysAtWork = value; OnPropertyChanged(nameof(DaysAtwork)); 
+            }
+        }
+
+        private string _HourFormat;
+        public string HourFormat
+        {
+            get
+            {
+                return _HourFormat;
+            }
+            set
+            {
+                _HourFormat = value; OnPropertyChanged(nameof(HourFormat));
+            }
+        }
+
+        private string _HourFormatY;
+        public string HourFormatY
+        {
+            get
+            {
+                return _HourFormatY;
+            }
+            set
+            {
+                _HourFormatY = value; OnPropertyChanged(nameof(HourFormatY));
+            }
+        }
     }
+   
 
 }
