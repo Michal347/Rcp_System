@@ -217,7 +217,7 @@
     
     <!-- Calendar styles-->
     <Style x:Key="CalendarCalendarButtonStyle" TargetType="{x:Type CalendarButton}">
-        <Setter Property="Background" Value="#Fd413C"/>
+        <Setter Property="Background" Value="#351c75"/>
         <Setter Property="MinWidth" Value="40"/>
         <Setter Property="MinHeight" Value="42"/>
         <Setter Property="FontSize" Value="10"/>
@@ -420,10 +420,10 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle x:Name="TodayBackground" Fill="#Fd413C" Opacity="0" RadiusX="6" RadiusY="6"/>
-                        <Rectangle x:Name="SelectedBackground" Fill="#Fd413C" Opacity="0" RadiusX="6" RadiusY="6"/>
+                        <Rectangle x:Name="TodayBackground" Fill="#351c75" Opacity="0" RadiusX="6" RadiusY="6"/>
+                        <Rectangle x:Name="SelectedBackground" Fill="#351c75" Opacity="0" RadiusX="6" RadiusY="6"/>
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
-                        <Rectangle x:Name="HighlightBackground" Stroke="#Fd413C" StrokeThickness="1" Opacity="0" RadiusX="6" RadiusY="6"/>
+                        <Rectangle x:Name="HighlightBackground" Stroke="#351c75" StrokeThickness="1" Opacity="0" RadiusX="6" RadiusY="6"/>
                         <ContentPresenter x:Name="NormalText" TextElement.Foreground="#FF333333" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="5,1,5,1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         <Path x:Name="Blackout" Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633,11.029181 L15.191895,11.029181 L12.844727,13.999395 L15.21875,17.060919 L12.962891,17.060919 L11.673828,15.256231 L10.352539,17.060919 L8.1396484,17.060919 L10.519043,14.042364 z" Fill="#FF000000" HorizontalAlignment="Stretch" Margin="3" Opacity="0" RenderTransformOrigin="0.5,0.5" Stretch="Fill" VerticalAlignment="Stretch"/>
                         <Rectangle x:Name="DayButtonFocusVisual" IsHitTestVisible="false" RadiusX="6" RadiusY="6" Stroke="Transparent" Visibility="Collapsed"/>
@@ -460,7 +460,7 @@
                             <Grid>
                                 <Grid.Resources>
                                     <ControlTemplate x:Key="PreviousButtonTemplate" TargetType="{x:Type Button}">
-                                        <Border Cursor="Hand" CornerRadius="20" Background="#Fd413C">
+                                        <Border Cursor="Hand" CornerRadius="20" Background="#351c75">
                                             <VisualStateManager.VisualStateGroups>
                                                 <VisualStateGroup x:Name="CommonStates">
                                                     <VisualState x:Name="Normal"/>
@@ -482,7 +482,7 @@
                                         </Border>
                                     </ControlTemplate>
                                     <ControlTemplate x:Key="NextButtonTemplate" TargetType="{x:Type Button}">
-                                        <Border Cursor="Hand" CornerRadius="20" Background="#Fd413C">
+                                        <Border Cursor="Hand" CornerRadius="20" Background="#351c75">
                                             <VisualStateManager.VisualStateGroups>
                                                 <VisualStateGroup x:Name="CommonStates">
                                                     <VisualState x:Name="Normal"/>
@@ -600,7 +600,7 @@
         </Setter>
     </Style>
     <Style x:Key="CalendarStyles" TargetType="{x:Type Calendar}">
-        <Setter Property="Background" Value="#282f33"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="#FFFFFF"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
