@@ -57,8 +57,8 @@
                            FontWeight="bold">
                 </TextBlock>
                 <StackPanel  Margin="150 0 0 0" Width="300" Height="80" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <RadioButton Name="DateCheck" IsChecked="{Binding IsCheckedDate}" FontSize="18" Margin="10 5 0 0" IsThreeState="False" Content="Date"></RadioButton>
-                    <RadioButton Name="ProjectCheck" IsChecked="{Binding IsCheckedProject}" FontSize="18" Margin="10 5 0 0" IsThreeState="False" Content="Project"></RadioButton>
+                    <RadioButton  Name="DateCheck" IsChecked="{Binding IsCheckedDate}" FontSize="18" Margin="10 5 0 0" IsThreeState="true" Content="Date"></RadioButton>
+                    <RadioButton  Name="ProjectCheck" IsChecked="{Binding IsCheckedProject}" FontSize="18" Margin="10 5 0 0" IsThreeState="False" Content="Project"></RadioButton>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

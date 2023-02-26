@@ -98,19 +98,16 @@ namespace RCP_Sys.ViewModels
                         Boolean result = gender.Gender.Contains(value);
                         if (result == true)
                         {
-                            string imagePath = "../Images/woman.png";
-                            this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                            this.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Images/woman.png"));
                         }
                         if (result == false)
                         {
-                            string imagePath = "../Images/man.png";
-                            this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                            this.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Images/man.png"));
                         }
 
                         if (result == false && gender.IsUserAdmin == true)
-                        {
-                            string imagePath = "../Images/businessman.png";
-                            this.ImageSource = new BitmapImage(new Uri(imagePath, UriKind.Relative));
+                        {                           
+                            this.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/Images/businessman.png"));
                         }
                     }
                 }
