@@ -101,6 +101,7 @@ namespace RCP_Sys.ViewModels
         {
             ClearPropertyErrors(this, "Email");
             ClearPropertyErrors(this, "Login");
+
             var hash = PasswordHasher.HashPassword(Password);
             var validEmail = EmailValidation.IsValidEmail(Email);
             UserModel output;
@@ -121,9 +122,14 @@ namespace RCP_Sys.ViewModels
 
                 }
 
-                UserAdd.Create(
-                    output = new UserModel()
+                else if (FileName == null)
+                {
+
+                    UserAdd.Create(output= new UserModel()
                     {
+
+                        ImagePath = null,
+                        ImageToByte = null,
                         Username = Login,
                         Name = Name,
                         Password = hash,
@@ -132,39 +138,43 @@ namespace RCP_Sys.ViewModels
                         Email = Email,
                         IsUserAdmin = false,
                         Gender = Gender
-                    });
-                context.SaveChanges();
-
-                if (FileName != null)
-                {
-                    context.Picture.Add(new ProfilePictureModel()
-                    {
-
-                        ImagePath = FileName,
-                        ImageToByte = File.ReadAllBytes(FileName),
-                        Username = Login,
 
 
                     });
                     context.SaveChanges();
+                    RegisterSucceded.Invoke(this, output);
+                    return;
+
                 }
 
-                else
-                {
-                    context.Picture.Add(new ProfilePictureModel()
-                    {
+                        UserAdd.Create(
+                  output = new UserModel()
+                  {
+                      Username = Login,
+                      Name = Name,
+                      Password = hash,
+                      Surname = Surname,
+                      DateTimeJoined = DateTime.Today,
+                      Email = Email,
+                      IsUserAdmin = false,
+                      Gender = Gender,
+                      ImagePath = FileName,
+                      ImageToByte = File.ReadAllBytes(FileName),
 
-                        ImagePath = null,
-                        ImageToByte = null,
-                        Username = Login,
+                  });
+                        context.SaveChanges();
+                        context.Picture.Add(new ProfilePictureModel()
+                        {
+
+                            ImagePath = FileName,
+                            ImageToByte = File.ReadAllBytes(FileName),
+                            Username = Login,
 
 
-                    });
-                    context.SaveChanges();
-                }
-
-                RegisterSucceded.Invoke(this, output);
-
+                        });
+                        context.SaveChanges();
+     
+                    RegisterSucceded.Invoke(this, output);
 
             }
         }

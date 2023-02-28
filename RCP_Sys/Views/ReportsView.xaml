@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="RCP_Sys.Views.ReportsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RCP_Sys.Views" xmlns:uc="clr-namespace:RCP_Sys.Resources" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d" 
+            Height="670" Width="1030">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="350"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="0 10 0 0" Orientation="Vertical" Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Height="175">
+                <StackPanel Margin="40 0 0 0" Width="316">
+                    <uc:InfoControl Title="Month hour work" Number="{Binding HourFormat}" Icon="ChartColumn" Background1="#827bff" Background2="#d9b5ff"
+                                        EllipseBackground1="#b298fd" EllipseBackground2="#e4bbff"></uc:InfoControl>
+                </StackPanel>
+                <StackPanel Margin="15 0 0 0" Width="316">
+                    <uc:InfoControl Title="Year hour at work" Number="{Binding HourFormatY}" Icon="ChartColumn" Background1="#fd8a87" Background2="#f3ab92"
+                                        EllipseBackground1="#fbd5a8" EllipseBackground2="#fdb89b"></uc:InfoControl>
+                </StackPanel>
+                <StackPanel Margin="15 0 0 0" Width="316">
+                    <uc:InfoControl Title="Day hour time " Number="{Binding DayFormatY}" Icon="ChartColumn" Background1="#fc84cb" Background2="#fc8fae"
+                                        EllipseBackground1="#fc8fae" EllipseBackground2="#ffabe6"></uc:InfoControl>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="175">
+                <StackPanel Orientation="Horizontal" Height="175">
+                    <StackPanel Margin="40 0 0 0" Width="316">
+                        <uc:InfoControl  Title="Count of project" Number="{Binding ProjectCount}" Icon="ChartColumn" Background1="#67B26F" Background2="#4ca2cd"
+                                        EllipseBackground1="#43C6AC" EllipseBackground2="#F8FFAE"></uc:InfoControl>
+                    </StackPanel>
+                    <StackPanel Margin="15 0 0 0" Width="316">
+                        <uc:InfoControl  Title="Days at work" Number="{Binding DaysAtwork}" Icon="ChartColumn" Background1="#2C5364" Background2="#0F2027"
+                                        EllipseBackground1="#2C5364" EllipseBackground2="#203A43"></uc:InfoControl>
+                    </StackPanel>
+                    <StackPanel Margin="15 0 0 0" Width="316">
+                        <uc:InfoControl Title="Join Date " Number="{Binding DayJoin}" Icon="ChartColumn" Background1="#4B1248" Background2="#F0C27B"
+                                        EllipseBackground1="#F0C27B" EllipseBackground2="#4B1248"></uc:InfoControl>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <Grid Background="Transparent" Margin="15"  x:Name="GridTimesheet" Grid.Row="2">
+                <DataGrid Width="1000" Height="300" Style="{DynamicResource DataGridStyle2}" CellStyle="{DynamicResource DataGridCellStyle2}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle2}" RowStyle="{DynamicResource DataGridRowStyle2}" Grid.Row="4" x:Name="TimerDataGrid" ItemsSource="{Binding UserIcollection}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="##" CanUserResize="False" Width="150">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource gridEditButtomReports}" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding}">
+                                            <fa:IconImage  Icon="ChartArea" Style="{StaticResource ChartIcon}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Picture" CanUserResize="False" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Margin="5"  Height="50" Width="50" CornerRadius="40">
+                                            <Border.Background>
+                                                <ImageBrush ImageSource="{Binding ImageToByte, UpdateSourceTrigger=PropertyChanged}"/>
+                                            </Border.Background>
+                                        </Border>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Binding="{Binding Username}" Header="Username" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="*" CanUserResize="False" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Surname}" Header="Surname" Width="*" CanUserResize="False" IsReadOnly="True" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

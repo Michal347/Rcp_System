@@ -25,6 +25,10 @@ namespace RCP_Sys.Models
 
         public string Email  { get; set; }
 
+        public string ImagePath { get; set; }
+
+        public byte[] ImageToByte { get; set; }
+
         public bool IsUserAdmin { get; set; }
 
         public string Gender { get; set; }

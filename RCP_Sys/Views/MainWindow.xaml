@@ -45,8 +45,8 @@
                 </StackPanel>
             </StackPanel>
             <Separator Height='0,8' Margin="30 20 30 30" Background="White" Opacity="0.7"/>
-
-            <Button Style="{StaticResource MenuButton}" 
+            <StackPanel Height="605">
+                <Button Style="{StaticResource MenuButton}" 
                     Command="{Binding ShowHomeView}">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="Home" Style="{StaticResource MenuIcon}"/>
@@ -101,12 +101,29 @@
                 </StackPanel>
             </Button>
             <Button Style="{StaticResource MenuButton}"
-                        Command="{Binding ExitProgram}">
+                    Command="{Binding ShowReportsView}"
+                    Visibility="{Binding btnUpdateVisibility, Converter={StaticResource InvertedBooleanToVisibilityConverter},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Cursor="Hand">
                 <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="AreaChart" Style="{StaticResource MenuIcon}"/>
+                    <TextBlock Style="{StaticResource MenuText}" Text="Reports" ></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Style="{StaticResource MenuButton}"
+                    Command="{Binding ShowReportsUserView}"
+                    Visibility="{Binding btnAdminVisi, Converter={StaticResource InvertedBooleanToVisibilityConverter},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Cursor="Hand">
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="AreaChart" Style="{StaticResource MenuIcon}"/>
+                    <TextBlock Style="{StaticResource MenuText}" Text="Reports" ></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Style="{StaticResource MenuButton}"
+                        Command="{Binding ExitProgram}">
+                    <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="PowerOff" Style="{StaticResource MenuIcon}" HorizontalAlignment="Left"/>
                     <TextBlock Style="{StaticResource MenuText}" Text="Exit"/>
                 </StackPanel>
             </Button>
+            </StackPanel>
         </StackPanel>
 
         <!--Main Window-->

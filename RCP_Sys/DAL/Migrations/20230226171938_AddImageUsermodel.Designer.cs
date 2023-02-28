@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RCP_Sys.Db;
 
 namespace RCP_Sys.Migrations
 {
     [DbContext(typeof(RcpDbContext))]
-    partial class RcpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230226171938_AddImageUsermodel")]
+    partial class AddImageUsermodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

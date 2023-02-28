@@ -234,6 +234,10 @@
     <Compile Include="DAL\Migrations\20230219100318_AddUsernameProfile.designer.cs">
       <DependentUpon>20230219100318_AddUsernameProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Migrations\20230226171938_AddImageUsermodel.cs" />
+    <Compile Include="DAL\Migrations\20230226171938_AddImageUsermodel.designer.cs">
+      <DependentUpon>20230226171938_AddImageUsermodel.cs</DependentUpon>
+    </Compile>
     <Compile Include="DAL\RcpDbContext.cs" />
     <Compile Include="DAL\Interface\IUserService.cs" />
     <Compile Include="DAL\Interface\ITimerService.cs" />
@@ -275,6 +279,7 @@
     <Compile Include="Models\TimerModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Resources\Converters\BoolInverterConverter.cs" />
+    <Compile Include="Resources\Converters\ByteArrayToImageSourceConverter.cs" />
     <Compile Include="Resources\Converters\TextBoxConverter.cs" />
     <Compile Include="Resources\InfoControl.xaml.cs">
       <DependentUpon>InfoControl.xaml</DependentUpon>
@@ -294,6 +299,8 @@
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\ReportsUserViewModel.cs" />
+    <Compile Include="ViewModels\ReportsViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\TimerViewModel.cs" />
     <Compile Include="ViewModels\TimeSheetViewModel.cs" />
@@ -319,6 +326,12 @@
     </Compile>
     <Compile Include="Views\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportsUserView.xaml.cs">
+      <DependentUpon>ReportsUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportsView.xaml.cs">
+      <DependentUpon>ReportsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingView.xaml.cs">
       <DependentUpon>SettingView.xaml</DependentUpon>
@@ -388,6 +401,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportsUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

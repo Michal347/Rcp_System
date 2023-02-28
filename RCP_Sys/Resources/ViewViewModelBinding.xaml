@@ -34,4 +34,10 @@
     <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
         <vw:SettingView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ReportsViewModel}">
+        <vw:ReportsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:ReportsUserViewModel}">
+        <vw:ReportsUserView/>
+    </DataTemplate>
 </ResourceDictionary>

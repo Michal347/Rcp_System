@@ -37,6 +37,8 @@ namespace RCP_Sys.ViewModels
         public ICommand ShowUserHistory { get; }
         public ICommand ShowSettingView { get; }
         public ICommand ExitProgram { get; }
+        public ICommand ShowReportsView { get; }
+        public ICommand ShowReportsUserView { get; }
 
         #endregion
 
@@ -107,6 +109,8 @@ namespace RCP_Sys.ViewModels
             ShowUserHistory = new RelayCommand(UserHistory);
             ShowSettingView = new RelayCommand(Setting);
             ExitProgram = new RelayCommand(Exit);
+            ShowReportsView = new RelayCommand(Reports);
+            ShowReportsUserView = new RelayCommand(ReportsUser);
 
 
 
@@ -117,6 +121,7 @@ namespace RCP_Sys.ViewModels
 
         }
 
+     
         private void Exit(object obj)
         {
             if (_timerViewModel.IsTimerRunning == false)
@@ -192,6 +197,20 @@ namespace RCP_Sys.ViewModels
             caption = "Setting";
             icon = IconChar.Cog;
 
+        }
+
+        private void Reports(object obj)
+        {
+            CurrentChildView = new ReportsViewModel();
+            caption = "Reports";
+            icon = IconChar.AreaChart;
+        }
+
+        private void ReportsUser(object obj)
+        {
+            CurrentChildView = new ReportsUserViewModel();
+            caption = "Reports";
+            icon = IconChar.AreaChart;
         }
 
         public void CurrentUserData()

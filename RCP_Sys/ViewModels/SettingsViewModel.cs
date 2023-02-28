@@ -369,19 +369,24 @@ namespace RCP_Sys.ViewModels
         {
             using (var context = new RcpDbContext())
             {
-                var q = (from s in context.Picture
+                var q = (from s in context.Users
                          where s.Username == Thread.CurrentPrincipal.Identity.Name
                          select s).FirstOrDefault();
 
+                var qq = (from s in context.Picture
+                         where s.Username == Thread.CurrentPrincipal.Identity.Name
+                         select s).FirstOrDefault();
                 if (q != null)
                 {
 
                     if (FileName != null)
                     {
-                       
+                        qq.ImageToByte= File.ReadAllBytes(FileName);
+                        qq.ImagePath = FileName;
                         q.ImagePath= FileName;
                         q.ImageToByte = File.ReadAllBytes(FileName);
-                        context.Update(q);    
+                        context.Update(q);
+                        context.Update(qq);
                         context.SaveChanges();
                     }
                 }

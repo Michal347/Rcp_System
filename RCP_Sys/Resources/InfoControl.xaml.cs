@@ -24,6 +24,7 @@ namespace RCP_Sys.Resources
         {
             InitializeComponent();
         }
+     
 
         public string Title
         {
