@@ -6,6 +6,8 @@ using RCP_Sys.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.Data.Entity.SqlServer;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -151,7 +153,21 @@ namespace RCP_Sys.ViewModels
             set { this._ImageSource = value; this.OnPropertyChanged("ImageSource"); }
         }
 
+        private IQueryable<int> _Count;
+        public IQueryable<int> Count
+        {
+            get
+            {
+                return _Count;
 
+            }
+
+            set
+            {
+                _Count = value;
+                OnPropertyChanged(nameof(Count));
+            }
+        }
         private string _Position;
         public string Position
         {
@@ -181,10 +197,10 @@ namespace RCP_Sys.ViewModels
 
 
                 var Timer = (from a in context.Users
-                            where a.Username == Thread.CurrentPrincipal.Identity.Name
-                            select a.DateTimeJoined).FirstOrDefault();
+                             where a.Username == Thread.CurrentPrincipal.Identity.Name
+                             select a.DateTimeJoined).FirstOrDefault();
 
-                DaysAtwork = date.Day - Timer.Day;
+                DaysAtwork = (int)(date - Timer).Days;
             }
 
             

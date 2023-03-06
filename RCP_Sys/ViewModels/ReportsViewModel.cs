@@ -84,7 +84,7 @@ namespace RCP_Sys.ViewModels
                                      where a.Username == emp.Username
                                    select a.DateTimeJoined).FirstOrDefault();
 
-                        DaysAtwork = date.Day - Day.Day;
+                        DaysAtwork = (int)(date - Day).Days;
 
 
                         ///////////////////////
