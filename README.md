@@ -1,4 +1,5 @@
-Celem prjektu jest napisanie aplikacji desktopowej do rejestru czasu pracy pracownika w formie zdalnej. Zakres projektu obejmuje następujące zagadnienia: 
+Celem projektu jest napisanie aplikacji desktopowej do rejestru czasu pracy pracownika w formie zdalnej. Zakres projektu obejmuje następujące zagadnienia: 
+
 
 •	System logowania; 
 
@@ -29,9 +30,14 @@ Celem prjektu jest napisanie aplikacji desktopowej do rejestru czasu pracy praco
 •	Zakładka z wyświetlonymi statystykami pracownika ;
 
 
+
+
 Keywords:
 
 •	WPF/MVVM;
+
 •	Service pattern;
+
 •	Data Transfer Objects;
+
 •	Data Access Layer, Business Layer, UI Layer;
