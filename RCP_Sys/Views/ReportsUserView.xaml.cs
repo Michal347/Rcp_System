@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LiveCharts.Configurations;
+using LiveCharts.Wpf;
+using LiveCharts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +15,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RCP_Sys.Models;
+using System.Collections.ObjectModel;
+using RCP_Sys.Db;
+using System.Threading;
+using RCP_Sys.Repository;
 
 namespace RCP_Sys.Views
 {
@@ -20,9 +28,12 @@ namespace RCP_Sys.Views
     /// </summary>
     public partial class ReportsUserView : UserControl
     {
+
         public ReportsUserView()
         {
             InitializeComponent();
         }
     }
+
 }
+

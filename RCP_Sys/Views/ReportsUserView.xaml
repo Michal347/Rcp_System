@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:RCP_Sys.Views" xmlns:uc="clr-namespace:RCP_Sys.Resources" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:local="clr-namespace:RCP_Sys.Views" xmlns:uc="clr-namespace:RCP_Sys.Resources" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              Height="670" Width="1030">
     <Grid>
@@ -44,12 +44,30 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <StackPanel Width="680"></StackPanel>
-            <Border Margin="13 0 10 0"  CornerRadius="30">
+                <Border Width="660" Padding="6 6" Margin="10"  CornerRadius="20">
                 <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
-                        <GradientStop Color="White" Offset="0.7"/>
-                        <GradientStop Color="LightGray" Offset="1"/>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="#26376f" Offset="0"></GradientStop>
+                        <GradientStop Color="#6a6ae4" Offset="1.5"></GradientStop>
+                    </LinearGradientBrush>
+                </Border.Background>
+                    <StackPanel Width="660">
+                    <lvc:CartesianChart Foreground="#717eb2"  Series="{Binding SeriesCollection}" LegendLocation="Left" Height="280">
+                        <lvc:CartesianChart.DataTooltip>
+                            <lvc:DefaultTooltip Background="#24336a" Foreground="#d5e2ff"/>
+                        </lvc:CartesianChart.DataTooltip>
+                    <lvc:CartesianChart.AxisX>
+                            <lvc:Axis LabelFormatter="{Binding Formatter}">
+                            </lvc:Axis>
+                    </lvc:CartesianChart.AxisX>
+                </lvc:CartesianChart>
+            </StackPanel>
+                    </Border>
+                        <Border Margin="13 0 10 0"  CornerRadius="30">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                        <GradientStop Color="#26376f" Offset="0"></GradientStop>
+                        <GradientStop Color="#6a6ae4" Offset="1.5"></GradientStop>
                     </LinearGradientBrush>
                 </Border.Background>
                 <StackPanel Margin="0 0 0 0" Width="300"></StackPanel>
