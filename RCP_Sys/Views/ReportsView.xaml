@@ -58,7 +58,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Picture" CanUserResize="False" Width="120">
+                        <!--<DataGridTemplateColumn Header="Picture" CanUserResize="False" Width="120">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -70,7 +70,7 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                        </DataGridTemplateColumn>-->
                         <DataGridTextColumn Binding="{Binding Username}" Header="Username" Width="*" CanUserResize="False" IsReadOnly="True"/>
                         <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="*" CanUserResize="False" IsReadOnly="True"/>
                         <DataGridTextColumn Binding="{Binding Surname}" Header="Surname" Width="*" CanUserResize="False" IsReadOnly="True" />

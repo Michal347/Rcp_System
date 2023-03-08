@@ -25,18 +25,18 @@ namespace RCP_Sys.ViewModels
 {
     public class RegisterViewModel : BaseViewModel, INotifyPropertyChanged
     {
-        #region ICommands
+
         public ICommand GoBack { get; private set; }
         public ICommand Register { get; private set; }
         public ICommand GetGender { get; set; }
         public ICommand OpenFileCommand { get; set; }
         public IUserService UserAdd;
-        
-        #endregion
+
 
         public event EventHandler<UserModel> RegisterSucceded;
         public event EventHandler CancelRequested;
-        #region Ctors
+
+
         public RegisterViewModel()
         {
             GoBack = new RelayCommand(x => GoBackHandler());
@@ -47,22 +47,8 @@ namespace RCP_Sys.ViewModels
             
         }
 
-        private void OpenFileDialog(object obj)
-        {
-            OpenFileDialog op = new OpenFileDialog();
-            op.Title = "Select a picture";
-            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-            if (op.ShowDialog() == true)
-            {
-                FileName = op.FileName;
-            }
-        }
 
-        #endregion
 
-        #region ICommand handlers
         private bool CanExecuteRegister(object obj)
         {
             bool valiData;
@@ -99,8 +85,8 @@ namespace RCP_Sys.ViewModels
 
         private void RegisterUser()
         {
-            ClearPropertyErrors(this, "Email");
-            ClearPropertyErrors(this, "Login");
+            ClearPropertyErrors(this, nameof(Email));
+            ClearPropertyErrors(this, nameof(Login));
 
             var hash = PasswordHasher.HashPassword(Password);
             var validEmail = EmailValidation.IsValidEmail(Email);
@@ -111,13 +97,13 @@ namespace RCP_Sys.ViewModels
 
                 if (user != null)
                 {
-                    OnErrorCreated("Login", "*Username already exist");
+                    OnErrorCreated(nameof(Login), "*Username already exist");
                     return;
                 }
 
                 else if (validEmail == false)
                 {
-                    OnErrorCreated("Email", "*Invalid email");
+                    OnErrorCreated(nameof(Email), "*Invalid email");
                     return;
 
                 }
@@ -138,6 +124,16 @@ namespace RCP_Sys.ViewModels
                         Email = Email,
                         IsUserAdmin = false,
                         Gender = Gender
+
+
+                    });
+                    context.SaveChanges();
+                    context.Picture.Add(new ProfilePictureModel()
+                    {
+
+                        ImagePath = null,
+                        ImageToByte = null,
+                        Username = Login,
 
 
                     });
@@ -178,10 +174,22 @@ namespace RCP_Sys.ViewModels
 
             }
         }
-        #endregion
-            #region Event rising fields
 
-            private string login;
+        private void OpenFileDialog(object obj)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (op.ShowDialog() == true)
+            {
+                FileName = op.FileName;
+            }
+        }
+ 
+
+        private string login;
 
         public string Login
         {
@@ -189,8 +197,8 @@ namespace RCP_Sys.ViewModels
             set
             {
                 login = value;
-                OnPropertyChanged("Login");
-                ClearPropertyErrors(this, "Login");
+                OnPropertyChanged(nameof(Login));
+                ClearPropertyErrors(this, nameof(Login));
             }
         }
 
@@ -202,7 +210,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 passsword = value;
-                OnPropertyChanged("Pasword");
+                OnPropertyChanged(nameof(Password));
             }
         }
 
@@ -214,7 +222,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged(nameof(Name));
             }
         }
 
@@ -226,7 +234,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 surname = value;
-                OnPropertyChanged("Surname");      
+                OnPropertyChanged(nameof(Surname));      
             }
         }
          private string _gender="Male";
@@ -237,7 +245,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _gender = value;
-                OnPropertyChanged("Gender");
+                OnPropertyChanged(nameof(Gender));
             }
         }
 
@@ -250,8 +258,8 @@ namespace RCP_Sys.ViewModels
             set
             {
                 email = value;
-                OnPropertyChanged("Email");
-                ClearPropertyErrors(this, "Email");
+                OnPropertyChanged(nameof(Email));
+                ClearPropertyErrors(this, nameof(Email));
             }
         }
 
@@ -269,12 +277,9 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _fileName = value;
-                OnPropertyChanged("FileName");
+                OnPropertyChanged(nameof(FileName));
             }
         }
-
-        #endregion
-
 
 
     }

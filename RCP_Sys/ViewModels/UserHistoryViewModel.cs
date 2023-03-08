@@ -20,6 +20,8 @@ namespace RCP_Sys.ViewModels
        
         public ICommand RefreshTimes { get; private set; }
 
+
+
         public UserHistoryViewModel()
         {
             
@@ -37,6 +39,7 @@ namespace RCP_Sys.ViewModels
 
 
         }
+
 
         private bool FilterName(object obj)
         {
@@ -92,7 +95,7 @@ namespace RCP_Sys.ViewModels
         public ObservableCollection<TimerModel> TimeViewCollectionUser
         {
             get { return _TimeViewCollection; }
-            set { _TimeViewCollection = value; OnPropertyChanged("TimeViewCollectionUser"); }
+            set { _TimeViewCollection = value; OnPropertyChanged(nameof(TimeViewCollectionUser)); }
         }
 
             private string _Filter = string.Empty;

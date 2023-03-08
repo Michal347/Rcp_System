@@ -6,9 +6,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -19,13 +16,17 @@ namespace RCP_Sys.ViewModels
         public ICommand EditCommand { get; }
         public IUserService GetUser;
 
+
+
+
         public ReportsViewModel()
         {
             LoadUsers();
-            UserIcollection = CollectionViewSource.GetDefaultView(UserCollectionReports);
+            UserIcollection = CollectionViewSource.GetDefaultView(UserCollectionReports);    
             EditCommand = new RelayCommand(EditUser);
             GetUser = new UserService();
         }
+
 
         private void EditUser(object obj)
         {
@@ -108,7 +109,7 @@ namespace RCP_Sys.ViewModels
         {
             using (var context = new RcpDbContext())
             {
-                var q = from a in context.Users
+                var q =from a in context.Users
                         where a.Username != null
                         select a;
                 UserCollectionReports = new ObservableCollection<UserModel>(q);
@@ -122,14 +123,14 @@ namespace RCP_Sys.ViewModels
         public ObservableCollection<UserModel> UserCollectionReports
         {
             get { return _UserCollectionReports; }
-            set { _UserCollectionReports = value; OnPropertyChanged("UserCollectionReports"); }
+            set { _UserCollectionReports = value; OnPropertyChanged(nameof(UserCollectionReports)); }
         }
 
         private ICollectionView _UserIcollection;
         public ICollectionView UserIcollection
         {
             get { return _UserIcollection; }
-            set { _UserIcollection = value; OnPropertyChanged("UserIcollection"); }
+            set { _UserIcollection = value; OnPropertyChanged(nameof(UserIcollection)); }
         }
 
         private int _DaysAtWork;
@@ -172,7 +173,7 @@ namespace RCP_Sys.ViewModels
         public ObservableCollection<TimerModel> YearTimeCollection
         {
             get { return _YearTimeCollection; }
-            set { _YearTimeCollection = value; OnPropertyChanged("YearTimeCollection"); }
+            set { _YearTimeCollection = value; OnPropertyChanged(nameof(YearTimeCollection)); }
         }
 
         private ObservableCollection<TimerModel> _DayTimeCollection;
@@ -180,7 +181,7 @@ namespace RCP_Sys.ViewModels
         public ObservableCollection<TimerModel> DayTimeCollection
         {
             get { return _DayTimeCollection; }
-            set { _DayTimeCollection = value; OnPropertyChanged("DayTimeCollection"); }
+            set { _DayTimeCollection = value; OnPropertyChanged(nameof(DayTimeCollection)); }
         }
 
         private ObservableCollection<TimerModel> _ProjectCollection;
@@ -188,7 +189,7 @@ namespace RCP_Sys.ViewModels
         public ObservableCollection<TimerModel> ProjectCollection
         {
             get { return _ProjectCollection; }
-            set { _ProjectCollection = value; OnPropertyChanged("ProjectCollection"); }
+            set { _ProjectCollection = value; OnPropertyChanged(nameof(ProjectCollection)); }
         }
 
 
@@ -275,7 +276,7 @@ namespace RCP_Sys.ViewModels
         public ObservableCollection<TimerModel> TimerUserCollection
         {
             get { return _TimerUserCollection; }
-            set { _TimerUserCollection = value; OnPropertyChanged("TimerUserCollection"); }
+            set { _TimerUserCollection = value; OnPropertyChanged(nameof(TimerUserCollection)); }
         }
 
     }

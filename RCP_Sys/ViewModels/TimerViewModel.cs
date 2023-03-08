@@ -20,7 +20,7 @@ namespace RCP_Sys.ViewModels
     public class TimerViewModel : BaseViewModel, INotifyPropertyChanged
     {
 
-        #region Icommand
+
 
         public ICommand StartTimerCommand { get; set; }
         public ICommand StopTimerCommand { get; set; }
@@ -28,7 +28,7 @@ namespace RCP_Sys.ViewModels
         private IUserService getUsername;
         private ITimerService TimeCreate;
 
-        #endregion
+
 
         public CancellationTokenSource _cancellationTokenSource;
         public SynchronizationContext synchronizationContext = SynchronizationContext.Current;
@@ -69,13 +69,15 @@ namespace RCP_Sys.ViewModels
             DaytimeSum();     
         }
 
+
+      
+
+
         private void DaytimeSum()
         {
             DayTime = new TimeSpan(TimerCollection.Sum(p => p.EndTimerValue.Ticks));
         }
 
-
-        #region ICommand handlers
         private void StartTimerLoop()
         {      
             DateTime aDate = DateTime.Now;
@@ -192,9 +194,7 @@ namespace RCP_Sys.ViewModels
             }
         }
 
-        #endregion
 
-        #region Event Fields
 
             private bool _isTimerRunning;
 
@@ -217,7 +217,7 @@ namespace RCP_Sys.ViewModels
             {
                 selectedProject = value;
                 OnPropertyChanged(nameof(SelectedProject1));
-                ClearPropertyErrors(this, "SelectedProject1");
+                ClearPropertyErrors(this, nameof(SelectedProject1));
             }
         }
 
@@ -258,16 +258,15 @@ namespace RCP_Sys.ViewModels
             get { return _DayTime; }
             set { _DayTime = value; OnPropertyChanged(nameof(DayTime)); }
         }
-        #endregion
 
-        #region Collection
+
 
             private ObservableCollection<ProjectModel> _projectCollection;
 
         public ObservableCollection<ProjectModel> ProjectCollection
         {
             get { return _projectCollection; }
-            set { _projectCollection = value; OnPropertyChanged("ProjectCollection"); }
+            set { _projectCollection = value; OnPropertyChanged(nameof(ProjectCollection)); }
         }
 
             private ObservableCollection<TimerModel> _TimerCollection;
@@ -275,7 +274,7 @@ namespace RCP_Sys.ViewModels
         public ObservableCollection<TimerModel> TimerCollection
         {
             get { return _TimerCollection; }
-            set { _TimerCollection = value; OnPropertyChanged("TimerCollection"); }
+            set { _TimerCollection = value; OnPropertyChanged(nameof(TimerCollection)); }
         }
 
 
@@ -284,9 +283,9 @@ namespace RCP_Sys.ViewModels
         public List<TimerModel> MysampleGrid
         {
             get { return mysampleGrid; }
-            set { mysampleGrid = value; OnPropertyChanged("MysampleGrid"); }
+            set { mysampleGrid = value; OnPropertyChanged(nameof(MysampleGrid)); }
         }
 
-        #endregion
+
     }
 }

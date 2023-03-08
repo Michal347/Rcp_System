@@ -63,6 +63,7 @@
                                        FontFamily="Montserrat"                             
                                        Margin="40,0,0,0" Height="26"  Width="200"/>
                     <TextBox x:Name="TxtName"
+                             Style="{StaticResource SettingTextboxStyle}"
                                      Text="{Binding Username,UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True, Mode=TwoWay}"
                                      FontSize="13"
                                      FontWeight="Medium"
@@ -100,6 +101,7 @@
                                        FontFamily="Montserrat"                             
                                        Margin="40,0,0,0" Height="26"  Width="200"/>
                     <TextBox x:Name="txtSurname"
+                             Style="{StaticResource SettingTextboxStyle}"
                                      Text="{Binding surname}"
                                      FontSize="13"
                                      FontWeight="Medium"
@@ -159,6 +161,7 @@
                                        FontFamily="Montserrat"                             
                                        Margin="40,0,0,0" Height="26"  Width="200"/>
                     <TextBox x:Name="txtName"
+                             Style="{StaticResource SettingTextboxStyle}"
                                      Text="{Binding Name}"
                                      FontSize="13"
                                      FontWeight="Medium"
@@ -195,6 +198,7 @@
                                        FontFamily="Montserrat"                             
                                        Margin="40,0,0,0" Height="26"  Width="200"/>
                     <TextBox x:Name="txtEmail"
+                             Style="{StaticResource SettingTextboxStyle}"
                                      Text="{Binding Email}"
                                      FontSize="13"
                                      FontWeight="Medium"

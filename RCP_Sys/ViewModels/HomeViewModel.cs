@@ -28,19 +28,6 @@ namespace RCP_Sys.ViewModels
         private IUserService getGender;
         public ICommand OpenFile { get; set; }
 
-        public UserAccountInformation UserInformation
-        {
-            get
-            {
-                return _UserInformation;
-            }
-            set
-            {
-                _UserInformation = value;
-                OnPropertyChanged(nameof(UserInformation));
-            }
-        }
-
         public HomeViewModel()
         {
             getUsername = new UserService();
@@ -66,6 +53,7 @@ namespace RCP_Sys.ViewModels
                 }
             }
         }
+
 
         public void LoadImage()
         {
@@ -146,43 +134,7 @@ namespace RCP_Sys.ViewModels
                     }
                 }
             
-            private BitmapImage _ImageSource;
-        public BitmapImage ImageSource
-        {
-            get { return this._ImageSource; }
-            set { this._ImageSource = value; this.OnPropertyChanged("ImageSource"); }
-        }
-
-        private IQueryable<int> _Count;
-        public IQueryable<int> Count
-        {
-            get
-            {
-                return _Count;
-
-            }
-
-            set
-            {
-                _Count = value;
-                OnPropertyChanged(nameof(Count));
-            }
-        }
-        private string _Position;
-        public string Position
-        {
-            get
-            {
-                return _Position;
-
-            }
-
-            set
-            {
-                _Position = value;
-                OnPropertyChanged(nameof(Position));
-            }
-        }
+            
         public void HometimeSum()
         {    
                 SumMonth = new TimeSpan((long)TimerUserCollection.Sum(p => p.EndTimerValue.Ticks));
@@ -267,7 +219,7 @@ namespace RCP_Sys.ViewModels
         public ObservableCollection<TimerModel> TimerUserCollection
         {
             get { return _TimerUserCollection; }
-            set { _TimerUserCollection = value; OnPropertyChanged("TimerUserCollection"); }
+            set { _TimerUserCollection = value; OnPropertyChanged(nameof(TimerUserCollection)); }
         }
 
         private ObservableCollection<TimerModel> _YearTimeCollection;
@@ -275,7 +227,7 @@ namespace RCP_Sys.ViewModels
         public ObservableCollection<TimerModel> YearTimeCollection
         {
             get { return _YearTimeCollection; }
-            set { _YearTimeCollection = value; OnPropertyChanged("YearTimeCollection"); }
+            set { _YearTimeCollection = value; OnPropertyChanged(nameof(YearTimeCollection)); }
         }
 
         private int _DaysAtWork;
@@ -316,7 +268,45 @@ namespace RCP_Sys.ViewModels
                 _HourFormatY = value; OnPropertyChanged(nameof(HourFormatY));
             }
         }
+
+        private BitmapImage _ImageSource;
+        public BitmapImage ImageSource
+        {
+            get { return this._ImageSource; }
+            set { this._ImageSource = value; this.OnPropertyChanged(nameof(ImageSource)); }
+        }
+
+
+        private string _Position;
+        public string Position
+        {
+            get
+            {
+                return _Position;
+
+            }
+
+            set
+            {
+                _Position = value;
+                OnPropertyChanged(nameof(Position));
+            }
+        }
+
+        public UserAccountInformation UserInformation
+        {
+            get
+            {
+                return _UserInformation;
+            }
+            set
+            {
+                _UserInformation = value;
+                OnPropertyChanged(nameof(UserInformation));
+            }
+        }
+
     }
-   
+
 
 }

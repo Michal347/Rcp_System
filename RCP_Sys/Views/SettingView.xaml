@@ -30,9 +30,11 @@
             <TextBlock Text="{Binding UserInformation.Name}"
                                         Foreground="Black"
                                        FontSize="20"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
                                        FontWeight="Medium"
                                        FontFamily="Montserrat"                             
-                                       Margin="35,10,0,0" Height="26"  Width="100"/>
+                                       Margin="33,10,0,0" Height="26"  Width="100"/>
             <TextBlock Text="{Binding Position}"
                                        Foreground="#808080"
                                        FontSize="16"

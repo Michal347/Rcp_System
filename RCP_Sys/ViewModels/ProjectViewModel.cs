@@ -13,17 +13,13 @@ namespace RCP_Sys.ViewModels
     {
 
 
-        #region Icommand
-
         public ICommand AddProject { get; private set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
 
-        #endregion
 
 
-        #region Ctors
         public ProjectViewModel()
         {
 
@@ -35,15 +31,11 @@ namespace RCP_Sys.ViewModels
 
         }
 
-       
 
 
-        #endregion
-
-        #region ICommand handlers
         private void AddProj()
         {
-            ClearPropertyErrors(this, "ProjectName");       
+            ClearPropertyErrors(this, nameof(ProjectName));       
             {
                 using (var context = new RcpDbContext())
                 {
@@ -126,7 +118,7 @@ namespace RCP_Sys.ViewModels
 
         private void Update(object obj)
         {
-            ClearPropertyErrors(this, "EditProjectName");
+            ClearPropertyErrors(this, nameof(EditProjectName));
             using (var context = new RcpDbContext())
             {
                 var Name = context.Projects.FirstOrDefault(x => x.Name == EditProjectName); ;
@@ -158,7 +150,7 @@ namespace RCP_Sys.ViewModels
                     context.Projects.Update(found);
                     context.SaveChanges();
                     Refresh();
-                    ClearPropertyErrors(this, "EditProjectName");
+                    ClearPropertyErrors(this, nameof(EditProjectName));
                 }
             }
         }
@@ -173,9 +165,6 @@ namespace RCP_Sys.ViewModels
         }
 
 
-        #endregion
-
-        #region fields
 
         private int _ID;
         public int ID
@@ -192,8 +181,8 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _EditprojectName = value;
-                OnPropertyChanged("EditProjectName");
-                ClearPropertyErrors(this, "EditProjectName");
+                OnPropertyChanged(nameof(EditProjectName));
+                ClearPropertyErrors(this, nameof(EditProjectName));
 
             }
         }
@@ -205,8 +194,8 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _projectName = value;
-                OnPropertyChanged("ProjectName");
-                ClearPropertyErrors(this, "ProjectName");
+                OnPropertyChanged(nameof(ProjectName));
+                ClearPropertyErrors(this, nameof(ProjectName));
 
             }
         }
@@ -219,8 +208,8 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _descripiton = value;
-                OnPropertyChanged("Description");
-                ClearPropertyErrors(this, "Description");
+                OnPropertyChanged(nameof(Description));
+                ClearPropertyErrors(this, nameof(Description));
 
             }
         }
@@ -233,8 +222,8 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _Editdescripiton = value;
-                OnPropertyChanged("EditDescription");
-                ClearPropertyErrors(this, "EditDescription");
+                OnPropertyChanged(nameof(EditDescription));
+                ClearPropertyErrors(this, nameof(EditDescription));
 
             }
         }
@@ -249,7 +238,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _selectedDataGridItem = value;
-                OnPropertyChanged("SelectedDataGridItem");
+                OnPropertyChanged(nameof(SelectedDataGridItem));
 
             }
         }
@@ -274,12 +263,9 @@ namespace RCP_Sys.ViewModels
         public List<ProjectModel> MysampleGrid
         {
             get { return mysampleGrid; }
-            set { mysampleGrid = value; OnPropertyChanged("MysampleGrid"); }
+            set { mysampleGrid = value; OnPropertyChanged(nameof(MysampleGrid)); }
         }
 
-
     }
-    #endregion
-
 
 }

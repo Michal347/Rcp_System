@@ -25,31 +25,29 @@ namespace RCP_Sys.ViewModels
         public IUserService RemoveUser;
         public IDialogService ChangeUser;
         public IUserService GetUser;
-        private ICollectionView _UserIcollection;
-        public ICollectionView UserIcollection
-        {
-            get { return _UserIcollection; }
-            set { _UserIcollection = value; OnPropertyChanged("UserIcollection"); }
-        }
+      
+      
 
         public UserViewModel()
-         {
-            RefreshDatauser();
-            UserIcollection = CollectionViewSource.GetDefaultView(UserCollection);
-            DeleteCommand = new RelayCommand(DeleteUser);
-            EditCommand = new RelayCommand(EditUser);
-            UpdateCommand = new RelayCommand(x => UpdateData(), CanExecuteUpdate);
-            GetGender = new RelayCommand(executemethod, canexecutemethod);
-            RemoveUser = new UserService();
-            GetUser = new UserService();
-            ChangeUser= new DialogService();
-            UserSum();
-            GroupFilter gf = new GroupFilter();
-            gf.AddFilter(UsernameFilter);
-            UserIcollection.Filter = gf.Filter;
-            UserIcollection.SortDescriptions.Add(new SortDescription("Username", ListSortDirection.Ascending));
+             {
+                RefreshDatauser();
+                UserIcollection = CollectionViewSource.GetDefaultView(UserCollection);
+                DeleteCommand = new RelayCommand(DeleteUser);
+                EditCommand = new RelayCommand(EditUser);
+                UpdateCommand = new RelayCommand(x => UpdateData(), CanExecuteUpdate);
+                GetGender = new RelayCommand(executemethod, canexecutemethod);
+                RemoveUser = new UserService();
+                GetUser = new UserService();
+                ChangeUser= new DialogService();
+                UserSum();
+                GroupFilter gf = new GroupFilter();
+                gf.AddFilter(UsernameFilter);
+                UserIcollection.Filter = gf.Filter;
+                UserIcollection.SortDescriptions.Add(new SortDescription("Username", ListSortDirection.Ascending));
 
-        }
+            }
+
+ 
 
         private bool CanExecuteUpdate(object obj)
         {
@@ -83,10 +81,10 @@ namespace RCP_Sys.ViewModels
 
         private void UpdateData()
         {
-            ClearPropertyErrors(this, "Username");
+            ClearPropertyErrors(this, nameof(Username));
             using (var context = new RcpDbContext())
             {
-                ClearPropertyErrors(this, "Email");
+                ClearPropertyErrors(this, nameof(Email));
                 var validEmail = EmailValidation.IsValidEmail(Email);
                 var found = context.Users.FirstOrDefault(x => x.Id == ID);
                 var User = context.Users.FirstOrDefault(x => x.Username == Username);
@@ -109,20 +107,20 @@ namespace RCP_Sys.ViewModels
                                 context.Users.Update(found);
                                 context.SaveChanges();
                                 RefreshDatauser();
-                                ClearPropertyErrors(this, "Email");
+                                ClearPropertyErrors(this, nameof(Email));
                             
         
                         }
                         else
                         {
-                            OnErrorCreated("Email", "*Invalid Email");
+                            OnErrorCreated(nameof(Email), "*Invalid Email");
                             return;
                         }
                     }
 
                     else
                     {
-                        OnErrorCreated("Username", "*Username already exist");
+                        OnErrorCreated(nameof(Username), "*Username already exist");
                         return;
 
                     }
@@ -138,8 +136,8 @@ namespace RCP_Sys.ViewModels
                     context.Users.Update(found);
                     context.SaveChanges();
                     RefreshDatauser();
-                    ClearPropertyErrors(this, "Email");
-                    ClearPropertyErrors(this, "Username");
+                    ClearPropertyErrors(this, nameof(Email));
+                    ClearPropertyErrors(this, nameof(Username));
 
                 
             }
@@ -157,7 +155,7 @@ namespace RCP_Sys.ViewModels
 
         private void EditUser(object obj)
         {
-            ClearPropertyErrors(this, "ErrorMessage");
+            ClearPropertyErrors(this, nameof(ErrorMessage));
             using (var context = new RcpDbContext())
             {
 
@@ -179,17 +177,17 @@ namespace RCP_Sys.ViewModels
                         Name = emp.Name;
                         ID = emp.Id;
                         HybridSeed = emp.IsUserAdmin;
-                        ClearPropertyErrors(this, "ErrorMessage");
+                        ClearPropertyErrors(this, nameof(ErrorMessage));
                     }
                     else
                     {
-                        OnErrorCreated("ErrorMessage", "*User can't be Admin");
+                        OnErrorCreated(nameof(ErrorMessage), "*User can't be Admin");
                         return;
                     }
                 }
                 else
                 {
-                    OnErrorCreated("ErrorMessage", "Error");
+                    OnErrorCreated(nameof(ErrorMessage), "Error");
                     return;
                 }
             }
@@ -211,7 +209,7 @@ namespace RCP_Sys.ViewModels
 
         private void DeleteUser(object obj)
         {
-            ClearPropertyErrors(this, "ErrorMessage");
+            ClearPropertyErrors(this, nameof(ErrorMessage));
             using (var context = new RcpDbContext())
             {
                 var emp = obj as UserModel;
@@ -222,12 +220,12 @@ namespace RCP_Sys.ViewModels
                                 UserIcollection.Refresh();
                                 context.SaveChanges();
                                 UserSum();
-                                ClearPropertyErrors(this, "ErrorMessage");
+                                ClearPropertyErrors(this, nameof(ErrorMessage));
                             }
                                 
                             else
                             {
-                                OnErrorCreated("ErrorMessage", "*User can't be Admin");
+                                OnErrorCreated(nameof(ErrorMessage), "*User can't be Admin");
                             }
             }
             
@@ -245,13 +243,21 @@ namespace RCP_Sys.ViewModels
             }
         }
 
-     
-            private ObservableCollection<UserModel> _UserCollection;
+
+        private ICollectionView _UserIcollection;
+        public ICollectionView UserIcollection
+        {
+            get { return _UserIcollection; }
+            set { _UserIcollection = value; OnPropertyChanged(nameof(UserIcollection)); }
+        }
+
+
+        private ObservableCollection<UserModel> _UserCollection;
 
         public ObservableCollection<UserModel> UserCollection
         {
             get { return _UserCollection; }
-            set { _UserCollection = value; OnPropertyChanged("UserCollection"); }
+            set { _UserCollection = value; OnPropertyChanged(nameof(UserCollection)); }
         }
 
          private int _ExistUser;
@@ -262,7 +268,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _ExistUser = value;
-                OnPropertyChanged("ExistUser");  
+                OnPropertyChanged(nameof(ExistUser));  
             }
         }
 
@@ -276,7 +282,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _errorMessage = value;
-                ClearPropertyErrors(this, "ErrorMessage");
+                ClearPropertyErrors(this, nameof(ErrorMessage));
                 OnPropertyChanged(nameof(ErrorMessage));
             }
         }
@@ -292,7 +298,7 @@ namespace RCP_Sys.ViewModels
             {
                 _selectedComboItem = value;
                 OnPropertyChanged(nameof(SelectedComboItem));
-                ClearPropertyErrors(this, "SelectedComboItem");
+                ClearPropertyErrors(this, nameof(SelectedComboItem));
             }
         }
 
@@ -337,7 +343,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 selectedItem = value;
-                OnPropertyChanged("SelectedItem");
+                OnPropertyChanged(nameof(SelectedItem));
             }
         }
 
@@ -351,7 +357,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _Surname = value;
-                OnPropertyChanged("surname");
+                OnPropertyChanged(nameof(surname));
 
             }
         }
@@ -366,7 +372,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _Name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged(nameof(Name));
 
             }
         }
@@ -394,7 +400,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _Username = value;
-                OnPropertyChanged("Username");
+                OnPropertyChanged(nameof(Username));
 
             }
         }
@@ -409,7 +415,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _Email = value;
-                OnPropertyChanged("Email");
+                OnPropertyChanged(nameof(Email));
                 ClearPropertyErrors(this, nameof(Email));
 
             }
@@ -435,7 +441,7 @@ namespace RCP_Sys.ViewModels
             set
             {
                 _gender = value;
-                OnPropertyChanged("Gender");
+                OnPropertyChanged(nameof(Gender));
             }
         }
 

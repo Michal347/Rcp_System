@@ -27,7 +27,6 @@ namespace RCP_Sys.ViewModels
     public class MainViewModel : BaseViewModel, INotifyPropertyChanged
     {
 
-        #region ICommand
 
         public ICommand ShowHomeView { get; }
         public ICommand ShowTimerView { get; }
@@ -40,9 +39,7 @@ namespace RCP_Sys.ViewModels
         public ICommand ShowReportsView { get; }
         public ICommand ShowReportsUserView { get; }
 
-        #endregion
 
-        #region View Fields
 
 
         private UserAccountInformation userAccount;
@@ -50,13 +47,8 @@ namespace RCP_Sys.ViewModels
         private IUserService GetUsername;
         private object _CurrentChildView;
         public TimerViewModel _timerViewModel;
-        public HomeViewModel _homeViewModel;
-        public ProjectViewModel _projectViewModel;
-        public TimeSheetViewModel _timeSheetViewModel;
         public UserViewModel _userViewModel;
-        public UserHistoryViewModel _userHistoryViewModel;
-        public SettingsViewModel _settingsViewModel;
-        #endregion
+
         public MainViewModel()
         {
             
@@ -89,12 +81,7 @@ namespace RCP_Sys.ViewModels
 
 
             _timerViewModel = new TimerViewModel();
-            _homeViewModel = new HomeViewModel();
-            _projectViewModel = new ProjectViewModel();
-            _timeSheetViewModel = new TimeSheetViewModel();
             _userViewModel = new UserViewModel();
-            _userHistoryViewModel = new UserHistoryViewModel();
-            _settingsViewModel = new SettingsViewModel();
             GetUsername = new UserService();
             DialogAction = new DialogService();
             UserAccount = new UserAccountInformation();
@@ -115,13 +102,14 @@ namespace RCP_Sys.ViewModels
 
 
 
-            //CurrentChildView
+            //Start program ChildView
             Home(null);
 
 
         }
 
-     
+
+
         private void Exit(object obj)
         {
             if (_timerViewModel.IsTimerRunning == false)
@@ -134,7 +122,7 @@ namespace RCP_Sys.ViewModels
             }
         }
 
-        #region ICommand handlers
+
         private void UserV(object obj)
         {
             CurrentChildView = _userViewModel;
@@ -232,9 +220,7 @@ namespace RCP_Sys.ViewModels
             }
         }
 
-        #endregion
 
-        #region Event rising fields
 
 
         private IconChar _icon;
@@ -304,8 +290,6 @@ namespace RCP_Sys.ViewModels
             }
 
         }
-      
-        #endregion
 
     }
 }

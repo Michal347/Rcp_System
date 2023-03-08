@@ -863,7 +863,14 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#210f55"/>
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Color="#26376f" Offset="0"></GradientStop>
+                            <GradientStop Color="#6a6ae4" Offset="1.5"></GradientStop>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
                 <Setter Property="BorderBrush" Value="#210f55"/>
             </Trigger>
@@ -899,7 +906,14 @@
     <Style x:Key="DataGridColumnHeaderStyle2" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="Background" Value="#210f55"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#26376f" Offset="0"></GradientStop>
+                    <GradientStop Color="#6a6ae4" Offset="1.5"></GradientStop>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Height" Value="30"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Template">
@@ -917,7 +931,14 @@
         </Setter>
     </Style>
     <Style x:Key="DataGridRowStyle2" TargetType="{x:Type DataGridRow}">
-        <Setter Property="Background" Value="#210f55"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#26376f" Offset="0"></GradientStop>
+                    <GradientStop Color="#6a6ae4" Offset="1.5"></GradientStop>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0 7 0 0"/>
         <Setter Property="SnapsToDevicePixels" Value="true"/>

@@ -17,11 +17,9 @@ namespace RCP_Sys.ViewModels
     public class TimeSheetViewModel : BaseViewModel
     {
 
-        #region Icommand 
+
 
         public ICommand RefreshTimes { get; private set; }
-        #endregion
-
 
         public TimeSheetViewModel()
         {
@@ -35,7 +33,7 @@ namespace RCP_Sys.ViewModels
             IsCheckedProject = true;
         }
 
-     
+
 
         private bool FilterDate(object obj)
         {
@@ -81,7 +79,7 @@ namespace RCP_Sys.ViewModels
         public ObservableCollection<TimerModel> TimeViewCollection
         {
             get { return _TimeViewCollection; }
-            set { _TimeViewCollection = value; OnPropertyChanged("TimeViewCollection"); }
+            set { _TimeViewCollection = value; OnPropertyChanged(nameof(TimeViewCollection)); }
         }
 
         

@@ -51,7 +51,6 @@ namespace RCP_Sys.ViewModels
             }
         }
 
-
         public SettingsViewModel()
         {
             UserInformation = new UserAccountInformation();
@@ -98,6 +97,8 @@ namespace RCP_Sys.ViewModels
 
 
         }
+
+
 
         private bool canExecute(object obj)
         {
@@ -564,7 +565,7 @@ namespace RCP_Sys.ViewModels
         public ImageSource ImageSource
         {
             get { return this._ImageSource; }
-            set { this._ImageSource = value; this.OnPropertyChanged("ImageSource"); }
+            set { this._ImageSource = value; this.OnPropertyChanged(nameof(ImageSource)); }
         }
 
         private bool _IsVisibleChangeImage = true;

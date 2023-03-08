@@ -15,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace RCP_Sys.ViewModels
@@ -26,7 +27,7 @@ namespace RCP_Sys.ViewModels
         public Func<double, string> Formatter { get; set; }
         public PeriodUnits Period { get; set; }
         public IAxisWindow SelectedWindow { get; set; }
-        private IUserService getUsername;
+        public ICommand ResultCommand { get; set; }
 
         public class ChartModel
         {
@@ -39,15 +40,18 @@ namespace RCP_Sys.ViewModels
                 this.Value = value;
             }
         }
+
+
         public ReportsUserViewModel()
         {
+            UserData();
             TimesMonth();
             TimesMonthAdd1();
             TimesMonthAdd2();
             TimesMonthAdd3();
             TimesMonthAdd4();
-            getUsername = new UserService();
             SetChartModelValues();
+            ResultCommand = new RelayCommand(x=>ResultPrize());
 
         }
 
@@ -82,48 +86,8 @@ namespace RCP_Sys.ViewModels
             this.Formatter = value => new DateTime((long)value).ToString("yyyy-MM");
         }
 
-        private ObservableCollection<TimerModel> _TimerUserCollection;
+        
 
-        public ObservableCollection<TimerModel> TimerUserCollection
-        {
-            get { return _TimerUserCollection; }
-            set { _TimerUserCollection = value; OnPropertyChanged(nameof(TimerUserCollection)); }
-        }
-
-        private ObservableCollection<TimerModel> _TimerUserCollection1;
-
-        public ObservableCollection<TimerModel> TimerUserCollection1
-        {
-            get { return _TimerUserCollection1; }
-            set { _TimerUserCollection1 = value; OnPropertyChanged(nameof(TimerUserCollection1)); }
-        }
-
-
-        private ObservableCollection<TimerModel> _TimerUserCollection2;
-
-        public ObservableCollection<TimerModel> TimerUserCollection2
-        {
-            get { return _TimerUserCollection2; }
-            set { _TimerUserCollection2 = value; OnPropertyChanged(nameof(TimerUserCollection2)); }
-        }
-
-
-        private ObservableCollection<TimerModel> _TimerUserCollection3;
-
-        public ObservableCollection<TimerModel> TimerUserCollection3
-        {
-            get { return _TimerUserCollection3; }
-            set { _TimerUserCollection3 = value; OnPropertyChanged(nameof(TimerUserCollection3)); }
-        }
-
-
-        private ObservableCollection<TimerModel> _TimerUserCollection4;
-
-        public ObservableCollection<TimerModel> TimerUserCollection4
-        {
-            get { return _TimerUserCollection4; }
-            set { _TimerUserCollection4 = value; OnPropertyChanged(nameof(TimerUserCollection4)); }
-        }
         public void TimesMonth()
         {
            
@@ -143,6 +107,7 @@ namespace RCP_Sys.ViewModels
             }
         }
 
+
         public void TimesMonthAdd1()
         {
             var date = DateTime.Today.AddMonths(-1);
@@ -155,9 +120,9 @@ namespace RCP_Sys.ViewModels
                              a.DateCreate.Month == date.Month
                              select a;
 
-                TimerUserCollection1 = new ObservableCollection<TimerModel>(Timer);
+                TimerUserCollection = new ObservableCollection<TimerModel>(Timer);
 
-                SumMonthAdd1 = new TimeSpan((long)TimerUserCollection1.Sum(p => p.EndTimerValue.Ticks));
+                SumMonthAdd1 = new TimeSpan((long)TimerUserCollection.Sum(p => p.EndTimerValue.Ticks));
                 HourFormat = string.Format("{0}", SumMonth.Days * 24 + SumMonth.Hours);
 
             }
@@ -175,9 +140,9 @@ namespace RCP_Sys.ViewModels
                             a.DateCreate.Month == date.Month
                             select a;
 
-                TimerUserCollection2 = new ObservableCollection<TimerModel>(Timer);
+                TimerUserCollection = new ObservableCollection<TimerModel>(Timer);
 
-                SumMonthAdd2 = new TimeSpan((long)TimerUserCollection2.Sum(p => p.EndTimerValue.Ticks));
+                SumMonthAdd2 = new TimeSpan((long)TimerUserCollection.Sum(p => p.EndTimerValue.Ticks));
                 HourFormat = string.Format("{0}", SumMonth.Days * 24 + SumMonth.Hours);
 
             }
@@ -195,9 +160,9 @@ namespace RCP_Sys.ViewModels
                             a.DateCreate.Month == date.Month
                             select a;
 
-                TimerUserCollection3 = new ObservableCollection<TimerModel>(Timer);
+                TimerUserCollection = new ObservableCollection<TimerModel>(Timer);
 
-                SumMonthAdd3 = new TimeSpan((long)TimerUserCollection3.Sum(p => p.EndTimerValue.Ticks));
+                SumMonthAdd3 = new TimeSpan((long)TimerUserCollection.Sum(p => p.EndTimerValue.Ticks));
                 HourFormat = string.Format("{0}", SumMonth.Days * 24 + SumMonth.Hours);
 
             }
@@ -214,11 +179,87 @@ namespace RCP_Sys.ViewModels
                             a.DateCreate.Month == date.Month
                             select a;
 
-                TimerUserCollection4 = new ObservableCollection<TimerModel>(Timer);
+                TimerUserCollection = new ObservableCollection<TimerModel>(Timer);
 
-                SumMonthAdd4 = new TimeSpan((long)TimerUserCollection4.Sum(p => p.EndTimerValue.Ticks));
+                SumMonthAdd4 = new TimeSpan((long)TimerUserCollection.Sum(p => p.EndTimerValue.Ticks));
                 HourFormat = string.Format("{0}", SumMonth.Days * 24 + SumMonth.Hours);
 
+            }
+        }
+
+        public void ResultPrize()
+        {
+          Result = HourCount * Prize;
+        }
+
+        private void UserData()
+        {
+            using (var context = new RcpDbContext())
+            {
+                var date = DateTime.Today;
+
+                /// join date 
+
+                var Joindate = (from a in context.Users
+                                where a.Username == Thread.CurrentPrincipal.Identity.Name
+                                select a.DateTimeJoined).FirstOrDefault();
+
+                DayJoin = Joindate.ToString("MM/dd/yyyy");
+
+                ///Count project 
+                var Project = (from a in context.Times
+                                       where a.Username == Thread.CurrentPrincipal.Identity.Name
+                                       select a.Project).Distinct();
+
+
+                        ProjectCount = Project.Count();
+                        ///Year
+
+                        var Timer = from a in context.Times
+                                    where a.Username == Thread.CurrentPrincipal.Identity.Name
+                                    && a.DateCreate.Year == DateTime.Today.Year
+                                    select a;
+
+                        YearTimeCollection = new ObservableCollection<TimerModel>(Timer);
+
+                        ///Month
+                        var Month = from a in context.Times
+                                    where a.Username == Thread.CurrentPrincipal.Identity.Name
+                                    && a.DateCreate.Month == DateTime.Today.Month && a.DateCreate.Year == DateTime.Today.Year
+                                    select a;
+
+                        TimerUserCollection = new ObservableCollection<TimerModel>(Month);
+
+
+                        ///Day 
+
+                        var Days = from a in context.Times
+                                   where a.Username == Thread.CurrentPrincipal.Identity.Name
+                                   && a.DateCreate.Day == DateTime.Today.Day && a.DateCreate.Year == DateTime.Today.Year
+                                   select a;
+
+                        DayTimeCollection = new ObservableCollection<TimerModel>(Days);
+                        ///All Day
+                        var Day = (from a in context.Users
+                                   where a.Username == Thread.CurrentPrincipal.Identity.Name
+                                   select a.DateTimeJoined).FirstOrDefault();
+
+                        DaysAtwork = (int)(date - Day).Days;
+
+
+                        ///////////////////////
+
+
+                        SumDay = new TimeSpan((long)DayTimeCollection.Sum(p => p.EndTimerValue.Ticks));
+                        DayFormatY = string.Format("{0}", SumDay.Days * 24 + SumDay.Hours);
+
+                        SumMonth = new TimeSpan((long)TimerUserCollection.Sum(p => p.EndTimerValue.Ticks));
+                        HourFormat = string.Format("{0}", SumMonth.Days * 24 + SumMonth.Hours);
+
+
+                        SumYear = new TimeSpan((long)YearTimeCollection.Sum(p => p.EndTimerValue.Ticks));
+                        HourFormatY = string.Format("{0}", SumYear.Days * 24 + SumYear.Hours);
+                   
             }
         }
 
@@ -269,6 +310,173 @@ namespace RCP_Sys.ViewModels
                 _HourFormat = value; OnPropertyChanged(nameof(HourFormat));
             }
         }
+
+        private TimeSpan _SumYear;
+        public TimeSpan SumYear
+        {
+            get { return _SumYear; }
+            set { _SumYear = value; OnPropertyChanged(nameof(SumYear)); }
+        }
+
+
+        private TimeSpan _SumDay;
+        public TimeSpan SumDay
+        {
+            get { return _SumDay; }
+            set { _SumDay = value; OnPropertyChanged(nameof(SumDay)); }
+        }
+
+        private ObservableCollection<TimerModel> _YearTimeCollection;
+
+        public ObservableCollection<TimerModel> YearTimeCollection
+        {
+            get { return _YearTimeCollection; }
+            set { _YearTimeCollection = value; OnPropertyChanged(nameof(YearTimeCollection)); }
+        }
+
+        private ObservableCollection<TimerModel> _DayTimeCollection;
+
+        public ObservableCollection<TimerModel> DayTimeCollection
+        {
+            get { return _DayTimeCollection; }
+            set { _DayTimeCollection = value; OnPropertyChanged(nameof(DayTimeCollection)); }
+        }
+
+        private ObservableCollection<TimerModel> _ProjectCollection;
+
+        public ObservableCollection<TimerModel> ProjectCollection
+        {
+            get { return _ProjectCollection; }
+            set { _ProjectCollection = value; OnPropertyChanged(nameof(ProjectCollection)); }
+        }
+      
+
+        private string _HourFormatY;
+        public string HourFormatY
+        {
+            get
+            {
+                return _HourFormatY;
+            }
+            set
+            {
+                _HourFormatY = value; OnPropertyChanged(nameof(HourFormatY));
+            }
+        }
+
+        private string _DayFormatY;
+        public string DayFormatY
+        {
+            get
+            {
+                return _DayFormatY;
+            }
+            set
+            {
+                _DayFormatY = value; OnPropertyChanged(nameof(DayFormatY));
+            }
+        }
+
+        private string _DayJoin;
+        public string DayJoin
+        {
+            get
+            {
+                return _DayJoin;
+            }
+            set
+            {
+                _DayJoin = value; OnPropertyChanged(nameof(DayJoin));
+            }
+        }
+
+        private string _User;
+        public string User
+        {
+            get
+            {
+                return _User;
+            }
+            set
+            {
+                _User = value; OnPropertyChanged(nameof(User));
+            }
+        }
+
+        private int _ProjectCount;
+        public int ProjectCount
+        {
+            get
+            {
+                return _ProjectCount;
+            }
+            set
+            {
+                _ProjectCount = value; OnPropertyChanged(nameof(ProjectCount));
+            }
+        }
+
+        private int _DaysAtWork;
+        public int DaysAtwork
+        {
+            get
+            {
+                return _DaysAtWork;
+            }
+            set
+            {
+                _DaysAtWork = value; OnPropertyChanged(nameof(DaysAtwork));
+            }
+        }
+
+
+        private int _HourCount;
+        public int HourCount
+        {
+            get
+            {
+                return _HourCount;
+            }
+            set
+            {
+                _HourCount = value; OnPropertyChanged(nameof(HourCount));
+            }
+        }
+
+        private double _Prize;
+        public double Prize
+        {
+            get
+            {
+                return _Prize;
+            }
+            set
+            {
+                _Prize = value; OnPropertyChanged(nameof(Prize));
+            }
+        }
+
+        private double _Result;
+        public double Result
+        {
+            get
+            {
+                return _Result;
+            }
+            set
+            {
+                _Result = value; OnPropertyChanged(nameof(Result));
+            }
+        }
+
+        private ObservableCollection<TimerModel> _TimerUserCollection;
+
+        public ObservableCollection<TimerModel> TimerUserCollection
+        {
+            get { return _TimerUserCollection; }
+            set { _TimerUserCollection = value; OnPropertyChanged(nameof(TimerUserCollection)); }
+        }
+
     }
 }
 

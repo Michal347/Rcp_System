@@ -18,29 +18,27 @@ namespace RCP_Sys.ViewModels
 {
     public class LoginViewModel : BaseViewModel, INotifyPropertyChanged
     {
-        #region ICommands
+
         public ICommand LoginCommand { get; private set; }
         public ICommand RegisterCommand { get; private set; }
-        private IUserService UserAdd;
-        #endregion
 
         public event EventHandler<UserModel> LoginCompleted;
 
         public event EventHandler<string> RegisterRequested;
 
+   
+
         public LoginViewModel()
         {
             LoginCommand = new RelayCommand(x => LoginUser(),CanExecuteloginCommand);
             RegisterCommand = new RelayCommand(x => Register());
-            UserAdd = new UserService();
+            
         }
 
-       
-
-        #region ICommand handlers
+    
         private void LoginUser()
         {
-            ClearPropertyErrors(this, "UserLogin");
+            ClearPropertyErrors(this, nameof(UserLogin));
             UserModel output;
             using (var context = new RcpDbContext())
             {
@@ -51,7 +49,7 @@ namespace RCP_Sys.ViewModels
                     var valid = PasswordHasher.ComparePasswords(found.Password, Password);
                     if (!valid)
                     {
-                        OnErrorCreated("UserLogin", "*Invalid password or username");
+                        OnErrorCreated(nameof(UserLogin), "*Invalid password or username");
                         return;
                         
                     }
@@ -60,7 +58,7 @@ namespace RCP_Sys.ViewModels
                 }
                 else
                 {
-                    OnErrorCreated("UserLogin", "*Invalid password or username");
+                    OnErrorCreated(nameof(UserLogin), "*Invalid password or username");
                     return;
                 }
             }
@@ -86,11 +84,7 @@ namespace RCP_Sys.ViewModels
             
         }
 
-        #endregion
-
-
-        #region Event rising fields
-
+     
         private string userLogin;
 
         public string UserLogin
@@ -99,8 +93,8 @@ namespace RCP_Sys.ViewModels
             set
             {
                 userLogin = value;
-                OnPropertyChanged("UserLogin");
-                ClearPropertyErrors(this, "UserLogin");      
+                OnPropertyChanged(nameof(UserLogin));
+                ClearPropertyErrors(this, nameof(UserLogin));      
             }
         }
 
@@ -112,13 +106,10 @@ namespace RCP_Sys.ViewModels
             set
             {
                 password = value;
-                OnPropertyChanged("Password");
-                ClearPropertyErrors(this, "Password");
+                OnPropertyChanged(nameof(Password));
+                ClearPropertyErrors(this, nameof(Password));
             }
         }
-
-
-        #endregion
 
     }
 }
