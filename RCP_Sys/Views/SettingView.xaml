@@ -330,7 +330,8 @@
                                      VerticalContentAlignment="Center"
                                      Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682" Width="214"/>
                     <TextBlock 
-                                Text="{Binding ErrorMessageSurname}"
+                               
+                        Text="{Binding ErrorMessageSurname}"
                                Foreground="#D7596D"
                                FontSize="12"
                                FontWeight="Medium"
