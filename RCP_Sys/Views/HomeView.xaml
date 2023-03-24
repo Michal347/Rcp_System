@@ -128,11 +128,11 @@
             <StackPanel  Margin="0 0 0 0" Grid.Column="0" Grid.Row="0" Orientation="Vertical">
                 <StackPanel Margin="40 10 10 10" Height="150" Orientation="Horizontal">
                     <StackPanel Width="316">
-                        <uc:InfoControl Title="Month hour at work" Number="{Binding HourFormat}" Icon="Clock" Background1="#827bff" Background2="#d9b5ff"
+                        <uc:InfoControl Title="Hours in a month" Number="{Binding HourFormat}" Icon="Clock" Background1="#827bff" Background2="#d9b5ff"
                                         EllipseBackground1="#b298fd" EllipseBackground2="#e4bbff"></uc:InfoControl>
                     </StackPanel>
                     <StackPanel Margin="15 0 0 0" Width="316">
-                        <uc:InfoControl Title="Year hour at work" Number="{Binding HourFormatY}" Icon="Eye" Background1="#fd8a87" Background2="#f3ab92"
+                        <uc:InfoControl Title="Hours in a year" Number="{Binding HourFormatY}" Icon="Eye" Background1="#fd8a87" Background2="#f3ab92"
                                         EllipseBackground1="#fbd5a8" EllipseBackground2="#fdb89b"></uc:InfoControl>
                     </StackPanel>
 

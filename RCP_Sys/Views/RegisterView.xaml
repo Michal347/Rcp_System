@@ -141,7 +141,7 @@
                 <StackPanel
                             Width="300" Margin="100,53,100,12">
 
-                            <TextBlock Text="Username"
+                            <TextBlock Text="Username*"
                                        Foreground="Gray"
                                        FontSize="12"
                                        FontWeight="Medium"
@@ -178,7 +178,7 @@
                     </TextBox>
 
 
-                            <TextBlock Text="Name"
+                            <TextBlock Text="Name*"
                                        Foreground="Gray"
                                        FontSize="12"
                                        FontWeight="Medium"
@@ -197,7 +197,7 @@
                                      Height="28"
                                      VerticalContentAlignment="Center"
                                      Padding="0,0,0,0" RenderTransformOrigin="0.52,0.682"/>
-                            <TextBlock Text="Surname"
+                            <TextBlock Text="Surname*"
                                        Foreground="Gray"
                                        FontSize="12"
                                        FontWeight="Medium"
@@ -234,7 +234,7 @@
                                      CommandParameter="{Binding ElementName=rbFemal, Path=Content}"></RadioButton>
                         
                     </StackPanel>
-                    <TextBlock Text="Select profile picture (optional):"
+                    <TextBlock Text="Select profile picture:"
                                        Foreground="Gray"
                                        FontSize="12"
                                        FontWeight="Medium"
@@ -247,7 +247,7 @@
                         </TextBox>
                         
                     </StackPanel>
-                    <TextBlock Text="Email"
+                    <TextBlock Text="Email*"
                                        Foreground="Gray"
                                        FontSize="12"
                                        FontWeight="Medium"
@@ -285,7 +285,7 @@
                         </Validation.ErrorTemplate>
                     </TextBox>
 
-                    <TextBlock Text="Password"
+                    <TextBlock Text="Password*"
                                        Foreground="Gray"
                                        FontSize="12"
                                        FontWeight="Medium"
