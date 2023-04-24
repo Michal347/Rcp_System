@@ -244,7 +244,7 @@ namespace RCP_Sys.ViewModels
                                    where a.Username == Thread.CurrentPrincipal.Identity.Name
                                    select a.DateTimeJoined).FirstOrDefault();
 
-                        DaysAtwork = (int)(Day - date).TotalDays;
+                        DaysAtwork = (int)(date - Day).TotalDays;
 
 
                         ///////////////////////

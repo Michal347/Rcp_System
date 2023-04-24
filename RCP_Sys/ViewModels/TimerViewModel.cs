@@ -112,7 +112,7 @@ namespace RCP_Sys.ViewModels
                 await Task.Run(() =>
                 {
                     SynchronizationContext.SetSynchronizationContext(synchronizationContext);
-                    TimerBoxValue = TimerBoxValue.Add(TimeSpan.FromHours(1));
+                    TimerBoxValue = TimerBoxValue.Add(TimeSpan.FromSeconds(1));
                 });
 
                 await Task.Delay(1000);
